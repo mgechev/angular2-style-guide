@@ -40,7 +40,6 @@ The guidelines described below are based on:
 │   ├── about
 │   │   └── components
 │   │       ├── about.e2e.ts
-│   │       ├── about.html
 │   │       ├── about.ts
 │   │       └── about.spec.ts
 │   ├── master
@@ -57,7 +56,6 @@ The guidelines described below are based on:
 │   ├── home
 │   │   └── components
 │   │       ├── home.css
-│   │       ├── home.html
 │   │       ├── home.ts
 │   │       └── home.spec.ts
 │   ├── shared
