@@ -32,7 +32,8 @@ The guidelines described below are based on:
 
 * Create folders named for the feature they represent. When a folder grows to contain more than 7 files, start to consider creating a folder for them. Your threshold may be different, so adjust as needed.
 
-  *Why?*: A developer can locate the code, identify *what each file represents at a glance, the structure is flat as can be, and there is no repetitive nor redundant names.
+  *Why?*: A developer can locate the code, identify what each file represents at a glance, the structure is flat as can be, and there is no repetitive nor redundant names.
+
   *Why?*: When there are a lot of files (10+) locating them is easier with a consistent folder structures and more difficult in flat structures.
 
 ```
@@ -75,6 +76,7 @@ The guidelines described below are based on:
 * Keep each code unit (component, directive, service, pipe, etc.) into a separate file. If the unit uses other internal for the given module logic you can keep it in the same module, without exporting it.
 
   *Why?*: The definitions will be easier to find simply by looking at the directory structure.
+  
   *Why?*: Do not export private APIs because you need to manage them and keep them consistent for the end users.
 
 # Directives and Components
@@ -134,6 +136,7 @@ The guidelines described below are based on:
 * Use `@HostListener` and `@HostBinding` instead of the `host` property of the `@Directive` and `@Component` decorators:
 
   *Why?*: The name of the property, or method name associated to `@HostBinding` or respectively `@HostListener` should be modified only on a single place - in the directive's controller. In contrast if you use `host` you need to modify both the property declaration inside the controller, and the metadata associated to the directive.
+
   *Why?*: The metadata declaration attached to the directive is shorter and thus more readable.
 
   ### Example
@@ -167,6 +170,7 @@ The guidelines described below are based on:
 * Use element selectors for components.
 
   *Why?*: There could be only a single component per element.
+
   *Why?*: Components are the actual elements in our applications, compared to directives which only augment the elements.
 
   ### Example
@@ -192,11 +196,13 @@ The guidelines described below are based on:
 * Keep the components as simple and coherent as possible but not too simple.
 
   *Why?*: Simple coherent components are easier to reason about, more reusable and composable.
+
   *Why?*: Components which are too primitive may lead to scattering and harder management of the user interface of our applications.
 
 * Keep the components' templates as lean as possible and inline them inside of the `@Component` decorator.
 
   *Why?*: Keeping the components' templates short implies simple, composable components.
+
   *Why?*: Keeping the template next to the component's controller makes it easier to lookup the component's structure and/or modify it.
 
 * Extract the more complex and bigger templates, longer than 15 lines of code, into a separate file and put them next to their controllers' definition.
@@ -206,6 +212,7 @@ The guidelines described below are based on:
 * Use `@Input` and `@Output` instead of the `inputs` and `outputs` properties of the `@Directive` and `@Component` decorators:
 
   *Why?*: The name of the property, or event name associated to `@Input` or respectively `@Output` should be modified only on a single place.
+
   *Why?*: The metadata declaration attached to the directive is shorter and thus more readable.
 
   ### Example
@@ -448,7 +455,9 @@ The guidelines described below are based on:
 * Use [Jasmine](https://jasmine.github.io/) for unit testing.
 
   *Why?*: It is well supported and popular in the JavaScript community.
+
   *Why?*: It is widely popular in the Angular community. Jasmine is used for testing both AngularJS 1.x and Angular 2.
+
   *Why?*: It has up-to-date type definitions so you can have great development experience using TypeScript.
 
 * Use Karma as test runner.
@@ -456,7 +465,9 @@ The guidelines described below are based on:
 * Place your test files side-by-side with your client code.
 
   *Why?*: The tests are easier to find since they are always next to the code they are testing.
+
   *Why?*: When you update source code it is easier to go update the tests at the same time.
+
   *Why?*: The code may act as documentation of the tested component.
 
 * Name the test file the following way `NAME_OF_THE_TESTED_UNIT.spec.EXT`:
@@ -510,6 +521,7 @@ The guidelines described below are based on:
 * Use TSLint for linting your JavaScript and be sure to customize the TSLint options file and include in source control. See the [TSLint docs](https://github.com/palantir/tslint) for details on the options.
 
   *Why?*: Provides a first alert prior to committing any code to source control.
+
   *Why?*: Provides consistency across your team.
 
   ```json
@@ -560,6 +572,7 @@ The guidelines described below are based on:
 * Use the internal JavaScript DLS provided by Angular 2 for annotating constructor functions.
 
   *Why?*: This syntax is simpler, more readable and closer to the original TypeScript version of the code.
+
   *Why?*: The DLS uses function expressions which are closer to the non-hoisted ES2015 classes.
 
   ### Example
@@ -600,6 +613,7 @@ The guidelines described below are based on:
 * Use JSHint for linting your JavaScript and be sure to customize the JSHint options file and include in source control. See the [JSHint](http://www.jshint.com/docs/) docs for details on the options.
 
   *Why?*: Provides a first alert prior to committing any code to source control.
+
   *Why?*: Provides consistency across your team.
 
   ```json
@@ -671,6 +685,7 @@ The guidelines described below are based on:
 * Use JSCS for checking your coding styles your JavaScript and be sure to customize the JSCS options file and include in source control. See the [JSCS docs](http://jscs.info/rules) for details on the options.
 
   *Why?*: Provides a first alert prior to committing any code to source control.
+
   *Why?*: Provides consistency across your team.
 
   ```json
