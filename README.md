@@ -5,26 +5,26 @@ If you are looking for an opinionated style guide for syntax, conventions, and s
 
 The guidelines described below are based on:
 
-1. Angular 2 source code
-2. Suggestions by Misko Hevery from his technical review of "[Switching to Angular 2](https://www.packtpub.com/web-development/switching-angular-2)"
-3. My own development experience working in a team on large-scale Angular 2 application
+1. Angular 2 [source code](https://github.com/angular/angular).
+2. Suggestions by [Miško Hevery](https://github.com/mhevery) from his technical review of "[Switching to Angular 2](https://www.packtpub.com/web-development/switching-angular-2)".
+3. My own development experience working in a team on large-scale Angular 2 application.
 4. [John Papa's AngularJS 1.x style guide](https://github.com/johnpapa/angular-styleguide), for being consistent with the directory structure and testing across the different major versions of the framework.
 
 # Table of Contents
 
-1. Directory Structure
-2. Modules
-3. Directives and Components
-4. Services and Dependency Injection
-5. Pipes
-6. Routing
-7. Forms
-8. Testing
-9. Change detection
-11. TypeScript specific practices
-12. ES2015/ES2016 specific practices
-13. ES5 specific practices
-14. License
+1. [Directory Structure](#directory-structure)
+2. [Modules](#modules)
+3. [Directives and Components](#directives-and-components)
+4. [Services and Dependency Injection](#services-and-dependency-injection)
+5. [Pipes](#pipes)
+6. [Routing](#routing)
+7. [Forms](#forms)
+8. [Testing](#testing)
+9. [Change Detection](#change-detection)
+11. [TypeScript specific practices](#typescript-specific-practices)
+12. [ES2015 and ES2016 specific practices](#es2015-and-es2016-specific-practices)
+13. [ES5 specific practices](#es5-specific-practices)
+14. [License](#license)
 
 # Directory Structure
 
@@ -551,7 +551,7 @@ The guidelines described below are based on:
   }
   ```
 
-# ES2015/ES2016 specific practices
+# ES2015 and ES2016 specific practices
 
 
 
