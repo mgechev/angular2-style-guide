@@ -3,6 +3,8 @@
 The purpose of the following style guide is to present a set of best practices and style guidelines for the development of Angular 2 applications.
 If you are looking for an opinionated style guide for syntax, conventions, and structuring Angular 2 applications, then you can step in!
 
+![Angular 2 Style Guide](/assets/logo.png)
+
 The guidelines described below are based on:
 
 1. Angular 2 [source code](https://github.com/angular/angular).
