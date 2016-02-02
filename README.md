@@ -5,6 +5,8 @@ If you are looking for an opinionated style guide for syntax, conventions, and s
 
 ![Angular 2 Style Guide](/assets/logo.png)
 
+**Disclaimer**: The document is in alpha version which means that some the guidelines will change and new will be added.
+
 The guidelines described below are based on:
 
 1. Angular 2 [source code](https://github.com/angular/angular).
@@ -76,7 +78,7 @@ The guidelines described below are based on:
 * Keep each code unit (component, directive, service, pipe, etc.) into a separate file. If the unit uses other internal for the given module logic you can keep it in the same module, without exporting it.
 
   *Why?*: The definitions will be easier to find simply by looking at the directory structure.
-  
+
   *Why?*: Do not export private APIs because you need to manage them and keep them consistent for the end users.
 
 # Directives and Components
