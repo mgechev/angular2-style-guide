@@ -177,6 +177,7 @@ The guidelines described below are based on:
     template: `...`
   })
   class SgButton {}
+  ```
 
   **CORRECT**
   ```ts
@@ -186,6 +187,7 @@ The guidelines described below are based on:
   })
   class SgButton {}
   ```
+
 
 * Keep the components as simple and coherent as possible but not too simple.
 
@@ -255,7 +257,7 @@ The guidelines described below are based on:
     @Output('changeEvent') change = new EventEmitter<any>();
     @Input('labelAttribute') label: string;
   }
-  /**
+  /*
    * Need to be consumed the following way:
    *
    * <sg-button labelAttribute="foobar" (changeEvent)="doStuff()">
@@ -273,7 +275,7 @@ The guidelines described below are based on:
     @Output() change = new EventEmitter<any>();
     @Input() label: string;
   }
-  /**
+  /*
    * Need to be consumed the following way, which is much more straightforward:
    *
    * <sg-button label="foobar" (change)="doStuff()">
