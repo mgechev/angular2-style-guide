@@ -103,7 +103,7 @@ The guidelines described below are based on:
 
   *Why?*: There could be many directives per element, which makes it more suitable to use attributes in oppose to elements.
 
-* Use custom prefix for the selector of your directives.
+* Use custom prefix for the selector of your directives (for instance below is used the prefix `sg` from **S**tyle **G**uide).
 
   *Why?*: This way you will be able to prevent name collisions.
 
@@ -136,19 +136,19 @@ The guidelines described below are based on:
   @Directive({
     selector: '[bs-tooltip]'
   })
-  class BootstrapTooltipDir {}
+  class BsBootstrapTooltipDir {}
 
   @Directive({
     selector: '[my-tooltip]'
   })
-  class CustomTooltipDir {}
+  class MyCustomTooltipDir {}
 
   @Component({
-    selector: 'app',
+    selector: 'sg-app',
     template: `...`,
     directives: [CustomTooltip, BootstrapTooltip]
   })
-  class AppCmp {}
+  class SgAppCmp {}
   ```
 
 * Name directives' controllers with `Dir` suffix and components' controllers with `Cmp` suffix. The name of any directive or component should be formed following the rule `CustomPrefix` + `BasicDescription` + `Dir` or `Cmp`.
@@ -169,11 +169,11 @@ The guidelines described below are based on:
   class SgButtonCmp {}
   ```
 
-  *Why?*: When any code unit is imported the consumer will know how to use it based on its name, i.e. `ScButtonCmp` means that:
+  *Why?*: When any code unit is imported the consumer will know how to use it based on its name, i.e. `SgButtonCmp` means that:
 
     - This is a controller of a component.
-    - It should be used as an element.
-    - Its selector is `sc-button`.
+    - The component should be used as an element.
+    - Its selector is `sg-button`.
 
 * Use `@HostListener` and `@HostBinding` instead of the `host` property of the `@Directive` and `@Component` decorators:
 
