@@ -115,19 +115,19 @@ The guidelines described below are based on:
   @Directive({
     selector: '[tooltip]'
   })
-  class BootstrapTooltipCtrl {}
+  class BootstrapTooltipDir {}
 
   @Directive({
     selector: '[tooltip]'
   })
-  class CustomTooltipCtrl {}
+  class CustomTooltipDir {}
 
   @Component({
     selector: 'app',
     template: `...`,
     directives: [CustomTooltip, BootstrapTooltip]
   })
-  class AppCtrl {}
+  class AppCmp {}
   ```
 
   **CORRECT**
@@ -136,20 +136,44 @@ The guidelines described below are based on:
   @Directive({
     selector: '[bs-tooltip]'
   })
-  class BootstrapTooltipCtrl {}
+  class BootstrapTooltipDir {}
 
   @Directive({
     selector: '[my-tooltip]'
   })
-  class CustomTooltipCtrl {}
+  class CustomTooltipDir {}
 
   @Component({
     selector: 'app',
     template: `...`,
     directives: [CustomTooltip, BootstrapTooltip]
   })
-  class AppCtrl {}
+  class AppCmp {}
   ```
+
+* Name directives' controllers with `Dir` suffix and components' controllers with `Cmp` suffix. The name of any directive or component should be formed following the rule `CustomPrefix` + `BasicDescription` + `Dir` or `Cmp`.
+
+  ### Example
+  **CORRECT**
+  ```ts
+
+  @Directive({
+    selector: '[sg-tooltip]`
+  })
+  class SgTooltipDir {}
+
+  @Component({
+    selector: 'sg-button',
+    template: `...`
+  })
+  class SgButtonCmp {}
+  ```
+
+  *Why?*: When any code unit is imported the consumer will know how to use it based on its name, i.e. `ScButtonCmp` means that:
+
+    - This is a controller of a component.
+    - It should be used as an element.
+    - Its selector is `sc-button`.
 
 * Use `@HostListener` and `@HostBinding` instead of the `host` property of the `@Directive` and `@Component` decorators:
 
@@ -168,7 +192,7 @@ The guidelines described below are based on:
       'role': 'button'
     }
   })
-  class SgSampleCtrl {
+  class SgSampleDir {
     button;
     onMouseEnter() {...}
   }
@@ -179,7 +203,7 @@ The guidelines described below are based on:
   @Directive({
     selector: '[sg-sample]'
   })
-  class SgSampleCtrl {
+  class SgSampleDir {
     @HostBinding('role') button;
     @HostListener('mouseenter') onMouseEnter() {...}
   }
@@ -198,7 +222,7 @@ The guidelines described below are based on:
     selector: '[sg-button]',
     template: `...`
   })
-  class SgButtonCtrl {}
+  class SgButtonCmp {}
   ```
 
   **CORRECT**
@@ -207,7 +231,7 @@ The guidelines described below are based on:
     selector: 'sg-button',
     template: `...`
   })
-  class SgButtonCtrl {}
+  class SgButtonCmp {}
   ```
 
 
@@ -216,18 +240,6 @@ The guidelines described below are based on:
   *Why?*: Simple coherent components are easier to reason about, more reusable and composable.
 
   *Why?*: Components which are too primitive may lead to scattering and harder management of the user interface of our applications.
-
-* Name the directives' and components' controllers with `Ctrl` suffix.
-
-  ### Example
-  **CORRECT**
-  ```ts
-  @Component({
-    selector: 'sg-button',
-    template: `...`
-  })
-  class SgButtonCtrl {}
-  ```
 
 * Keep the components' templates as lean as possible and inline them inside of the `@Component` decorator.
 
@@ -259,7 +271,7 @@ The guidelines described below are based on:
       'change'
     ]
   })
-  class SgButtonCtrl {
+  class SgButtonCmp {
     change = new EventEmitter<any>();
     label: string;
   }
@@ -271,7 +283,7 @@ The guidelines described below are based on:
     selector: 'sg-button',
     template: `...`
   })
-  class SgButtonCtrl {
+  class SgButtonCmp {
     @Output()
     change = new EventEmitter<any>();
     @Input()
@@ -290,7 +302,7 @@ The guidelines described below are based on:
     selector: 'sg-button',
     template: `...`
   })
-  class SgButtonCtrl {
+  class SgButtonCmp {
     @Output('changeEvent') change = new EventEmitter<any>();
     @Input('labelAttribute') label: string;
   }
@@ -308,7 +320,7 @@ The guidelines described below are based on:
     selector: 'sg-button',
     template: `...`
   })
-  class SgButtonCtrl {
+  class SgButtonCmp {
     @Output() change = new EventEmitter<any>();
     @Input() label: string;
   }
@@ -332,7 +344,7 @@ The guidelines described below are based on:
     selector: 'sg-button',
     template: `...`
   })
-  class SgButtonCtrl {
+  class SgButtonCmp {
     label: string;
     constructor(@Attribute('label') label) {
       this.label = label;
@@ -346,7 +358,7 @@ The guidelines described below are based on:
     selector: 'sg-button',
     template: `...`
   })
-  class SgButtonCtrl {
+  class SgButtonCmp {
     @Input() label: string;
   }
   ```
@@ -363,7 +375,7 @@ The guidelines described below are based on:
     selector: 'sg-text-field',
     template: `<input type="text">`
   })
-  class SgTextFieldCtrl {
+  class SgTextFieldCmp {
     value: string;
     constructor(el: ElementRef) {
       el.nativeElement.querySelector('input[type="text"]')
@@ -381,7 +393,7 @@ The guidelines described below are based on:
     selector: 'sg-text-field',
     template: `<input [(ngModel)]="value" type="text">`
   })
-  class SgTextFieldCtrl {
+  class SgTextFieldCmp {
     value: string;
   }
   ```
@@ -399,7 +411,7 @@ The guidelines described below are based on:
       <button (click)="add(textInput.value)">Add</button>
     `
   })
-  class SgItemListCtrl {
+  class SgItemListCmp {
     values: string[] = [];
     add(val) {
       this.values.push(val);
@@ -419,7 +431,7 @@ The guidelines described below are based on:
       <button (click)="add()">Add</button>
     `
   })
-  class SgItemListCtrl {
+  class SgItemListCmp {
     value: string;
     values: string[] = [];
     add() {
@@ -465,7 +477,7 @@ The guidelines described below are based on:
   ```
   ```ts
   @Component(...)
-  class SampleCtrl {
+  class SampleCmp {
     foobar = 'foo';
   }
   ```
@@ -477,7 +489,7 @@ The guidelines described below are based on:
   ```
   ```ts
   @Component(...)
-  class SampleCtrl {}
+  class SampleCmp {}
   ```
 
 # Testing
