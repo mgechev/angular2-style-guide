@@ -38,36 +38,36 @@ The guidelines described below are based on:
 
   *Why?*: When there are a lot of files (10+) locating them is easier with a consistent folder structures and more difficult in flat structures.
 
-```
-├── app
-│   ├── about
-│   │   └── components
-│   │       ├── about.e2e.ts
-│   │       ├── about.ts
-│   │       └── about.spec.ts
-│   ├── master
-│   │   └── components
-│   │       ├── master.css
-│   │       ├── master.e2e.ts
-│   │       ├── master.html
-│   │       ├── master.ts
-│   │       └── master.spec.ts
-│   ├── assets
-│   │   ├── img
-│   │   │   └── smile.png
-│   │   └── main.css
-│   ├── home
-│   │   └── components
-│   │       ├── home.css
-│   │       ├── home.ts
-│   │       └── home.spec.ts
-│   ├── shared
-│   │   └── services
-│   │       ├── name_list.ts
-│   │       └── name_list.spec.ts
-│   ├── main.ts
-│   └── index.html
-```
+  ```
+  ├── app
+  │   ├── about
+  │   │   └── components
+  │   │       ├── about.e2e.ts
+  │   │       ├── about.ts
+  │   │       └── about.spec.ts
+  │   ├── master
+  │   │   └── components
+  │   │       ├── master.css
+  │   │       ├── master.e2e.ts
+  │   │       ├── master.html
+  │   │       ├── master.ts
+  │   │       └── master.spec.ts
+  │   ├── assets
+  │   │   ├── img
+  │   │   │   └── smile.png
+  │   │   └── main.css
+  │   ├── home
+  │   │   └── components
+  │   │       ├── home.css
+  │   │       ├── home.ts
+  │   │       └── home.spec.ts
+  │   ├── shared
+  │   │   └── services
+  │   │       ├── name_list.ts
+  │   │       └── name_list.spec.ts
+  │   ├── main.ts
+  │   └── index.html
+  ```
 
 # Modules
 
@@ -80,6 +80,20 @@ The guidelines described below are based on:
   *Why?*: The definitions will be easier to find simply by looking at the directory structure.
 
   *Why?*: Do not export private APIs because you need to manage them and keep them consistent for the end users.
+
+* Name the modules with `lower_snake_case`.
+
+  *Why?*: Using lower case will not cause problem across platforms with different case sensitivity.
+
+  *Why?*: By using only English letters, numbers and underscore (`_`) the file names will be consistent across platforms.
+
+  ### Example
+
+  **CORRECT**
+  ```
+  sg_tooltip.ts
+  sg_user_service.ts
+  ```
 
 # Directives and Components
 
@@ -99,19 +113,19 @@ The guidelines described below are based on:
   @Directive({
     selector: '[tooltip]'
   })
-  class BootstrapTooltip {}
+  class BootstrapTooltipCtrl {}
 
   @Directive({
     selector: '[tooltip]'
   })
-  class CustomTooltip {}
+  class CustomTooltipCtrl {}
 
   @Component({
     selector: 'app',
     template: `...`,
     directives: [CustomTooltip, BootstrapTooltip]
   })
-  class App {}
+  class AppCtrl {}
   ```
 
   **CORRECT**
@@ -120,19 +134,19 @@ The guidelines described below are based on:
   @Directive({
     selector: '[bs-tooltip]'
   })
-  class BootstrapTooltip {}
+  class BootstrapTooltipCtrl {}
 
   @Directive({
     selector: '[my-tooltip]'
   })
-  class CustomTooltip {}
+  class CustomTooltipCtrl {}
 
   @Component({
     selector: 'app',
     template: `...`,
     directives: [CustomTooltip, BootstrapTooltip]
   })
-  class App {}
+  class AppCtrl {}
   ```
 
 * Use `@HostListener` and `@HostBinding` instead of the `host` property of the `@Directive` and `@Component` decorators:
@@ -152,7 +166,7 @@ The guidelines described below are based on:
       'role': 'button'
     }
   })
-  class SgSample {
+  class SgSampleCtrl {
     button;
     onMouseEnter() {...}
   }
@@ -163,7 +177,7 @@ The guidelines described below are based on:
   @Directive({
     selector: '[sg-sample]'
   })
-  class SgSample {
+  class SgSampleCtrl {
     @HostBinding('role') button;
     @HostListener('mouseenter') onMouseEnter() {...}
   }
@@ -182,7 +196,7 @@ The guidelines described below are based on:
     selector: '[sg-button]',
     template: `...`
   })
-  class SgButton {}
+  class SgButtonCtrl {}
   ```
 
   **CORRECT**
@@ -191,7 +205,7 @@ The guidelines described below are based on:
     selector: 'sg-button',
     template: `...`
   })
-  class SgButton {}
+  class SgButtonCtrl {}
   ```
 
 
@@ -200,6 +214,18 @@ The guidelines described below are based on:
   *Why?*: Simple coherent components are easier to reason about, more reusable and composable.
 
   *Why?*: Components which are too primitive may lead to scattering and harder management of the user interface of our applications.
+
+* Name the directives' and components' controllers with `Ctrl` suffix.
+
+  ### Example
+  **CORRECT**
+  ```ts
+  @Component({
+    selector: 'sg-button',
+    template: `...`
+  })
+  class SgButtonCtrl {}
+  ```
 
 * Keep the components' templates as lean as possible and inline them inside of the `@Component` decorator.
 
@@ -231,7 +257,7 @@ The guidelines described below are based on:
       'change'
     ]
   })
-  class SgButton {
+  class SgButtonCtrl {
     change = new EventEmitter<any>();
     label: string;
   }
@@ -243,7 +269,7 @@ The guidelines described below are based on:
     selector: 'sg-button',
     template: `...`
   })
-  class SgButton {
+  class SgButtonCtrl {
     @Output()
     change = new EventEmitter<any>();
     @Input()
@@ -262,7 +288,7 @@ The guidelines described below are based on:
     selector: 'sg-button',
     template: `...`
   })
-  class SgButton {
+  class SgButtonCtrl {
     @Output('changeEvent') change = new EventEmitter<any>();
     @Input('labelAttribute') label: string;
   }
@@ -280,7 +306,7 @@ The guidelines described below are based on:
     selector: 'sg-button',
     template: `...`
   })
-  class SgButton {
+  class SgButtonCtrl {
     @Output() change = new EventEmitter<any>();
     @Input() label: string;
   }
@@ -304,7 +330,7 @@ The guidelines described below are based on:
     selector: 'sg-button',
     template: `...`
   })
-  class SgButton {
+  class SgButtonCtrl {
     label: string;
     constructor(@Attribute('label') label) {
       this.label = label;
@@ -318,7 +344,7 @@ The guidelines described below are based on:
     selector: 'sg-button',
     template: `...`
   })
-  class SgButton {
+  class SgButtonCtrl {
     @Input() label: string;
   }
   ```
@@ -335,7 +361,7 @@ The guidelines described below are based on:
     selector: 'sg-text-field',
     template: `<input type="text">`
   })
-  class SgTextField {
+  class SgTextFieldCtrl {
     value: string;
     constructor(el: ElementRef) {
       el.nativeElement.querySelector('input[type="text"]')
@@ -353,7 +379,7 @@ The guidelines described below are based on:
     selector: 'sg-text-field',
     template: `<input [(ngModel)]="value" type="text">`
   })
-  class SgTextField {
+  class SgTextFieldCtrl {
     value: string;
   }
   ```
@@ -371,7 +397,7 @@ The guidelines described below are based on:
       <button (click)="add(textInput.value)">Add</button>
     `
   })
-  class SgItemList {
+  class SgItemListCtrl {
     values: string[] = [];
     add(val) {
       this.values.push(val);
@@ -391,7 +417,7 @@ The guidelines described below are based on:
       <button (click)="add()">Add</button>
     `
   })
-  class SgItemList {
+  class SgItemListCtrl {
     value: string;
     values: string[] = [];
     add() {
