@@ -5,7 +5,9 @@ If you are looking for an opinionated style guide for syntax, conventions, and s
 
 ![Angular 2 Style Guide](/assets/logo.png)
 
-**Disclaimer**: The document is in alpha version which means that some the guidelines will change and new will be added.
+**Disclaimer: The document is in alpha version which means that some the guidelines will change and new will be added.**
+
+You are welcome to join the discussion of the best [practices here](https://github.com/mgechev/angular2-style-guide/issues).
 
 The guidelines described below are based on:
 
