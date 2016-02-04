@@ -101,7 +101,7 @@ The guidelines described below are based on:
 
 * Use attributes as selectors for your directives.
 
-  *Why?*: There could be many directives per element, which makes it more suitable to use attributes in oppose to elements.
+  *Why?*: There could be many directives per element, which makes it more suitable to use attributes as opposed to elements.
 
 * Use custom prefix for the selector of your directives (for instance below is used the prefix `sg` from **S**tyle **G**uide).
 
@@ -177,7 +177,7 @@ The guidelines described below are based on:
 
 * Use `@HostListener` and `@HostBinding` instead of the `host` property of the `@Directive` and `@Component` decorators:
 
-  *Why?*: The name of the property, or method name associated to `@HostBinding` or respectively `@HostListener` should be modified only on a single place - in the directive's controller. In contrast if you use `host` you need to modify both the property declaration inside the controller, and the metadata associated to the directive.
+  *Why?*: The name of the property, or method name associated to `@HostBinding` or respectively `@HostListener` should be modified only in a single place - in the directive's controller. In contrast if you use `host` you need to modify both the property declaration inside the controller, and the metadata associated to the directive.
 
   *Why?*: The metadata declaration attached to the directive is shorter and thus more readable.
 
@@ -292,7 +292,7 @@ The guidelines described below are based on:
   ```
 * Do not rename inputs and outputs.
 
-  *Why?*: May lead to a confusion when the outputs or the inputs properties of given directive are named given way but exported as public API differently.
+  *Why?*: May lead to confusion when the output or the input properties of a given directive are named a given way but exported differently as a public API.
 
   ### Example
 
@@ -366,7 +366,7 @@ The guidelines described below are based on:
 * Detach components and directives which are not visible from the view in order to prevent the change detection running over them.
 * Do not inject native elements to the controller's constructors.
 
-  *Why?*: This way the application will get tightly coupled to the platform and thus won't be able to run independently from it. For instance, a web application injecting native DOM elements won't be able to run in WebWorker, neither be rendered on the server-side.
+  *Why?*: This way the application will get tightly coupled to the platform and thus won't be able to run independently from it. For instance, a web application injecting native DOM elements won't be able to run in WebWorker, nor be rendered on the server-side.
 
   ### Example
   **WRONG**
@@ -448,7 +448,7 @@ The guidelines described below are based on:
 
 * Do not declare global providers in the `bootstrap` call, use a top-level component instead.
 
-  *Why?*: The providers registered in the `bootstrap` method are meant for overriding existing providers, rather than declaring dependencies.
+  *Why?*: The providers registered in the `bootstrap` method are meant for overriding existing providers rather than declaring dependencies.
 
 # Pipes
 
@@ -458,9 +458,9 @@ The guidelines described below are based on:
 
 # Routing
 
-* Name the routes the same way the associated to them components are called.
+* Name the routes the same way the components associated with them are called.
 
-  *Why?*: This way there is only a single name associated to given route. In case given route is called differently from the associate to it component may lead to confusion.
+  *Why?*: This way there is only a single name associated to a given route. This avoids confusion in case a given route is called in a different way to the components associated with it.
 
 # Forms
 
