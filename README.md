@@ -44,9 +44,9 @@ The guidelines described below are based on:
   ├── app
   │   ├── about
   │   │   └── components
-  │   │       ├── about.e2e.ts
-  │   │       ├── about.ts
-  │   │       └── about.spec.ts
+  │   │       ├── about-us.e2e.ts
+  │   │       ├── about-us.ts
+  │   │       └── about-us.spec.ts
   │   ├── master
   │   │   └── components
   │   │       ├── master.css
@@ -83,18 +83,20 @@ The guidelines described below are based on:
 
   *Why?*: Do not export private APIs because you need to manage them and keep them consistent for the end users.
 
-* Name the modules with `lower_snake_case`.
+* Name the modules with `lower-kebab-case`.
 
   *Why?*: Using lower case will not cause problem across platforms with different case sensitivity.
 
-  *Why?*: By using only English letters, numbers and underscore (`_`) the file names will be consistent across platforms.
+  *Why?*: By using only English letters, numbers and dash (`-`) the file names will be consistent across platforms.
+
+  *Why?*: Keeps consistency with AngularJS 1.x style guidelines.
 
   ### Example
 
   **CORRECT**
   ```
-  sg_tooltip.ts
-  sg_user_service.ts
+  sg-tooltip.ts
+  sg-user-service.ts
   ```
 
 # Directives and Components
@@ -102,6 +104,12 @@ The guidelines described below are based on:
 * Use attributes as selectors for your directives.
 
   *Why?*: There could be many directives per element, which makes it more suitable to use attributes in oppose to elements.
+
+* Use lowerCamelCase for naming the selectors of your directives.
+
+  *Why?*: Keeps the names of the properties defined in the controllers that are bound to the view consistent with the attribute names.
+
+  *Why?*: The Angular 2 HTML parser is case sensitive so lowerCamelCase attributes are well supported.
 
 * Use custom prefix for the selector of your directives (for instance below is used the prefix `sg` from **S**tyle **G**uide).
 
@@ -115,65 +123,64 @@ The guidelines described below are based on:
   @Directive({
     selector: '[tooltip]'
   })
-  class BootstrapTooltipDir {}
+  class BootstrapTooltipDirective {}
 
   @Directive({
     selector: '[tooltip]'
   })
-  class CustomTooltipDir {}
+  class CustomTooltipDirective {}
 
   @Component({
     selector: 'app',
     template: `...`,
     directives: [CustomTooltip, BootstrapTooltip]
   })
-  class AppCmp {}
+  class AppComponent {}
   ```
 
   **CORRECT**
 
   ```ts
   @Directive({
-    selector: '[bs-tooltip]'
+    selector: '[bsTooltip]'
   })
-  class BsBootstrapTooltipDir {}
+  class BootstrapTooltipDirective {}
 
   @Directive({
-    selector: '[my-tooltip]'
+    selector: '[myTooltip]'
   })
-  class MyCustomTooltipDir {}
+  class CustomTooltipDirective {}
 
   @Component({
     selector: 'sg-app',
     template: `...`,
     directives: [CustomTooltip, BootstrapTooltip]
   })
-  class SgAppCmp {}
+  class AppComponent {}
   ```
 
-* Name directives' controllers with `Dir` suffix and components' controllers with `Cmp` suffix. The name of any directive or component should be formed following the rule `CustomPrefix` + `BasicDescription` + `Dir` or `Cmp`.
+* Name directives' controllers with `Directive` suffix and components' controllers with `Component` suffix. The name of any directive or component should be formed following the rule `BasicDescription` + `Directive` or `Component`.
 
   ### Example
   **CORRECT**
   ```ts
 
   @Directive({
-    selector: '[sg-tooltip]`
+    selector: '[sgTooltip]`
   })
-  class SgTooltipDir {}
+  class TooltipDirective {}
 
   @Component({
     selector: 'sg-button',
     template: `...`
   })
-  class SgButtonCmp {}
+  class ButtonComponent {}
   ```
 
-  *Why?*: When any code unit is imported the consumer will know how to use it based on its name, i.e. `SgButtonCmp` means that:
+  *Why?*: When any code unit is imported the consumer will know how to use it based on its name, i.e. `ButtonComponent` means that:
 
     - This is a controller of a component.
     - The component should be used as an element.
-    - Its selector is `sg-button`.
 
 * Use `@HostListener` and `@HostBinding` instead of the `host` property of the `@Directive` and `@Component` decorators:
 
@@ -186,13 +193,13 @@ The guidelines described below are based on:
   **WRONG**
   ```ts
   @Directive({
-    selector: '[sg-sample'],
+    selector: '[sgSample'],
     host: {
       '(mouseenter)': 'onMouseEnter()',
       'role': 'button'
     }
   })
-  class SgSampleDir {
+  class SampleDirective {
     button;
     onMouseEnter() {...}
   }
@@ -201,9 +208,9 @@ The guidelines described below are based on:
   **CORRECT**
   ```ts
   @Directive({
-    selector: '[sg-sample]'
+    selector: '[sgSample]'
   })
-  class SgSampleDir {
+  class SampleDirective {
     @HostBinding('role') button;
     @HostListener('mouseenter') onMouseEnter() {...}
   }
@@ -215,6 +222,10 @@ The guidelines described below are based on:
 
   *Why?*: Components are the actual elements in our applications, compared to directives which only augment the elements.
 
+* Use kebab-case for naming the element selectors of your components.
+
+  *Why?*: Keeps the element names consistent with the specification for [Custom Elements](https://www.w3.org/TR/custom-elements/).
+
   ### Example
   **WRONG**
   ```ts
@@ -222,7 +233,7 @@ The guidelines described below are based on:
     selector: '[sg-button]',
     template: `...`
   })
-  class SgButtonCmp {}
+  class ButtonComponent {}
   ```
 
   **CORRECT**
@@ -231,9 +242,8 @@ The guidelines described below are based on:
     selector: 'sg-button',
     template: `...`
   })
-  class SgButtonCmp {}
+  class ButtonComponent {}
   ```
-
 
 * Keep the components as simple and coherent as possible but not too simple.
 
@@ -271,7 +281,7 @@ The guidelines described below are based on:
       'change'
     ]
   })
-  class SgButtonCmp {
+  class ButtonComponent {
     change = new EventEmitter<any>();
     label: string;
   }
@@ -283,7 +293,7 @@ The guidelines described below are based on:
     selector: 'sg-button',
     template: `...`
   })
-  class SgButtonCmp {
+  class ButtonComponent {
     @Output()
     change = new EventEmitter<any>();
     @Input()
@@ -302,7 +312,7 @@ The guidelines described below are based on:
     selector: 'sg-button',
     template: `...`
   })
-  class SgButtonCmp {
+  class ButtonComponent {
     @Output('changeEvent') change = new EventEmitter<any>();
     @Input('labelAttribute') label: string;
   }
@@ -320,7 +330,7 @@ The guidelines described below are based on:
     selector: 'sg-button',
     template: `...`
   })
-  class SgButtonCmp {
+  class ButtonComponent {
     @Output() change = new EventEmitter<any>();
     @Input() label: string;
   }
@@ -344,7 +354,7 @@ The guidelines described below are based on:
     selector: 'sg-button',
     template: `...`
   })
-  class SgButtonCmp {
+  class ButtonComponent {
     label: string;
     constructor(@Attribute('label') label) {
       this.label = label;
@@ -358,12 +368,37 @@ The guidelines described below are based on:
     selector: 'sg-button',
     template: `...`
   })
-  class SgButtonCmp {
+  class ButtonComponent {
     @Input() label: string;
   }
   ```
 
 * Detach components and directives which are not visible from the view in order to prevent the change detection running over them.
+
+  ### Example
+
+  **CORRECT**
+  ```ts
+  @Directive({
+    selector: '[pane]'
+  })
+  class Pane {
+    @Input() title;
+    view: EmbeddedViewRef;
+    constructor(private _viewContainer: ViewContainerRef, private _templateRef: TemplateRef) {}
+    // Creates and attaches the view
+    show() {
+      this.view = this._viewContainer.createEmbeddedView(this._templateRef);
+      this._viewContainer.insert(this.view);
+    }
+    // Detaches the view container
+    hide() {
+      this._viewContainer.detach();
+      this._viewContainer.remove();
+    }
+  }
+  ```
+
 * Do not inject native elements to the controller's constructors.
 
   *Why?*: This way the application will get tightly coupled to the platform and thus won't be able to run independently from it. For instance, a web application injecting native DOM elements won't be able to run in WebWorker, neither be rendered on the server-side.
@@ -375,7 +410,7 @@ The guidelines described below are based on:
     selector: 'sg-text-field',
     template: `<input type="text">`
   })
-  class SgTextFieldCmp {
+  class TextFieldComponent {
     value: string;
     constructor(el: ElementRef) {
       el.nativeElement.querySelector('input[type="text"]')
@@ -393,7 +428,7 @@ The guidelines described below are based on:
     selector: 'sg-text-field',
     template: `<input [(ngModel)]="value" type="text">`
   })
-  class SgTextFieldCmp {
+  class TextFieldComponent {
     value: string;
   }
   ```
@@ -411,7 +446,7 @@ The guidelines described below are based on:
       <button (click)="add(textInput.value)">Add</button>
     `
   })
-  class SgItemListCmp {
+  class ItemListComponent {
     values: string[] = [];
     add(val) {
       this.values.push(val);
@@ -431,7 +466,7 @@ The guidelines described below are based on:
       <button (click)="add()">Add</button>
     `
   })
-  class SgItemListCmp {
+  class ItemListComponent {
     value: string;
     values: string[] = [];
     add() {
@@ -477,7 +512,7 @@ The guidelines described below are based on:
   ```
   ```ts
   @Component(...)
-  class SampleCmp {
+  class SampleComponent {
     foobar = 'foo';
   }
   ```
@@ -489,7 +524,7 @@ The guidelines described below are based on:
   ```
   ```ts
   @Component(...)
-  class SampleCmp {}
+  class SampleComponent {}
   ```
 
 # Testing
