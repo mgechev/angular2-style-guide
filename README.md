@@ -95,8 +95,8 @@ The guidelines described below are based on:
 
   **CORRECT**
   ```
-  sg-tooltip.ts
-  sg-user-service.ts
+  sg-tooltip.directive.ts
+  sg-user.service.ts
   ```
 
 # Directives and Components
