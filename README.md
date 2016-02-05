@@ -175,9 +175,9 @@ The guidelines described below are based on:
     - The component should be used as an element.
     - Its selector is `sg-button`.
 
-* Use `@HostListener` and `@HostBinding` instead of the `host` property of the `@Directive` and `@Component` decorators:
+* Use [`@HostListener`](https://angular.io/docs/ts/latest/api/core/HostListener-var.html) and [`@HostBinding`](https://angular.io/docs/ts/latest/api/core/HostBinding-var.html) instead of the [`host`](https://angular.io/docs/ts/latest/api/core/Host-var.html) property of the [`@Directive`](https://angular.io/docs/ts/latest/api/core/Directive-decorator.html) and [`@Component`](https://angular.io/docs/ts/latest/api/core/Component-decorator.html) decorators:
 
-  *Why?*: The name of the property, or method name associated to `@HostBinding` or respectively `@HostListener` should be modified only in a single place - in the directive's controller. In contrast if you use `host` you need to modify both the property declaration inside the controller, and the metadata associated to the directive.
+  *Why?*: The name of the property, or method name associated to [`@HostBinding`](https://angular.io/docs/ts/latest/api/core/HostBinding-var.html) or respectively [`@HostListener`](https://angular.io/docs/ts/latest/api/core/HostListener-var.html) should be modified only in a single place - in the directive's controller. In contrast if you use [`host`](https://angular.io/docs/ts/latest/api/core/Host-var.html) you need to modify both the property declaration inside the controller, and the metadata associated to the directive.
 
   *Why?*: The metadata declaration attached to the directive is shorter and thus more readable.
 
@@ -241,7 +241,7 @@ The guidelines described below are based on:
 
   *Why?*: Components which are too primitive may lead to scattering and harder management of the user interface of our applications.
 
-* Keep the components' templates as lean as possible and inline them inside of the `@Component` decorator.
+* Keep the components' templates as lean as possible and inline them inside of the [`@Component`](https://angular.io/docs/ts/latest/api/core/Component-decorator.html) decorator.
 
   *Why?*: Keeping the components' templates short implies simple, composable components.
 
@@ -251,9 +251,9 @@ The guidelines described below are based on:
 
   *Why?*: In case a big and complex template is inlined in the component metadata it may shift the focus from the component's logic defined within the controller.
 
-* Use `@Input` and `@Output` instead of the `inputs` and `outputs` properties of the `@Directive` and `@Component` decorators:
+* Use [`@Input`](https://angular.io/docs/ts/latest/api/core/Input-var.html) and [`@Output`](https://angular.io/docs/ts/latest/api/core/Output-var.html) instead of the `inputs` and `outputs` properties of the [`@Directive`](https://angular.io/docs/ts/latest/api/core/Directive-decorator.html) and [`@Component`](https://angular.io/docs/ts/latest/api/core/Component-decorator.html) decorators:
 
-  *Why?*: The name of the property, or event name associated to `@Input` or respectively `@Output` should be modified only on a single place.
+  *Why?*: The name of the property, or event name associated to [`@Input`](https://angular.io/docs/ts/latest/api/core/Input-var.html) or respectively [`@Output`](https://angular.io/docs/ts/latest/api/core/Output-var.html) should be modified only on a single place.
 
   *Why?*: The metadata declaration attached to the directive is shorter and thus more readable.
 
@@ -332,9 +332,9 @@ The guidelines described below are based on:
    */
   ```
 
-* Prefer inputs over the `@Attribute` parameter decorator.
+* Prefer inputs over the [`@Attribute`](https://angular.io/docs/ts/latest/api/core/Attribute-var.html) parameter decorator.
 
-  *Why?*: The input creates one-way binding which means that we can bind it to an expression and its value gets automatically updated. We can inject a property with `@Attribute` to a controller's constructor and get its value a single time.
+  *Why?*: The input creates one-way binding which means that we can bind it to an expression and its value gets automatically updated. We can inject a property with [`@Attribute`](https://angular.io/docs/ts/latest/api/core/Attribute-var.html) to a controller's constructor and get its value a single time.
 
   ### Example
 
@@ -442,17 +442,17 @@ The guidelines described below are based on:
 
 # Services and Dependency Injection
 
-* Limit the usage of `forwardRef`.
+* Limit the usage of [`forwardRef`](https://angular.io/docs/ts/latest/api/core/forwardRef-function.html).
 
-  *Why?*: The usage of `forwardRef` indicates either a cyclic dependency or inconsistency in the services' declaration (i.e. the dependent service is declared before its dependency). In both cases there is usually a better approach to be used.
+  *Why?*: The usage of [`forwardRef`](https://angular.io/docs/ts/latest/api/core/forwardRef-function.html) indicates either a cyclic dependency or inconsistency in the services' declaration (i.e. the dependent service is declared before its dependency). In both cases there is usually a better approach to be used.
 
-* Do not declare global providers in the `bootstrap` call, use a top-level component instead.
+* Do not declare global providers in the [`bootstrap`](https://angular.io/docs/ts/latest/api/platform/browser/bootstrap-function.html) call, use a top-level component instead.
 
-  *Why?*: The providers registered in the `bootstrap` method are meant for overriding existing providers rather than declaring dependencies.
+  *Why?*: The providers registered in the [`bootstrap`](https://angular.io/docs/ts/latest/api/platform/browser/bootstrap-function.html) method are meant for overriding existing providers rather than declaring dependencies.
 
 # Pipes
 
-* Use impure pipes only when they need to hold state.
+* Use [impure pipes](https://angular.io/docs/ts/latest/api/core/PipeMetadata-class.html) only when they need to hold state.
 
   *Why?*: The change detection can optimize pure pipes since they hold the [referential transparency](https://en.wikipedia.org/wiki/Referential_transparency) property.
 
@@ -525,13 +525,13 @@ The guidelines described below are based on:
 
 # Change detection
 
-* Use `OnPush` change detection strategy for [pure/dumb components](http://teropa.info/blog/2015/10/18/refactoring-angular-apps-to-components.html#toward-smart-and-dumb-components) that accepts as input immutable data.
+* Use [`OnPush`](https://angular.io/docs/ts/latest/api/core/ChangeDetectionStrategy-enum.html) change detection strategy for [pure/dumb components](http://teropa.info/blog/2015/10/18/refactoring-angular-apps-to-components.html#toward-smart-and-dumb-components) that accepts as input immutable data.
 
   *Why?*: Angular will optimize the performance of your application dramatically by not performing change detection over the entire sub tree with root the given pure component.
 
 # TypeScript specific practices
 
-* Use tslint for linting your code.
+* Use [TSLint](http://palantir.github.io/tslint/) for linting your code.
 
   *Why?*: In big teams, code following the same practices is easier to read and understand.
 
@@ -554,13 +554,13 @@ The guidelines described below are based on:
 
 ## TypeScript dependency injection
 
-* Use the `@Injectable()` decorator instead of explicitly declaring the dependencies using `@Inject(TOKEN)`.
+* Use the [`@Injectable()`](https://angular.io/docs/ts/latest/api/core/Injectable-decorator.html) decorator instead of explicitly declaring the dependencies using [`@Inject(TOKEN)`](https://angular.io/docs/ts/latest/api/testing/inject-function.html).
 
-  *Why?*: Using `@Injectable()` the TypeScript compiler will emit the required type metadata, which makes the code using `@Inject()` unnecessary verbose and less readable.
+  *Why?*: Using [`@Injectable()`](https://angular.io/docs/ts/latest/api/core/Injectable-decorator.html) the TypeScript compiler will emit the required type metadata, which makes the code using [`@Inject()`](https://angular.io/docs/ts/latest/api/testing/inject-function.html) unnecessary verbose and less readable.
 
 ## TSLint
 
-* Use TSLint for linting your JavaScript and be sure to customize the TSLint options file and include in source control. See the [TSLint docs](https://github.com/palantir/tslint) for details on the options.
+* Use [TSLint](http://palantir.github.io/tslint/) for linting your JavaScript and be sure to customize the TSLint options file and include in source control. See the [TSLint docs](https://github.com/palantir/tslint) for details on the options.
 
   *Why?*: Provides a first alert prior to committing any code to source control.
 
@@ -652,7 +652,7 @@ The guidelines described below are based on:
 
 ## JSHint
 
-* Use JSHint for linting your JavaScript and be sure to customize the JSHint options file and include in source control. See the [JSHint](http://www.jshint.com/docs/) docs for details on the options.
+* Use [JSHint](http://www.jshint.com/) for linting your JavaScript and be sure to customize the [JSHint](http://www.jshint.com/) options file and include in source control. See the [JSHint](http://www.jshint.com/docs/) docs for details on the options.
 
   *Why?*: Provides a first alert prior to committing any code to source control.
 
@@ -724,7 +724,7 @@ The guidelines described below are based on:
 
 ## JSCS
 
-* Use JSCS for checking your coding styles your JavaScript and be sure to customize the JSCS options file and include in source control. See the [JSCS docs](http://jscs.info/rules) for details on the options.
+* Use [JSCS](http://jscs.info/) for checking your coding styles your JavaScript and be sure to customize the [JSCS](http://jscs.info/) options file and include in source control. See the [JSCS docs](http://jscs.info/rules) for details on the options.
 
   *Why?*: Provides a first alert prior to committing any code to source control.
 
