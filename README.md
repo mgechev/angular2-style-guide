@@ -493,6 +493,33 @@ The guidelines described below are based on:
 
   *Why?* This ensures your custom Pipes will conform to the framework requirements should they change in the future.
 
+* Name your pipe `name` property in camelCase.
+
+  **WRONG**
+  ```ts
+  @Pipe({
+    name: 'sg-transform-something',
+  })
+  class TransformSomething {
+      transform(input: any): any {
+          //...
+      }
+  }
+  ```
+
+  **CORRECT**
+  ```ts
+  @Pipe({
+    name: 'sgTransformSomething',
+    `
+  })
+  class TransformSomethingPipe implements PipeTransform {
+      transform(input: any): any {
+          //...
+      }
+  }
+  ```
+
 * Use [impure pipes](https://angular.io/docs/ts/latest/api/core/PipeMetadata-class.html) only when they need to hold state.
 
   *Why?*: The change detection can optimize pure pipes since they hold the [referential transparency](https://en.wikipedia.org/wiki/Referential_transparency) property.
