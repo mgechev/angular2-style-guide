@@ -498,25 +498,24 @@ The guidelines described below are based on:
   **WRONG**
   ```ts
   @Pipe({
-    name: 'sg-transform-something',
+    name: 'sg-transform-something'
   })
   class TransformSomething {
-      transform(input: any): any {
-          //...
-      }
+    transform(input: any): any {
+      //...
+    }
   }
   ```
 
   **CORRECT**
   ```ts
   @Pipe({
-    name: 'sgTransformSomething',
-    `
+    name: 'sgTransformSomething'
   })
   class TransformSomethingPipe implements PipeTransform {
-      transform(input: any): any {
-          //...
-      }
+    transform(input: any): any {
+      //...
+    }
   }
   ```
 
