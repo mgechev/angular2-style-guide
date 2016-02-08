@@ -504,7 +504,7 @@ The guidelines described below are based on:
     selector: 'sg-button',
     template: `...`
   })
-  class ButtonComponent implement OnInit {
+  class ButtonComponent implements OnInit {
     ngOnInit {
       console.log('The component got initialized');
     }
