@@ -523,9 +523,45 @@ The guidelines described below are based on:
 
 # Pipes
 
+* Name pipes' controllers with `Pipe` as suffix. The name of any pipe should be formed observing the *BasicDescription + Pipe* rule.
+
+* Always implement the `PipeTransform` interface when building a Pipe.
+
+  *Why?* This ensures your custom Pipes will conform to the framework requirements should they change in the future.
+
+* Name your pipe `name` property in camelCase.
+
+  **WRONG**
+  ```ts
+  @Pipe({
+    name: 'sg-transform-something'
+  })
+  class TransformSomething {
+    transform(input: any): any {
+      //...
+    }
+  }
+  ```
+
+  **CORRECT**
+  ```ts
+  @Pipe({
+    name: 'sgTransformSomething'
+  })
+  class TransformSomethingPipe implements PipeTransform {
+    transform(input: any): any {
+      //...
+    }
+  }
+  ```
+
 * Use [impure pipes](https://angular.io/docs/ts/latest/api/core/PipeMetadata-class.html) only when they need to hold state.
 
   *Why?*: The change detection can optimize pure pipes since they hold the [referential transparency](https://en.wikipedia.org/wiki/Referential_transparency) property.
+
+* Wherever stateful (impure) pipes are required, implement the `OnDestroy` interface.
+
+  *Why?* It is likely that a stateful pipe may contain state that should be cleaned up when a binding is destroyed. For example, a subscription to a stream of data may need to be disposed, or an interval may need to be cleared.
 
 # Routing
 
