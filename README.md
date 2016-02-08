@@ -437,6 +437,8 @@ The guidelines described below are based on:
 
   *Why?*: This way the application will get tightly coupled to the platform and thus won't be able to run independently from it. For instance, a web application injecting native DOM elements won't be able to run in WebWorker, neither be rendered on the server-side.
 
+  ### Example
+
   **WRONG**
   ```ts
   @Component({
@@ -471,6 +473,40 @@ The guidelines described below are based on:
     values: string[] = [];
     add() {
       this.values.push(this.value);
+    }
+  }
+  ```
+
+* Always explicitly implement the interfaces associated with the used by given component life-cycle hooks.
+
+  *Why?*: In case the interface associated to given life-cycle hook is implemented one will get compile-time errors in case the hook is not implemented properly (for instance, the method name is misspelled).
+
+  ### Example
+
+  **WRONG**
+  ```ts
+  @Component({
+    selector: 'sg-button',
+    template: `...`
+  })
+  class ButtonComponent {
+    ngOnInit {
+      console.log('The component got initialized');
+    }
+  }
+  ```
+
+  **CORRECT**
+  ```ts
+  import {OnInit} from 'angular2/core';
+
+  @Component({
+    selector: 'sg-button',
+    template: `...`
+  })
+  class ButtonComponent implement OnInit {
+    ngOnInit {
+      console.log('The component got initialized');
     }
   }
   ```
