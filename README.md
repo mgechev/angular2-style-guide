@@ -25,8 +25,9 @@ The guidelines described below are based on:
 5. [Pipes](#pipes)
 6. [Routing](#routing)
 7. [Forms](#forms)
-8. [Testing](#testing)
-9. [Change Detection](#change-detection)
+8. [Reusable libraries](#reusable-libraries)
+9. [Testing](#testing)
+10. [Change Detection](#change-detection)
 11. [TypeScript specific practices](#typescript-specific-practices)
 12. [ES2015 and ES2016 specific practices](#es2015-and-es2016-specific-practices)
 13. [ES5 specific practices](#es5-specific-practices)
@@ -598,6 +599,12 @@ The guidelines described below are based on:
   @Component(...)
   class SampleComponent {}
   ```
+
+# Reusable libraries
+
+* Follow the [angular-cli publisher guide](https://github.com/angular/angular-cli/blob/master/docs/ng-install.md#b-publisher-guide-preparing-your-library).
+
+  *Why?*: It will allow your library to be painlessly used with the official Angular 2 CLI tool.
 
 # Testing
 
