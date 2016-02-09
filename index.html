@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Angular2 Style Guide by mgechev</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Angular2 Style Guide</h1>
+      <h2 class="project-tagline">Community-driven set of best practices for Angular 2 application development</h2>
+      <a href="https://github.com/mgechev/angular2-style-guide" class="btn">View on GitHub</a>
+      <a href="https://github.com/mgechev/angular2-style-guide/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/mgechev/angular2-style-guide/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="angular-2-style-guide" class="anchor" href="#angular-2-style-guide" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Angular 2 Style Guide</h1>
+
+<p>The purpose of the following style guide is to present a set of best practices and style guidelines for the development of Angular 2 applications.
+If you are looking for an opinionated style guide for syntax, conventions, and structuring Angular 2 applications, then you can step in!</p>
+
+<p><img src="/assets/logo.png" alt="Angular 2 Style Guide"></p>
+
+<p><strong>Disclaimer: The document is in alpha version which means that some the guidelines will change and new will be added.</strong></p>
+
+<p>You are welcome to join the discussion of the best <a href="https://github.com/mgechev/angular2-style-guide/issues">practices here</a>.</p>
+
+<p>The guidelines described below are based on:</p>
+
+<ol>
+<li>Angular 2 <a href="https://github.com/angular/angular">source code</a>.</li>
+<li>Suggestions by <a href="https://github.com/mhevery">Miško Hevery</a> from his technical review of "<a href="https://www.packtpub.com/web-development/switching-angular-2">Switching to Angular 2</a>".</li>
+<li>My own development experience working in a team on large-scale Angular 2 application.</li>
+<li>
+<a href="https://github.com/johnpapa/angular-styleguide">John Papa's AngularJS 1.x style guide</a>, for being consistent with the directory structure and testing across the different major versions of the framework.</li>
+</ol>
+
+<h1>
+<a id="table-of-contents" class="anchor" href="#table-of-contents" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Table of Contents</h1>
+
+<ol>
+<li><a href="#directory-structure">Directory Structure</a></li>
+<li><a href="#modules">Modules</a></li>
+<li><a href="#directives-and-components">Directives and Components</a></li>
+<li><a href="#services-and-dependency-injection">Services and Dependency Injection</a></li>
+<li><a href="#pipes">Pipes</a></li>
+<li><a href="#routing">Routing</a></li>
+<li><a href="#forms">Forms</a></li>
+<li><a href="#testing">Testing</a></li>
+<li><a href="#change-detection">Change Detection</a></li>
+<li><a href="#typescript-specific-practices">TypeScript specific practices</a></li>
+<li><a href="#es2015-and-es2016-specific-practices">ES2015 and ES2016 specific practices</a></li>
+<li><a href="#es5-specific-practices">ES5 specific practices</a></li>
+<li><a href="#license">License</a></li>
+</ol>
+
+<h1>
+<a id="directory-structure" class="anchor" href="#directory-structure" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Directory Structure</h1>
+
+<ul>
+<li>
+<p>Create folders named for the feature they represent. When a folder grows to contain more than 7 files, start to consider creating a folder for them. Your threshold may be different, so adjust as needed.</p>
+
+<p><em>Why?</em>: A developer can locate the code, identify what each file represents at a glance, the structure is flat as can be, and there is no repetitive nor redundant names.</p>
+
+<p><em>Why?</em>: When there are a lot of files (10+) locating them is easier with a consistent folder structures and more difficult in flat structures.</p>
+
+<pre><code>├── src
+│   ├── about
+│   │   └── components
+│   │       ├── about-us.e2e.ts
+│   │       ├── about-us.ts
+│   │       └── about-us.spec.ts
+│   ├── master
+│   │   └── components
+│   │       ├── master.css
+│   │       ├── master.e2e.ts
+│   │       ├── master.html
+│   │       ├── master.ts
+│   │       └── master.spec.ts
+│   ├── assets
+│   │   ├── img
+│   │   │   └── smile.png
+│   │   └── main.css
+│   ├── home
+│   │   └── components
+│   │       ├── home.css
+│   │       ├── home.ts
+│   │       └── home.spec.ts
+│   ├── shared
+│   │   └── services
+│   │       ├── name_list.ts
+│   │       └── name_list.spec.ts
+│   ├── main.ts
+│   └── index.html
+</code></pre>
+</li>
+</ul>
+
+<h1>
+<a id="modules" class="anchor" href="#modules" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Modules</h1>
+
+<ul>
+<li>
+<p>Keep the modules self-contained and coherent. Each module should have a <a href="https://en.wikipedia.org/wiki/Single_responsibility_principle">single reason to change</a>.</p>
+
+<p><em>Why?</em>: This way the modules will be more reusable, and thus composable.</p>
+</li>
+<li>
+<p>Keep each code unit (component, directive, service, pipe, etc.) into a separate file. If the unit uses other internal for the given module logic you can keep it in the same module, without exporting it.</p>
+
+<p><em>Why?</em>: The definitions will be easier to find simply by looking at the directory structure.</p>
+
+<p><em>Why?</em>: Do not export private APIs because you need to manage them and keep them consistent for the end users.</p>
+</li>
+<li>
+<p>Name the modules with <code>lower-kebab-case</code>.</p>
+
+<p><em>Why?</em>: Using lower case will not cause problem across platforms with different case sensitivity.</p>
+
+<p><em>Why?</em>: By using only English letters, numbers and dash (<code>-</code>) the file names will be consistent across platforms.</p>
+
+<p><em>Why?</em>: Keeps consistency with AngularJS 1.x style guidelines.</p>
+
+<h3>
+<a id="example" class="anchor" href="#example" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h3>
+
+<p><strong>CORRECT</strong></p>
+
+<pre><code>sg-tooltip.directive.ts
+sg-user.service.ts
+</code></pre>
+</li>
+</ul>
+
+<h1>
+<a id="directives-and-components" class="anchor" href="#directives-and-components" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Directives and Components</h1>
+
+<ul>
+<li>
+<p>Use attributes as selectors for your directives.</p>
+
+<p><em>Why?</em>: There could be many directives per element, which makes it more suitable to use attributes as opposed to elements.</p>
+</li>
+<li>
+<p>Use lowerCamelCase for naming the selectors of your directives.</p>
+
+<p><em>Why?</em>: Keeps the names of the properties defined in the controllers that are bound to the view consistent with the attribute names.</p>
+
+<p><em>Why?</em>: The Angular 2 HTML parser is case sensitive so lowerCamelCase attributes are well supported.</p>
+</li>
+<li>
+<p>Use custom prefix for the selector of your directives (for instance below is used the prefix <code>sg</code> from <strong>S</strong>tyle <strong>G</strong>uide).</p>
+
+<p><em>Why?</em>: This way you will be able to prevent name collisions.</p>
+
+<h3>
+<a id="example-1" class="anchor" href="#example-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h3>
+
+<p><strong>WRONG</strong></p>
+
+<div class="highlight highlight-source-ts"><pre>@Directive({
+  selector: <span class="pl-s">'[tooltip]'</span>
+})
+<span class="pl-k">class</span> <span class="pl-en">BootstrapTooltipDirective</span> {}
+
+@Directive({
+  selector: <span class="pl-s">'[tooltip]'</span>
+})
+<span class="pl-k">class</span> <span class="pl-en">CustomTooltipDirective</span> {}
+
+@Component({
+  selector: <span class="pl-s">'app'</span>,
+  template: <span class="pl-s">`...`</span>,
+  directives: [CustomTooltip, BootstrapTooltip]
+})
+<span class="pl-k">class</span> <span class="pl-en">AppComponent</span> {}</pre></div>
+
+<p><strong>CORRECT</strong></p>
+
+<div class="highlight highlight-source-ts"><pre>@Directive({
+  selector: <span class="pl-s">'[bsTooltip]'</span>
+})
+<span class="pl-k">class</span> <span class="pl-en">BootstrapTooltipDirective</span> {}
+
+@Directive({
+  selector: <span class="pl-s">'[myTooltip]'</span>
+})
+<span class="pl-k">class</span> <span class="pl-en">CustomTooltipDirective</span> {}
+
+@Component({
+  selector: <span class="pl-s">'sg-app'</span>,
+  template: <span class="pl-s">`...`</span>,
+  directives: [CustomTooltip, BootstrapTooltip]
+})
+<span class="pl-k">class</span> <span class="pl-en">AppComponent</span> {}</pre></div>
+</li>
+<li>
+<p>Name directives' controllers with <code>Directive</code> suffix and components' controllers with <code>Component</code> suffix. The name of any directive or component should be formed following the rule <code>BasicDescription</code> + <code>Directive</code> or <code>Component</code>.</p>
+
+<h3>
+<a id="example-2" class="anchor" href="#example-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h3>
+
+<p><strong>CORRECT</strong></p>
+
+<div class="highlight highlight-source-ts"><pre>
+@Directive({
+  selector: <span class="pl-s">'[sgTooltip]`</span>
+})
+<span class="pl-k">class</span> <span class="pl-en">TooltipDirective</span> {}
+
+@Component({
+  selector: <span class="pl-s">'sg-button'</span>,
+  template: <span class="pl-s">`...`</span>
+})
+<span class="pl-k">class</span> <span class="pl-en">ButtonComponent</span> {}</pre></div>
+
+<p><em>Why?</em>: When any code unit is imported the consumer will know how to use it based on its name, i.e. <code>ButtonComponent</code> means that:</p>
+
+<ul>
+<li>This is a controller of a component.</li>
+<li>The component should be used as an element.</li>
+</ul>
+</li>
+<li>
+<p>Use <a href="https://angular.io/docs/ts/latest/api/core/HostListener-var.html"><code>@HostListener</code></a> and <a href="https://angular.io/docs/ts/latest/api/core/HostBinding-var.html"><code>@HostBinding</code></a> instead of the <a href="https://angular.io/docs/ts/latest/api/core/Host-var.html"><code>host</code></a> property of the <a href="https://angular.io/docs/ts/latest/api/core/Directive-decorator.html"><code>@Directive</code></a> and <a href="https://angular.io/docs/ts/latest/api/core/Component-decorator.html"><code>@Component</code></a> decorators:</p>
+
+<p><em>Why?</em>: The name of the property, or method name associated to <a href="https://angular.io/docs/ts/latest/api/core/HostBinding-var.html"><code>@HostBinding</code></a> or respectively <a href="https://angular.io/docs/ts/latest/api/core/HostListener-var.html"><code>@HostListener</code></a> should be modified only in a single place - in the directive's controller. In contrast if you use <a href="https://angular.io/docs/ts/latest/api/core/Host-var.html"><code>host</code></a> you need to modify both the property declaration inside the controller, and the metadata associated to the directive.</p>
+
+<p><em>Why?</em>: The metadata declaration attached to the directive is shorter and thus more readable.</p>
+
+<h3>
+<a id="example-3" class="anchor" href="#example-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h3>
+
+<p><strong>WRONG</strong></p>
+
+<div class="highlight highlight-source-ts"><pre>@Directive({
+  selector: <span class="pl-s">'[sgSample'</span>],
+  host: {
+    <span class="pl-s">'(mouseenter)'</span>: <span class="pl-s">'onMouseEnter()'</span>,
+    <span class="pl-s">'role'</span>: <span class="pl-s">'button'</span>
+  }
+})
+<span class="pl-k">class</span> <span class="pl-en">SampleDirective</span> {
+  button;
+  <span class="pl-en">onMouseEnter</span>() {...}
+}</pre></div>
+
+<p><strong>CORRECT</strong></p>
+
+<div class="highlight highlight-source-ts"><pre>@Directive({
+  selector: <span class="pl-s">'[sgSample]'</span>
+})
+<span class="pl-k">class</span> <span class="pl-en">SampleDirective</span> {
+  @<span class="pl-en">HostBinding</span>('<span class="pl-v">role</span>') button;
+  @<span class="pl-en">HostListener</span>('<span class="pl-v">mouseenter</span>') <span class="pl-en">onMouseEnter</span>() {...}
+}</pre></div>
+</li>
+<li>
+<p>Use element selectors for components.</p>
+
+<p><em>Why?</em>: There could be only a single component per element.</p>
+
+<p><em>Why?</em>: Components are the actual elements in our applications, compared to directives which only augment the elements.</p>
+</li>
+<li>
+<p>Use kebab-case for naming the element selectors of your components.</p>
+
+<p><em>Why?</em>: Keeps the element names consistent with the specification for <a href="https://www.w3.org/TR/custom-elements/">Custom Elements</a>.</p>
+
+<h3>
+<a id="example-4" class="anchor" href="#example-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h3>
+
+<p><strong>WRONG</strong></p>
+
+<div class="highlight highlight-source-ts"><pre>@Component({
+  selector: <span class="pl-s">'[sg-button]'</span>,
+  template: <span class="pl-s">`...`</span>
+})
+<span class="pl-k">class</span> <span class="pl-en">ButtonComponent</span> {}</pre></div>
+
+<p><strong>CORRECT</strong></p>
+
+<div class="highlight highlight-source-ts"><pre>@Component({
+  selector: <span class="pl-s">'sg-button'</span>,
+  template: <span class="pl-s">`...`</span>
+})
+<span class="pl-k">class</span> <span class="pl-en">ButtonComponent</span> {}</pre></div>
+</li>
+<li>
+<p>Keep the components as simple and coherent as possible but not too simple.</p>
+
+<p><em>Why?</em>: Simple coherent components are easier to reason about, more reusable and composable.</p>
+
+<p><em>Why?</em>: Components which are too primitive may lead to scattering and harder management of the user interface of our applications.</p>
+</li>
+<li>
+<p>Keep the components' templates as lean as possible and inline them inside of the <a href="https://angular.io/docs/ts/latest/api/core/Component-decorator.html"><code>@Component</code></a> decorator.</p>
+
+<p><em>Why?</em>: Keeping the components' templates short implies simple, composable components.</p>
+
+<p><em>Why?</em>: Keeping the template next to the component's controller makes it easier to lookup the component's structure and/or modify it.</p>
+</li>
+<li>
+<p>Extract the more complex and bigger templates, longer than 15 lines of code, into a separate file and put them next to their controllers' definition.</p>
+
+<p><em>Why?</em>: In case a big and complex template is inlined in the component metadata it may shift the focus from the component's logic defined within the controller.</p>
+</li>
+<li>
+<p>Use <a href="https://angular.io/docs/ts/latest/api/core/Input-var.html"><code>@Input</code></a> and <a href="https://angular.io/docs/ts/latest/api/core/Output-var.html"><code>@Output</code></a> instead of the <code>inputs</code> and <code>outputs</code> properties of the <a href="https://angular.io/docs/ts/latest/api/core/Directive-decorator.html"><code>@Directive</code></a> and <a href="https://angular.io/docs/ts/latest/api/core/Component-decorator.html"><code>@Component</code></a> decorators:</p>
+
+<p><em>Why?</em>: The name of the property, or event name associated to <a href="https://angular.io/docs/ts/latest/api/core/Input-var.html"><code>@Input</code></a> or respectively <a href="https://angular.io/docs/ts/latest/api/core/Output-var.html"><code>@Output</code></a> should be modified only on a single place.</p>
+
+<p><em>Why?</em>: The metadata declaration attached to the directive is shorter and thus more readable.</p>
+
+<h3>
+<a id="example-5" class="anchor" href="#example-5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h3>
+
+<p><strong>WRONG</strong></p>
+
+<div class="highlight highlight-source-ts"><pre>@Component({
+  selector: <span class="pl-s">'sg-button'</span>,
+  template: <span class="pl-s">`...`</span>,
+  inputs: [
+    <span class="pl-s">'label'</span>
+  ],
+  outputs: [
+    <span class="pl-s">'change'</span>
+  ]
+})
+<span class="pl-k">class</span> <span class="pl-en">ButtonComponent</span> {
+  <span class="pl-v">change</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">EventEmitter</span>&lt;<span class="pl-k">any</span>&gt;();
+  <span class="pl-v">label</span>: <span class="pl-k">string</span>;
+}</pre></div>
+
+<p><strong>CORRECT</strong></p>
+
+<div class="highlight highlight-source-ts"><pre>@Component({
+  selector: <span class="pl-s">'sg-button'</span>,
+  template: <span class="pl-s">`...`</span>
+})
+<span class="pl-k">class</span> <span class="pl-en">ButtonComponent</span> {
+  @<span class="pl-en">Output</span>()
+  change = new <span class="pl-en">EventEmitter</span>&lt;<span class="pl-k">any</span>&gt;();
+  @<span class="pl-en">Input</span>()
+  label: <span class="pl-k">string</span>;
+}</pre></div>
+</li>
+<li>
+<p>Do not rename inputs and outputs.</p>
+
+<p><em>Why?</em>: May lead to confusion when the output or the input properties of a given directive are named a given way but exported differently as a public API.</p>
+
+<h3>
+<a id="example-6" class="anchor" href="#example-6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h3>
+
+<p><strong>WRONG</strong></p>
+
+<div class="highlight highlight-source-ts"><pre>@Component({
+  selector: <span class="pl-s">'sg-button'</span>,
+  template: <span class="pl-s">`...`</span>
+})
+<span class="pl-k">class</span> <span class="pl-en">ButtonComponent</span> {
+  @<span class="pl-en">Output</span>('<span class="pl-v">changeEvent</span>') change = new <span class="pl-en">EventEmitter</span>&lt;<span class="pl-k">any</span>&gt;();
+  @<span class="pl-en">Input</span>('<span class="pl-v">labelAttribute</span>') label: <span class="pl-k">string</span>;
+}
+<span class="pl-c">/*</span>
+<span class="pl-c">* Need to be consumed the following way:</span>
+<span class="pl-c">*</span>
+<span class="pl-c">* &lt;sg-button labelAttribute="foobar" (changeEvent)="doStuff()"&gt;</span>
+<span class="pl-c">* &lt;/sg-button&gt;</span>
+<span class="pl-c">*/</span></pre></div>
+
+<p><strong>CORRECT</strong></p>
+
+<div class="highlight highlight-source-ts"><pre>@Component({
+  selector: <span class="pl-s">'sg-button'</span>,
+  template: <span class="pl-s">`...`</span>
+})
+<span class="pl-k">class</span> <span class="pl-en">ButtonComponent</span> {
+  @<span class="pl-en">Output</span>() change = new <span class="pl-en">EventEmitter</span>&lt;<span class="pl-k">any</span>&gt;();
+  @<span class="pl-en">Input</span>() label: <span class="pl-k">string</span>;
+}
+<span class="pl-c">/*</span>
+<span class="pl-c">* Need to be consumed the following way, which is much more straightforward:</span>
+<span class="pl-c">*</span>
+<span class="pl-c">* &lt;sg-button label="foobar" (change)="doStuff()"&gt;</span>
+<span class="pl-c">* &lt;/sg-button&gt;</span>
+<span class="pl-c">*/</span></pre></div>
+</li>
+<li>
+<p>Prefer inputs over the <a href="https://angular.io/docs/ts/latest/api/core/Attribute-var.html"><code>@Attribute</code></a> parameter decorator.</p>
+
+<p><em>Why?</em>: The input creates one-way binding which means that we can bind it to an expression and its value gets automatically updated. We can inject a property with <a href="https://angular.io/docs/ts/latest/api/core/Attribute-var.html"><code>@Attribute</code></a> to a controller's constructor and get its value a single time.</p>
+
+<h3>
+<a id="example-7" class="anchor" href="#example-7" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h3>
+
+<p><strong>WRONG</strong></p>
+
+<div class="highlight highlight-source-ts"><pre>@Component({
+  selector: <span class="pl-s">'sg-button'</span>,
+  template: <span class="pl-s">`...`</span>
+})
+<span class="pl-k">class</span> <span class="pl-en">ButtonComponent</span> {
+  <span class="pl-v">label</span>: <span class="pl-k">string</span>;
+  <span class="pl-en">constructor</span>(@<span class="pl-v">Attribute</span>('<span class="pl-v">label</span>') label) {
+    <span class="pl-c1">this</span>.label <span class="pl-k">=</span> label;
+  }
+}</pre></div>
+
+<p><strong>CORRECT</strong></p>
+
+<div class="highlight highlight-source-ts"><pre>@Component({
+  selector: <span class="pl-s">'sg-button'</span>,
+  template: <span class="pl-s">`...`</span>
+})
+<span class="pl-k">class</span> <span class="pl-en">ButtonComponent</span> {
+  @<span class="pl-en">Input</span>() label: <span class="pl-k">string</span>;
+}</pre></div>
+</li>
+<li>
+<p>Detach components and directives which are not visible from the view in order to prevent the change detection running over them.</p>
+
+<h3>
+<a id="example-8" class="anchor" href="#example-8" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h3>
+
+<p><strong>CORRECT</strong></p>
+
+<div class="highlight highlight-source-ts"><pre>@Directive({
+  selector: <span class="pl-s">'[pane]'</span>
+})
+<span class="pl-k">class</span> <span class="pl-en">Pane</span> {
+  @<span class="pl-en">Input</span>() title;
+  <span class="pl-v">view</span>: EmbeddedViewRef;
+  <span class="pl-en">constructor</span>(<span class="pl-k">private</span> <span class="pl-v">_viewContainer</span>: ViewContainerRef, <span class="pl-k">private</span> <span class="pl-v">_templateRef</span>: TemplateRef) {}
+  <span class="pl-c">// Creates and attaches the view</span>
+  <span class="pl-en">show</span>() {
+    <span class="pl-c1">this</span>.view <span class="pl-k">=</span> <span class="pl-c1">this</span>._viewContainer.createEmbeddedView(<span class="pl-c1">this</span>._templateRef);
+    <span class="pl-c1">this</span>._viewContainer.insert(<span class="pl-c1">this</span>.view);
+  }
+  <span class="pl-c">// Detaches the view container</span>
+  <span class="pl-en">hide</span>() {
+    <span class="pl-c1">this</span>._viewContainer.detach();
+    <span class="pl-c1">this</span>._viewContainer.remove();
+  }
+}</pre></div>
+</li>
+<li>
+<p>Do not inject native elements to the controller's constructors.</p>
+
+<p><em>Why?</em>: This way the application will get tightly coupled to the platform and thus won't be able to run independently from it. For instance, a web application injecting native DOM elements won't be able to run in WebWorker, nor be rendered on the server-side.</p>
+
+<h3>
+<a id="example-9" class="anchor" href="#example-9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h3>
+
+<p><strong>WRONG</strong></p>
+
+<div class="highlight highlight-source-ts"><pre>@Component({
+  selector: <span class="pl-s">'sg-text-field'</span>,
+  template: <span class="pl-s">`&lt;input type="text"&gt;`</span>
+})
+<span class="pl-k">class</span> <span class="pl-en">TextFieldComponent</span> {
+  <span class="pl-v">value</span>: <span class="pl-k">string</span>;
+  <span class="pl-en">constructor</span>(<span class="pl-v">el</span>: ElementRef) {
+    el.nativeElement.querySelector(<span class="pl-s">'input[type="text"]'</span>)
+      .onchange <span class="pl-k">=</span> () <span class="pl-k">=&gt;</span> <span class="pl-c1">this</span>.value <span class="pl-k">=</span> el.value;
+  }
+}</pre></div>
+
+<p><strong>CORRECT</strong></p>
+
+<div class="highlight highlight-source-ts"><pre><span class="pl-k">import</span> {NgModel} from <span class="pl-s">'angular2/common'</span>;
+
+@Component({
+  directives: [NgModel],
+  selector: <span class="pl-s">'sg-text-field'</span>,
+  template: <span class="pl-s">`&lt;input [(ngModel)]="value" type="text"&gt;`</span>
+})
+<span class="pl-k">class</span> <span class="pl-en">TextFieldComponent</span> {
+  <span class="pl-v">value</span>: <span class="pl-k">string</span>;
+}</pre></div>
+</li>
+<li>
+<p>Do not manipulate element referenced within the template.</p>
+
+<p><em>Why?</em>: This way the application will get tightly coupled to the platform and thus won't be able to run independently from it. For instance, a web application injecting native DOM elements won't be able to run in WebWorker, neither be rendered on the server-side.</p>
+
+<h3>
+<a id="example-10" class="anchor" href="#example-10" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h3>
+
+<p><strong>WRONG</strong></p>
+
+<div class="highlight highlight-source-ts"><pre>@Component({
+  selector: <span class="pl-s">'sg-items-list'</span>,
+  template: <span class="pl-s">`</span>
+<span class="pl-s">    &lt;input type="text" #textInput&gt;</span>
+<span class="pl-s">    &lt;button (click)="add(textInput.value)"&gt;Add&lt;/button&gt;</span>
+<span class="pl-s">  `</span>
+})
+<span class="pl-k">class</span> <span class="pl-en">ItemListComponent</span> {
+  <span class="pl-v">values</span>: <span class="pl-k">string</span>[] <span class="pl-k">=</span> [];
+  <span class="pl-en">add</span>(<span class="pl-v">val</span>) {
+    <span class="pl-c1">this</span>.values.push(val);
+  }
+}</pre></div>
+
+<p><strong>CORRECT</strong></p>
+
+<div class="highlight highlight-source-ts"><pre><span class="pl-k">import</span> {NgModel} from <span class="pl-s">'angular2/common'</span>;
+
+@Component({
+  directives: [NgModel],
+  selector: <span class="pl-s">'sg-items-list'</span>,
+  template: <span class="pl-s">`</span>
+<span class="pl-s">    &lt;input type="text" [(ngModel)]="value"&gt;</span>
+<span class="pl-s">    &lt;button (click)="add()"&gt;Add&lt;/button&gt;</span>
+<span class="pl-s">  `</span>
+})
+<span class="pl-k">class</span> <span class="pl-en">ItemListComponent</span> {
+  <span class="pl-v">value</span>: <span class="pl-k">string</span>;
+  <span class="pl-v">values</span>: <span class="pl-k">string</span>[] <span class="pl-k">=</span> [];
+  <span class="pl-en">add</span>() {
+    <span class="pl-c1">this</span>.values.push(<span class="pl-c1">this</span>.value);
+  }
+}</pre></div>
+</li>
+<li>
+<p>Always explicitly implement the interfaces associated with the used by given component life-cycle hooks.</p>
+
+<p><em>Why?</em>: In case the interface associated to given life-cycle hook is implemented one will get compile-time errors in case the hook is not implemented properly (for instance, the method name is misspelled).</p>
+
+<h3>
+<a id="example-11" class="anchor" href="#example-11" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h3>
+
+<p><strong>WRONG</strong></p>
+
+<div class="highlight highlight-source-ts"><pre>@Component({
+  selector: <span class="pl-s">'sg-button'</span>,
+  template: <span class="pl-s">`...`</span>
+})
+<span class="pl-k">class</span> <span class="pl-en">ButtonComponent</span> {
+  ngOnInit {
+    <span class="pl-en">console.log</span>('<span class="pl-v">The</span> <span class="pl-v">component</span> <span class="pl-v">got</span> <span class="pl-v">initialized</span>');
+  }
+}</pre></div>
+
+<p><strong>CORRECT</strong></p>
+
+<div class="highlight highlight-source-ts"><pre><span class="pl-k">import</span> {OnInit} from <span class="pl-s">'angular2/core'</span>;
+
+@Component({
+  selector: <span class="pl-s">'sg-button'</span>,
+  template: <span class="pl-s">`...`</span>
+})
+<span class="pl-k">class</span> <span class="pl-en">ButtonComponent</span> <span class="pl-k">implements</span> <span class="pl-k">OnInit</span> {
+  ngOnInit {
+    <span class="pl-en">console.log</span>('<span class="pl-v">The</span> <span class="pl-v">component</span> <span class="pl-v">got</span> <span class="pl-v">initialized</span>');
+  }
+}</pre></div>
+</li>
+</ul>
+
+<h1>
+<a id="services-and-dependency-injection" class="anchor" href="#services-and-dependency-injection" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Services and Dependency Injection</h1>
+
+<ul>
+<li>
+<p>Limit the usage of <a href="https://angular.io/docs/ts/latest/api/core/forwardRef-function.html"><code>forwardRef</code></a>.</p>
+
+<p><em>Why?</em>: The usage of <a href="https://angular.io/docs/ts/latest/api/core/forwardRef-function.html"><code>forwardRef</code></a> indicates either a cyclic dependency or inconsistency in the services' declaration (i.e. the dependent service is declared before its dependency). In both cases there is usually a better approach to be used.</p>
+</li>
+<li>
+<p>Do not declare global providers in the <a href="https://angular.io/docs/ts/latest/api/platform/browser/bootstrap-function.html"><code>bootstrap</code></a> call, use a top-level component instead.</p>
+
+<p><em>Why?</em>: The providers registered in the <a href="https://angular.io/docs/ts/latest/api/platform/browser/bootstrap-function.html"><code>bootstrap</code></a> method are meant for overriding existing providers rather than declaring dependencies.</p>
+</li>
+</ul>
+
+<h1>
+<a id="pipes" class="anchor" href="#pipes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Pipes</h1>
+
+<ul>
+<li><p>Name pipes' controllers with <code>Pipe</code> as suffix. The name of any pipe should be formed observing the <em>BasicDescription + Pipe</em> rule.</p></li>
+<li>
+<p>Always implement the <code>PipeTransform</code> interface when building a Pipe.</p>
+
+<p><em>Why?</em> This ensures your custom Pipes will conform to the framework requirements should they change in the future.</p>
+</li>
+<li>
+<p>Name your pipe <code>name</code> property in camelCase.</p>
+
+<p><strong>WRONG</strong></p>
+
+<div class="highlight highlight-source-ts"><pre>@Pipe({
+  name: <span class="pl-s">'sg-transform-something'</span>
+})
+<span class="pl-k">class</span> <span class="pl-en">TransformSomething</span> {
+  <span class="pl-en">transform</span>(<span class="pl-v">input</span>: <span class="pl-k">any</span>): <span class="pl-k">any</span> {
+    <span class="pl-c">//...</span>
+  }
+}</pre></div>
+
+<p><strong>CORRECT</strong></p>
+
+<div class="highlight highlight-source-ts"><pre>@Pipe({
+  name: <span class="pl-s">'sgTransformSomething'</span>
+})
+<span class="pl-k">class</span> <span class="pl-en">TransformSomethingPipe</span> <span class="pl-k">implements</span> <span class="pl-k">PipeTransform</span> {
+  <span class="pl-en">transform</span>(<span class="pl-v">input</span>: <span class="pl-k">any</span>): <span class="pl-k">any</span> {
+    <span class="pl-c">//...</span>
+  }
+}</pre></div>
+</li>
+<li>
+<p>Use <a href="https://angular.io/docs/ts/latest/api/core/PipeMetadata-class.html">impure pipes</a> only when they need to hold state.</p>
+
+<p><em>Why?</em>: The change detection can optimize pure pipes since they hold the <a href="https://en.wikipedia.org/wiki/Referential_transparency">referential transparency</a> property.</p>
+</li>
+<li>
+<p>Wherever stateful (impure) pipes are required, implement the <code>OnDestroy</code> interface.</p>
+
+<p><em>Why?</em> It is likely that a stateful pipe may contain state that should be cleaned up when a binding is destroyed. For example, a subscription to a stream of data may need to be disposed, or an interval may need to be cleared.</p>
+</li>
+</ul>
+
+<h1>
+<a id="routing" class="anchor" href="#routing" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Routing</h1>
+
+<ul>
+<li>
+<p>Name the routes the same way the components associated with them are called.</p>
+
+<p><em>Why?</em>: This way there is only a single name associated to a given route. This avoids confusion in case a given route is called in a different way to the components associated with it.</p>
+</li>
+</ul>
+
+<h1>
+<a id="forms" class="anchor" href="#forms" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Forms</h1>
+
+<ul>
+<li>
+<p>Do not use expression for name of a control.</p>
+
+<p><em>Why?</em>: When the name of the control is dynamically generated it will be hard to reference it inside of the controller associated to the form, and may lead to confusion.</p>
+
+<h3>
+<a id="example-12" class="anchor" href="#example-12" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h3>
+
+<p><strong>WRONG</strong></p>
+
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">form</span>&gt;
+  &lt;<span class="pl-ent">input</span> [<span class="pl-e">ngControl</span>]=<span class="pl-s"><span class="pl-pds">"</span>foobar<span class="pl-pds">"</span></span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span>&gt;
+&lt;/<span class="pl-ent">form</span>&gt;</pre></div>
+
+<div class="highlight highlight-source-ts"><pre>@Component(...)
+<span class="pl-k">class</span> <span class="pl-en">SampleComponent</span> {
+  <span class="pl-v">foobar</span> <span class="pl-k">=</span> <span class="pl-s">'foo'</span>;
+}</pre></div>
+
+<p><strong>CORRECT</strong></p>
+
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">form</span>&gt;
+  &lt;<span class="pl-ent">input</span> <span class="pl-e">ngControl</span>=<span class="pl-s"><span class="pl-pds">"</span>foo<span class="pl-pds">"</span></span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span>&gt;
+&lt;/<span class="pl-ent">form</span>&gt;</pre></div>
+
+<div class="highlight highlight-source-ts"><pre>@Component(...)
+<span class="pl-k">class</span> <span class="pl-en">SampleComponent</span> {}</pre></div>
+</li>
+</ul>
+
+<h1>
+<a id="testing" class="anchor" href="#testing" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Testing</h1>
+
+<ul>
+<li>
+<p>Use <a href="https://jasmine.github.io/">Jasmine</a> for unit testing.</p>
+
+<p><em>Why?</em>: It is well supported and popular in the JavaScript community.</p>
+
+<p><em>Why?</em>: It is widely popular in the Angular community. Jasmine is used for testing both AngularJS 1.x and Angular 2.</p>
+
+<p><em>Why?</em>: It has up-to-date type definitions so you can have great development experience using TypeScript.</p>
+</li>
+<li><p>Use Karma as test runner.</p></li>
+<li>
+<p>Place your test files side-by-side with your client code.</p>
+
+<p><em>Why?</em>: The tests are easier to find since they are always next to the code they are testing.</p>
+
+<p><em>Why?</em>: When you update source code it is easier to go update the tests at the same time.</p>
+
+<p><em>Why?</em>: The code may act as documentation of the tested component.</p>
+</li>
+<li>
+<p>Name the test file the following way <code>NAME_OF_THE_TESTED_UNIT.spec.EXT</code>:</p>
+
+<h3>
+<a id="example-13" class="anchor" href="#example-13" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example:</h3>
+
+<p><strong>CORRECT</strong></p>
+
+<pre><code>about.ts
+about.spec.ts
+</code></pre>
+</li>
+<li><p>Place integration tests and tests that cover multiple code units into a separate <code>tests</code> directory in your project's root.</p></li>
+</ul>
+
+<h1>
+<a id="change-detection" class="anchor" href="#change-detection" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Change detection</h1>
+
+<ul>
+<li>
+<p>Use <a href="https://angular.io/docs/ts/latest/api/core/ChangeDetectionStrategy-enum.html"><code>OnPush</code></a> change detection strategy for <a href="http://teropa.info/blog/2015/10/18/refactoring-angular-apps-to-components.html#toward-smart-and-dumb-components">pure/dumb components</a> that accepts as input immutable data.</p>
+
+<p><em>Why?</em>: Angular will optimize the performance of your application dramatically by not performing change detection over the entire sub tree with root the given pure component.</p>
+</li>
+</ul>
+
+<h1>
+<a id="typescript-specific-practices" class="anchor" href="#typescript-specific-practices" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>TypeScript specific practices</h1>
+
+<ul>
+<li>
+<p>Use <a href="http://palantir.github.io/tslint/">TSLint</a> for linting your code.</p>
+
+<p><em>Why?</em>: In big teams, code following the same practices is easier to read and understand.</p>
+</li>
+<li>
+<p>Be as explicit in the type definitions as possible (i.e. use <code>any</code> as rarely as possible).</p>
+
+<p><em>Why?</em>: <code>any</code> makes TypeScript behaves like a dynamic language. This way we gave up all the benefits we get from static typing such as better IDE/text editor support and compile-time type-checking.</p>
+</li>
+<li>
+<p>Use "Façade modules" for exporting the public members of your application/library and hiding the implementation details.</p>
+
+<h3>
+<a id="example-14" class="anchor" href="#example-14" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h3>
+
+<div class="highlight highlight-source-ts"><pre><span class="pl-k">export</span> {NgClass} from <span class="pl-s">'./directives/ng_class'</span>;
+<span class="pl-k">export</span> {NgFor} from <span class="pl-s">'./directives/ng_for'</span>;
+<span class="pl-k">export</span> {NgIf} from <span class="pl-s">'./directives/ng_if'</span>;
+<span class="pl-k">export</span> {NgStyle} from <span class="pl-s">'./directives/ng_style'</span>;
+<span class="pl-k">export</span> {NgSwitch, NgSwitchWhen, NgSwitchDefault} from <span class="pl-s">'./directives/ng_switch'</span>;
+<span class="pl-k">export</span> <span class="pl-k">*</span> from <span class="pl-s">'./directives/observable_list_diff'</span>;
+<span class="pl-k">export</span> {CORE_DIRECTIVES} from <span class="pl-s">'./directives/core_directives'</span>;</pre></div>
+</li>
+</ul>
+
+<h2>
+<a id="typescript-dependency-injection" class="anchor" href="#typescript-dependency-injection" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>TypeScript dependency injection</h2>
+
+<ul>
+<li>
+<p>Use the <a href="https://angular.io/docs/ts/latest/api/core/Injectable-decorator.html"><code>@Injectable()</code></a> decorator instead of explicitly declaring the dependencies using <a href="https://angular.io/docs/ts/latest/api/testing/inject-function.html"><code>@Inject(TOKEN)</code></a>.</p>
+
+<p><em>Why?</em>: Using <a href="https://angular.io/docs/ts/latest/api/core/Injectable-decorator.html"><code>@Injectable()</code></a> the TypeScript compiler will emit the required type metadata, which makes the code using <a href="https://angular.io/docs/ts/latest/api/testing/inject-function.html"><code>@Inject()</code></a> unnecessary verbose and less readable.</p>
+</li>
+</ul>
+
+<h2>
+<a id="tslint" class="anchor" href="#tslint" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>TSLint</h2>
+
+<ul>
+<li>
+<p>Use <a href="http://palantir.github.io/tslint/">TSLint</a> for linting your JavaScript and be sure to customize the TSLint options file and include in source control. See the <a href="https://github.com/palantir/tslint">TSLint docs</a> for details on the options.</p>
+
+<p><em>Why?</em>: Provides a first alert prior to committing any code to source control.</p>
+
+<p><em>Why?</em>: Provides consistency across your team.</p>
+
+<div class="highlight highlight-source-json"><pre>{
+  <span class="pl-s"><span class="pl-pds">"</span>rules<span class="pl-pds">"</span></span>: {
+    <span class="pl-s"><span class="pl-pds">"</span>class-name<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>curly<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>eofline<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>indent<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>spaces<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>max-line-length<span class="pl-pds">"</span></span>: [<span class="pl-c1">true</span>, <span class="pl-c1">140</span>],
+    <span class="pl-s"><span class="pl-pds">"</span>member-ordering<span class="pl-pds">"</span></span>: [<span class="pl-c1">true</span>,
+      <span class="pl-s"><span class="pl-pds">"</span>public-before-private<span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>static-before-instance<span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>variables-before-functions<span class="pl-pds">"</span></span>
+    ],
+    <span class="pl-s"><span class="pl-pds">"</span>no-arg<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>no-construct<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>no-duplicate-key<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>no-duplicate-variable<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>no-empty<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>no-eval<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>no-trailing-comma<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>no-trailing-whitespace<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>no-unused-expression<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>no-unused-variable<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>no-unreachable<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>no-use-before-declare<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>one-line<span class="pl-pds">"</span></span>: [<span class="pl-c1">true</span>,
+      <span class="pl-s"><span class="pl-pds">"</span>check-open-brace<span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>check-catch<span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>check-else<span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>check-whitespace<span class="pl-pds">"</span></span>
+    ],
+    <span class="pl-s"><span class="pl-pds">"</span>quotemark<span class="pl-pds">"</span></span>: [<span class="pl-c1">true</span>, <span class="pl-s"><span class="pl-pds">"</span>single<span class="pl-pds">"</span></span>],
+    <span class="pl-s"><span class="pl-pds">"</span>semicolon<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>triple-equals<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>variable-name<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>
+  }
+}</pre></div>
+</li>
+</ul>
+
+<h1>
+<a id="es2015-and-es2016-specific-practices" class="anchor" href="#es2015-and-es2016-specific-practices" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ES2015 and ES2016 specific practices</h1>
+
+<h1>
+<a id="es5-specific-practices" class="anchor" href="#es5-specific-practices" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ES5 specific practices</h1>
+
+<ul>
+<li>
+<p>Use the internal JavaScript DLS provided by Angular 2 for annotating constructor functions.</p>
+
+<p><em>Why?</em>: This syntax is simpler, more readable and closer to the original TypeScript version of the code.</p>
+
+<p><em>Why?</em>: The DLS uses function expressions which are closer to the non-hoisted ES2015 classes.</p>
+
+<h3>
+<a id="example-15" class="anchor" href="#example-15" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h3>
+
+<p><strong>WRONG</strong></p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">function</span> <span class="pl-en">Component</span>() {
+  <span class="pl-c">//...</span>
+}
+<span class="pl-smi">Component</span>.<span class="pl-smi">annotations</span> <span class="pl-k">=</span> [
+  <span class="pl-k">new</span> <span class="pl-en">ng.core</span>.<span class="pl-en">ComponentMetadata</span>({
+    <span class="pl-c">//...</span>
+  }),
+  <span class="pl-k">new</span> <span class="pl-en">ng.router</span>.<span class="pl-en">RouteConfig</span>([
+    <span class="pl-c">//...</span>
+  ])
+];</pre></div>
+
+<p><strong>CORRECT</strong></p>
+
+<div class="highlight highlight-source-ts"><pre><span class="pl-k">var</span> <span class="pl-v">Component</span> <span class="pl-k">=</span> ng.
+  Component({
+    <span class="pl-c">//...</span>
+  })
+  .RouteConfig([
+    <span class="pl-c">//...</span>
+  ])
+  .Class({
+    constructor: functions () {
+      <span class="pl-c">//...</span>
+    }
+  });</pre></div>
+</li>
+</ul>
+
+<h2>
+<a id="jshint" class="anchor" href="#jshint" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>JSHint</h2>
+
+<ul>
+<li>
+<p>Use <a href="http://www.jshint.com/">JSHint</a> for linting your JavaScript and be sure to customize the <a href="http://www.jshint.com/">JSHint</a> options file and include in source control. See the <a href="http://www.jshint.com/docs/">JSHint</a> docs for details on the options.</p>
+
+<p><em>Why?</em>: Provides a first alert prior to committing any code to source control.</p>
+
+<p><em>Why?</em>: Provides consistency across your team.</p>
+
+<div class="highlight highlight-source-json"><pre>{
+    <span class="pl-s"><span class="pl-pds">"</span>bitwise<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>camelcase<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>curly<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>eqeqeq<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>es3<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>forin<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>freeze<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>immed<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>indent<span class="pl-pds">"</span></span>: <span class="pl-c1">4</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>latedef<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>nofunc<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>newcap<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>noarg<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>noempty<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>nonbsp<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>nonew<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>plusplus<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>quotmark<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>single<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>undef<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>unused<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>strict<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>maxparams<span class="pl-pds">"</span></span>: <span class="pl-c1">10</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>maxdepth<span class="pl-pds">"</span></span>: <span class="pl-c1">5</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>maxstatements<span class="pl-pds">"</span></span>: <span class="pl-c1">40</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>maxcomplexity<span class="pl-pds">"</span></span>: <span class="pl-c1">8</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>maxlen<span class="pl-pds">"</span></span>: <span class="pl-c1">120</span>,
+
+    <span class="pl-s"><span class="pl-pds">"</span>asi<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>boss<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>debug<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>eqnull<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>esnext<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>evil<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>expr<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>funcscope<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>globalstrict<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>iterator<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>lastsemic<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>laxbreak<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>laxcomma<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>loopfunc<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>maxerr<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>moz<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>multistr<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>notypeof<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>proto<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>scripturl<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>shadow<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>sub<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>supernew<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>validthis<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>noyield<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>,
+
+    <span class="pl-s"><span class="pl-pds">"</span>browser<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>node<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+
+    <span class="pl-s"><span class="pl-pds">"</span>globals<span class="pl-pds">"</span></span>: {
+        <span class="pl-s"><span class="pl-pds">"</span>angular<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>,
+        <span class="pl-s"><span class="pl-pds">"</span>ng<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>
+    }
+}</pre></div>
+</li>
+</ul>
+
+<h2>
+<a id="jscs" class="anchor" href="#jscs" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>JSCS</h2>
+
+<ul>
+<li>
+<p>Use <a href="http://jscs.info/">JSCS</a> for checking your coding styles your JavaScript and be sure to customize the <a href="http://jscs.info/">JSCS</a> options file and include in source control. See the <a href="http://jscs.info/rules">JSCS docs</a> for details on the options.</p>
+
+<p><em>Why?</em>: Provides a first alert prior to committing any code to source control.</p>
+
+<p><em>Why?</em>: Provides consistency across your team.</p>
+
+<div class="highlight highlight-source-json"><pre>{
+    <span class="pl-s"><span class="pl-pds">"</span>excludeFiles<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span>node_modules/**<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>bower_components/**<span class="pl-pds">"</span></span>],
+
+    <span class="pl-s"><span class="pl-pds">"</span>requireCurlyBraces<span class="pl-pds">"</span></span>: [
+        <span class="pl-s"><span class="pl-pds">"</span>if<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>else<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>for<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>while<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>do<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>try<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>catch<span class="pl-pds">"</span></span>
+    ],
+    <span class="pl-s"><span class="pl-pds">"</span>requireOperatorBeforeLineBreak<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>requireCamelCaseOrUpperCaseIdentifiers<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>maximumLineLength<span class="pl-pds">"</span></span>: {
+      <span class="pl-s"><span class="pl-pds">"</span>value<span class="pl-pds">"</span></span>: <span class="pl-c1">100</span>,
+      <span class="pl-s"><span class="pl-pds">"</span>allowComments<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+      <span class="pl-s"><span class="pl-pds">"</span>allowRegex<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>
+    },
+    <span class="pl-s"><span class="pl-pds">"</span>validateIndentation<span class="pl-pds">"</span></span>: <span class="pl-c1">4</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>validateQuoteMarks<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>'<span class="pl-pds">"</span></span>,
+
+    <span class="pl-s"><span class="pl-pds">"</span>disallowMultipleLineStrings<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>disallowMixedSpacesAndTabs<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>disallowTrailingWhitespace<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>disallowSpaceAfterPrefixUnaryOperators<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>disallowMultipleVarDecl<span class="pl-pds">"</span></span>: <span class="pl-c1">null</span>,
+
+    <span class="pl-s"><span class="pl-pds">"</span>requireSpaceAfterKeywords<span class="pl-pds">"</span></span>: [
+      <span class="pl-s"><span class="pl-pds">"</span>if<span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>else<span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>for<span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>while<span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>do<span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>switch<span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>return<span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>try<span class="pl-pds">"</span></span>,
+      <span class="pl-s"><span class="pl-pds">"</span>catch<span class="pl-pds">"</span></span>
+    ],
+    <span class="pl-s"><span class="pl-pds">"</span>requireSpaceBeforeBinaryOperators<span class="pl-pds">"</span></span>: [
+        <span class="pl-s"><span class="pl-pds">"</span>=<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>+=<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>-=<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>*=<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>/=<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>%=<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;&lt;=<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&gt;&gt;=<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&gt;&gt;&gt;=<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>&amp;=<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>|=<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>^=<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>+=<span class="pl-pds">"</span></span>,
+
+        <span class="pl-s"><span class="pl-pds">"</span>+<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>-<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>*<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>/<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>%<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;&lt;<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&gt;&gt;<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&gt;&gt;&gt;<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&amp;<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>|<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>^<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&amp;&amp;<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>||<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>===<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>==<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&gt;=<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>&lt;=<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&gt;<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>!=<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>!==<span class="pl-pds">"</span></span>
+    ],
+    <span class="pl-s"><span class="pl-pds">"</span>requireSpaceAfterBinaryOperators<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>requireSpacesInConditionalExpression<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>requireSpaceBeforeBlockStatements<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>requireLineFeedAtFileEnd<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>disallowSpacesInsideObjectBrackets<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>all<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>disallowSpacesInsideArrayBrackets<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>all<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>disallowSpacesInsideParentheses<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+
+    <span class="pl-s"><span class="pl-pds">"</span>jsDoc<span class="pl-pds">"</span></span>: {
+        <span class="pl-s"><span class="pl-pds">"</span>checkAnnotations<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+        <span class="pl-s"><span class="pl-pds">"</span>checkParamNames<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+        <span class="pl-s"><span class="pl-pds">"</span>requireParamTypes<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+        <span class="pl-s"><span class="pl-pds">"</span>checkReturnTypes<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+        <span class="pl-s"><span class="pl-pds">"</span>checkTypes<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>
+    },
+
+    <span class="pl-s"><span class="pl-pds">"</span>disallowMultipleLineBreaks<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
+
+    <span class="pl-s"><span class="pl-pds">"</span>disallowCommaBeforeLineBreak<span class="pl-pds">"</span></span>: <span class="pl-c1">null</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>disallowDanglingUnderscores<span class="pl-pds">"</span></span>: <span class="pl-c1">null</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>disallowEmptyBlocks<span class="pl-pds">"</span></span>: <span class="pl-c1">null</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>disallowTrailingComma<span class="pl-pds">"</span></span>: <span class="pl-c1">null</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>requireCommaBeforeLineBreak<span class="pl-pds">"</span></span>: <span class="pl-c1">null</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>requireDotNotation<span class="pl-pds">"</span></span>: <span class="pl-c1">null</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>requireMultipleVarDecl<span class="pl-pds">"</span></span>: <span class="pl-c1">null</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>requireParenthesesAroundIIFE<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>
+}</pre></div>
+</li>
+</ul>
+
+<h1>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h1>
+
+<p>MIT</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/mgechev/angular2-style-guide">Angular2 Style Guide</a> is maintained by <a href="https://github.com/mgechev">mgechev</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
