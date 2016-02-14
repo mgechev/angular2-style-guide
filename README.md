@@ -1,11 +1,9 @@
-# Angular 2 Style Guide
+# Angular 2 Style Guide ![Angular 2 Style Guide](/assets/logo.png)
 
 [![Join the chat at https://gitter.im/mgechev/angular2-style-guide](https://badges.gitter.im/mgechev/angular2-style-guide.svg)](https://gitter.im/mgechev/angular2-style-guide?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 The purpose of the following style guide is to present a set of best practices and style guidelines for the development of Angular 2 applications.
 If you are looking for an opinionated style guide for syntax, conventions, and structuring Angular 2 applications, then you can step in!
-
-![Angular 2 Style Guide](/assets/logo.png)
 
 **Disclaimer: The document is in alpha version which means that some the guidelines will change and new will be added.**
 
@@ -18,7 +16,7 @@ The guidelines described below are based on:
 3. My own development experience working in a team on large-scale Angular 2 application.
 4. [John Papa's AngularJS 1.x style guide](https://github.com/johnpapa/angular-styleguide), for being consistent with the directory structure and testing across the different major versions of the framework.
 
-# Table of Contents
+## Table of Contents
 
 1. [Directory Structure](#directory-structure)
 2. [Modules](#modules)
@@ -35,7 +33,7 @@ The guidelines described below are based on:
 13. [ES5 specific practices](#es5-specific-practices)
 14. [License](#license)
 
-# Directory Structure
+## Directory Structure
 
 * Create folders named for the feature they represent. When a folder grows to contain more than 7 files, start to consider creating a folder for them. Your threshold may be different, so adjust as needed.
 
@@ -74,7 +72,7 @@ The guidelines described below are based on:
   │   └── index.html
   ```
 
-# Modules
+## Modules
 
 * Keep the modules self-contained and coherent. Each module should have a [single reason to change](https://en.wikipedia.org/wiki/Single_responsibility_principle).
 
@@ -94,15 +92,14 @@ The guidelines described below are based on:
 
   *Why?*: Keeps consistency with AngularJS 1.x style guidelines.
 
-  ### Example
-
-  **CORRECT**
   ```
+  /* CORRECT */
   sg-tooltip.directive.ts
   sg-user.service.ts
   ```
+  **[Table of Contents](#table-of-contents)**
 
-# Directives and Components
+## Directives and Components
 
 * Use attributes as selectors for your directives.
 
@@ -118,11 +115,8 @@ The guidelines described below are based on:
 
   *Why?*: This way you will be able to prevent name collisions.
 
-  ### Example
-
-  **WRONG**
-
   ```ts
+  /* WRONG */
   @Directive({
     selector: '[tooltip]'
   })
@@ -141,9 +135,8 @@ The guidelines described below are based on:
   class AppComponent {}
   ```
 
-  **CORRECT**
-
   ```ts
+  /* CORRECT */
   @Directive({
     selector: '[bsTooltip]'
   })
@@ -164,10 +157,8 @@ The guidelines described below are based on:
 
 * Name directives' controllers with `Directive` suffix and components' controllers with `Component` suffix. The name of any directive or component should be formed following the rule `BasicDescription` + `Directive` or `Component`.
 
-  ### Example
-  **CORRECT**
   ```ts
-
+  /* CORRECT */
   @Directive({
     selector: '[sgTooltip]`
   })
@@ -191,10 +182,8 @@ The guidelines described below are based on:
 
   *Why?*: The metadata declaration attached to the directive is shorter and thus more readable.
 
-  ### Example
-
-  **WRONG**
   ```ts
+  /* WRONG */
   @Directive({
     selector: '[sgSample'],
     host: {
@@ -208,8 +197,8 @@ The guidelines described below are based on:
   }
   ```
 
-  **CORRECT**
   ```ts
+  /* CORRECT */
   @Directive({
     selector: '[sgSample]'
   })
@@ -229,9 +218,8 @@ The guidelines described below are based on:
 
   *Why?*: Keeps the element names consistent with the specification for [Custom Elements](https://www.w3.org/TR/custom-elements/).
 
-  ### Example
-  **WRONG**
   ```ts
+  /* WRONG */
   @Component({
     selector: '[sg-button]',
     template: `...`
@@ -239,8 +227,8 @@ The guidelines described below are based on:
   class ButtonComponent {}
   ```
 
-  **CORRECT**
   ```ts
+  /* CORRECT */
   @Component({
     selector: 'sg-button',
     template: `...`
@@ -270,10 +258,8 @@ The guidelines described below are based on:
 
   *Why?*: The metadata declaration attached to the directive is shorter and thus more readable.
 
-  ### Example
-
-  **WRONG**
   ```ts
+  /* WRONG */
   @Component({
     selector: 'sg-button',
     template: `...`,
@@ -290,8 +276,8 @@ The guidelines described below are based on:
   }
   ```
 
-  **CORRECT**
   ```ts
+  /* CORRECT */
   @Component({
     selector: 'sg-button',
     template: `...`
@@ -307,10 +293,8 @@ The guidelines described below are based on:
 
   *Why?*: May lead to confusion when the output or the input properties of a given directive are named a given way but exported differently as a public API.
 
-  ### Example
-
-  **WRONG**
   ```ts
+  /* WRONG */
   @Component({
     selector: 'sg-button',
     template: `...`
@@ -327,8 +311,8 @@ The guidelines described below are based on:
    */
   ```
 
-  **CORRECT**
   ```ts
+  /* CORRECT */
   @Component({
     selector: 'sg-button',
     template: `...`
@@ -349,10 +333,8 @@ The guidelines described below are based on:
 
   *Why?*: The input creates one-way binding which means that we can bind it to an expression and its value gets automatically updated. We can inject a property with [`@Attribute`](https://angular.io/docs/ts/latest/api/core/Attribute-var.html) to a controller's constructor and get its value a single time.
 
-  ### Example
-
-  **WRONG**
   ```ts
+  /* WRONG */
   @Component({
     selector: 'sg-button',
     template: `...`
@@ -365,8 +347,8 @@ The guidelines described below are based on:
   }
   ```
 
-  **CORRECT**
   ```ts
+  /* CORRECT */
   @Component({
     selector: 'sg-button',
     template: `...`
@@ -378,10 +360,8 @@ The guidelines described below are based on:
 
 * Detach components and directives which are not visible from the view in order to prevent the change detection running over them.
 
-  ### Example
-
-  **CORRECT**
   ```ts
+  /* CORRECT */
   @Directive({
     selector: '[pane]'
   })
@@ -406,9 +386,8 @@ The guidelines described below are based on:
 
   *Why?*: This way the application will get tightly coupled to the platform and thus won't be able to run independently from it. For instance, a web application injecting native DOM elements won't be able to run in WebWorker, nor be rendered on the server-side.
 
-  ### Example
-  **WRONG**
   ```ts
+  /* WRONG */
   @Component({
     selector: 'sg-text-field',
     template: `<input type="text">`
@@ -422,8 +401,8 @@ The guidelines described below are based on:
   }
   ```
 
-  **CORRECT**
   ```ts
+  /* CORRECT */
   import {NgModel} from 'angular2/common';
 
   @Component({
@@ -444,10 +423,8 @@ The guidelines described below are based on:
 
   *Why?*: This way the application will get tightly coupled to the platform and thus won't be able to run independently from it. For instance, a web application injecting native DOM elements won't be able to run in WebWorker, neither be rendered on the server-side.
 
-  ### Example
-
-  **WRONG**
   ```ts
+  /* WRONG */
   @Component({
     selector: 'sg-items-list',
     template: `
@@ -463,8 +440,8 @@ The guidelines described below are based on:
   }
   ```
 
-  **CORRECT**
   ```ts
+  /* CORRECT */
   import {NgModel} from 'angular2/common';
 
   @Component({
@@ -488,10 +465,8 @@ The guidelines described below are based on:
 
   *Why?*: In case the interface associated to given life-cycle hook is implemented one will get compile-time errors in case the hook is not implemented properly (for instance, the method name is misspelled).
 
-  ### Example
-
-  **WRONG**
   ```ts
+  /* WRONG */
   @Component({
     selector: 'sg-button',
     template: `...`
@@ -503,8 +478,8 @@ The guidelines described below are based on:
   }
   ```
 
-  **CORRECT**
   ```ts
+  /* CORRECT */
   import {OnInit} from 'angular2/core';
 
   @Component({
@@ -517,8 +492,9 @@ The guidelines described below are based on:
     }
   }
   ```
+  **[Table of Contents](#table-of-contents)**
 
-# Services and Dependency Injection
+## Services and Dependency Injection
 
 * Limit the usage of [`forwardRef`](https://angular.io/docs/ts/latest/api/core/forwardRef-function.html).
 
@@ -528,7 +504,9 @@ The guidelines described below are based on:
 
   *Why?*: The providers registered in the [`bootstrap`](https://angular.io/docs/ts/latest/api/platform/browser/bootstrap-function.html) method are meant for overriding existing providers rather than declaring dependencies.
 
-# Pipes
+  **[Table of Contents](#table-of-contents)**
+
+## Pipes
 
 * Name pipes' controllers with `Pipe` as suffix. The name of any pipe should be formed observing the *BasicDescription + Pipe* rule.
 
@@ -538,8 +516,8 @@ The guidelines described below are based on:
 
 * Name your pipe `name` property in camelCase.
 
-  **WRONG**
   ```ts
+  /* WRONG */
   @Pipe({
     name: 'sg-transform-something'
   })
@@ -550,8 +528,8 @@ The guidelines described below are based on:
   }
   ```
 
-  **CORRECT**
   ```ts
+  /* CORRECT */
   @Pipe({
     name: 'sgTransformSomething'
   })
@@ -570,21 +548,24 @@ The guidelines described below are based on:
 
   *Why?* It is likely that a stateful pipe may contain state that should be cleaned up when a binding is destroyed. For example, a subscription to a stream of data may need to be disposed, or an interval may need to be cleared.
 
-# Routing
+  **[Table of Contents](#table-of-contents)**
+
+## Routing
 
 * Name the routes the same way the components associated with them are called.
 
   *Why?*: This way there is only a single name associated to a given route. This avoids confusion in case a given route is called in a different way to the components associated with it.
 
-# Forms
+  **[Table of Contents](#table-of-contents)**
+
+## Forms
 
 * Do not use expression for name of a control.
 
   *Why?*: When the name of the control is dynamically generated it will be hard to reference it inside of the controller associated to the form, and may lead to confusion.
 
-  ### Example
-  **WRONG**
   ```html
+  /* WRONG */
   <form>
     <input [ngControl]="foobar" type="text">
   </form>
@@ -595,8 +576,9 @@ The guidelines described below are based on:
     foobar = 'foo';
   }
   ```
-  **CORRECT**
+
   ```html
+  /* CORRECT */
   <form>
     <input ngControl="foo" type="text">
   </form>
@@ -605,14 +587,17 @@ The guidelines described below are based on:
   @Component(...)
   class SampleComponent {}
   ```
+  **[Table of Contents](#table-of-contents)**
 
-# Reusable libraries
+## Reusable libraries
 
 * Follow the [angular-cli publisher guide](https://github.com/angular/angular-cli/blob/master/docs/ng-install.md#b-publisher-guide-preparing-your-library).
 
   *Why?*: It will allow your library to be painlessly used with the official Angular 2 CLI tool.
 
-# Testing
+  **[Table of Contents](#table-of-contents)**
+
+## Testing
 
 * Use [Jasmine](https://jasmine.github.io/) for unit testing.
 
@@ -634,22 +619,25 @@ The guidelines described below are based on:
 
 * Name the test file the following way `NAME_OF_THE_TESTED_UNIT.spec.EXT`:
 
-  ### Example:
-  **CORRECT**
   ```
+  /* CORRECT */
   about.ts
   about.spec.ts
   ```
 
 * Place integration tests and tests that cover multiple code units into a separate `tests` directory in your project's root.
 
-# Change detection
+  **[Table of Contents](#table-of-contents)**
+
+## Change detection
 
 * Use [`OnPush`](https://angular.io/docs/ts/latest/api/core/ChangeDetectionStrategy-enum.html) change detection strategy for [pure/dumb components](http://teropa.info/blog/2015/10/18/refactoring-angular-apps-to-components.html#toward-smart-and-dumb-components) that accepts as input immutable data.
 
   *Why?*: Angular will optimize the performance of your application dramatically by not performing change detection over the entire sub tree with root the given pure component.
 
-# TypeScript specific practices
+  **[Table of Contents](#table-of-contents)**
+
+## TypeScript specific practices
 
 * Use [TSLint](http://palantir.github.io/tslint/) for linting your code.
 
@@ -661,8 +649,8 @@ The guidelines described below are based on:
 
 * Use "Façade modules" for exporting the public members of your application/library and hiding the implementation details.
 
-  ### Example
   ```ts
+  /* Example */
   export {NgClass} from './directives/ng_class';
   export {NgFor} from './directives/ng_for';
   export {NgIf} from './directives/ng_if';
@@ -672,13 +660,13 @@ The guidelines described below are based on:
   export {CORE_DIRECTIVES} from './directives/core_directives';
   ```
 
-## TypeScript dependency injection
+#### TypeScript dependency injection
 
 * Use the [`@Injectable()`](https://angular.io/docs/ts/latest/api/core/Injectable-decorator.html) decorator instead of explicitly declaring the dependencies using [`@Inject(TOKEN)`](https://angular.io/docs/ts/latest/api/testing/inject-function.html).
 
   *Why?*: Using [`@Injectable()`](https://angular.io/docs/ts/latest/api/core/Injectable-decorator.html) the TypeScript compiler will emit the required type metadata, which makes the code using [`@Inject()`](https://angular.io/docs/ts/latest/api/testing/inject-function.html) unnecessary verbose and less readable.
 
-## TSLint
+### TSLint
 
 * Use [TSLint](http://palantir.github.io/tslint/) for linting your JavaScript and be sure to customize the TSLint options file and include in source control. See the [TSLint docs](https://github.com/palantir/tslint) for details on the options.
 
@@ -724,12 +712,13 @@ The guidelines described below are based on:
     }
   }
   ```
+  **[Table of Contents](#table-of-contents)**
 
-# ES2015 and ES2016 specific practices
+## ES2015 and ES2016 specific practices
 
 
 
-# ES5 specific practices
+## ES5 specific practices
 
 * Use the internal JavaScript DLS provided by Angular 2 for annotating constructor functions.
 
@@ -737,10 +726,8 @@ The guidelines described below are based on:
 
   *Why?*: The DLS uses function expressions which are closer to the non-hoisted ES2015 classes.
 
-  ### Example
-
-  **WRONG**
   ```js
+  /* WRONG */
   function Component() {
     //...
   }
@@ -754,8 +741,8 @@ The guidelines described below are based on:
   ];
   ```
 
-  **CORRECT**
   ```ts
+  /* CORRECT */
   var Component = ng.
     Component({
       //...
@@ -770,7 +757,7 @@ The guidelines described below are based on:
     });
   ```
 
-## JSHint
+### JSHint
 
 * Use [JSHint](http://www.jshint.com/) for linting your JavaScript and be sure to customize the [JSHint](http://www.jshint.com/) options file and include in source control. See the [JSHint](http://www.jshint.com/docs/) docs for details on the options.
 
@@ -842,7 +829,7 @@ The guidelines described below are based on:
   }
   ```
 
-## JSCS
+### JSCS
 
 * Use [JSCS](http://jscs.info/) for checking your coding styles your JavaScript and be sure to customize the [JSCS](http://jscs.info/) options file and include in source control. See the [JSCS docs](http://jscs.info/rules) for details on the options.
 
@@ -926,7 +913,8 @@ The guidelines described below are based on:
       "requireParenthesesAroundIIFE": true
   }
   ```
+  **[Table of Contents](#table-of-contents)**
 
-# License
+## License
 
 MIT
