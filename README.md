@@ -434,6 +434,10 @@ The guidelines described below are based on:
   }
   ```
 
+* Keep the component templates logicless.
+
+  *Why?*: Keeping the logic of the components in their controller, instead of template will bring a lot of benefits such as better testability, maintability, reusability.
+
 * Do not manipulate element referenced within the template.
 
   *Why?*: This way the application will get tightly coupled to the platform and thus won't be able to run independently from it. For instance, a web application injecting native DOM elements won't be able to run in WebWorker, neither be rendered on the server-side.
