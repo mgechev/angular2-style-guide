@@ -788,7 +788,7 @@ The guidelines described below are based on:
       "forin": true,
       "freeze": true,
       "immed": true,
-      "indent": 4,
+      "indent": 2,
       "latedef": "nofunc",
       "newcap": true,
       "noarg": true,
@@ -804,7 +804,7 @@ The guidelines described below are based on:
       "maxdepth": 5,
       "maxstatements": 40,
       "maxcomplexity": 8,
-      "maxlen": 120,
+      "maxlen": 140,
 
       "asi": false,
       "boss": false,
@@ -866,11 +866,11 @@ The guidelines described below are based on:
       "requireOperatorBeforeLineBreak": true,
       "requireCamelCaseOrUpperCaseIdentifiers": true,
       "maximumLineLength": {
-        "value": 100,
+        "value": 140,
         "allowComments": true,
         "allowRegex": true
       },
-      "validateIndentation": 4,
+      "validateIndentation": 2,
       "validateQuoteMarks": "'",
 
       "disallowMultipleLineStrings": true,
