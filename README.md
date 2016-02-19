@@ -382,7 +382,7 @@ The guidelines described below are based on:
   }
   ```
 
-* Do not inject native elements to the controller's constructors.
+* Do not use native elements injected to the controller's constructors with `ElementRef`.
 
   *Why?*: This way the application will get tightly coupled to the platform and thus won't be able to run independently from it. For instance, a web application injecting native DOM elements won't be able to run in WebWorker, nor be rendered on the server-side.
 
