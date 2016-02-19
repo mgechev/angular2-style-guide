@@ -2,7 +2,7 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>Angular 2 Style Guide by mgechev</title>
+    <title>Angular2 Style Guide by mgechev</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
@@ -11,7 +11,7 @@
   </head>
   <body>
     <section class="page-header">
-      <h1 class="project-name">Angular 2 Style Guide</h1>
+      <h1 class="project-name">Angular2 Style Guide</h1>
       <h2 class="project-tagline">Community-driven set of best practices for Angular 2 application development</h2>
       <a href="https://github.com/mgechev/angular2-style-guide" class="btn">View on GitHub</a>
       <a href="https://github.com/mgechev/angular2-style-guide/zipball/master" class="btn">Download .zip</a>
@@ -20,12 +20,12 @@
 
     <section class="main-content">
       <h1>
-<a id="angular-2-style-guide" class="anchor" href="#angular-2-style-guide" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Angular 2 Style Guide</h1>
+<a id="-angular-2-style-guide" class="anchor" href="#-angular-2-style-guide" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><img src="/assets/logo.png" alt="Angular 2 Style Guide"> Angular 2 Style Guide</h1>
+
+<p><a href="https://gitter.im/mgechev/angular2-style-guide?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://badges.gitter.im/mgechev/angular2-style-guide.svg" alt="Join the chat at https://gitter.im/mgechev/angular2-style-guide"></a></p>
 
 <p>The purpose of the following style guide is to present a set of best practices and style guidelines for the development of Angular 2 applications.
 If you are looking for an opinionated style guide for syntax, conventions, and structuring Angular 2 applications, then you can step in!</p>
-
-<p><img src="https://raw.githubusercontent.com/mgechev/angular2-style-guide/master/assets/logo.png" alt="Angular 2 Style Guide"></p>
 
 <p><strong>Disclaimer: The document is in alpha version which means that some the guidelines will change and new will be added.</strong></p>
 
@@ -41,8 +41,8 @@ If you are looking for an opinionated style guide for syntax, conventions, and s
 <a href="https://github.com/johnpapa/angular-styleguide">John Papa's AngularJS 1.x style guide</a>, for being consistent with the directory structure and testing across the different major versions of the framework.</li>
 </ol>
 
-<h1>
-<a id="table-of-contents" class="anchor" href="#table-of-contents" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Table of Contents</h1>
+<h2>
+<a id="table-of-contents" class="anchor" href="#table-of-contents" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Table of Contents</h2>
 
 <ol>
 <li><a href="#directory-structure">Directory Structure</a></li>
@@ -52,6 +52,7 @@ If you are looking for an opinionated style guide for syntax, conventions, and s
 <li><a href="#pipes">Pipes</a></li>
 <li><a href="#routing">Routing</a></li>
 <li><a href="#forms">Forms</a></li>
+<li><a href="#reusable-libraries">Reusable libraries</a></li>
 <li><a href="#testing">Testing</a></li>
 <li><a href="#change-detection">Change Detection</a></li>
 <li><a href="#typescript-specific-practices">TypeScript specific practices</a></li>
@@ -60,8 +61,8 @@ If you are looking for an opinionated style guide for syntax, conventions, and s
 <li><a href="#license">License</a></li>
 </ol>
 
-<h1>
-<a id="directory-structure" class="anchor" href="#directory-structure" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Directory Structure</h1>
+<h2>
+<a id="directory-structure" class="anchor" href="#directory-structure" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Directory Structure</h2>
 
 <ul>
 <li>
@@ -103,8 +104,8 @@ If you are looking for an opinionated style guide for syntax, conventions, and s
 </li>
 </ul>
 
-<h1>
-<a id="modules" class="anchor" href="#modules" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Modules</h1>
+<h2>
+<a id="modules" class="anchor" href="#modules" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Modules</h2>
 
 <ul>
 <li>
@@ -128,19 +129,17 @@ If you are looking for an opinionated style guide for syntax, conventions, and s
 
 <p><em>Why?</em>: Keeps consistency with AngularJS 1.x style guidelines.</p>
 
-<h3>
-<a id="example" class="anchor" href="#example" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h3>
-
-<p><strong>CORRECT</strong></p>
-
-<pre><code>sg-tooltip.directive.ts
+<pre><code>/* CORRECT */
+sg-tooltip.directive.ts
 sg-user.service.ts
 </code></pre>
+
+<p><strong><a href="#table-of-contents">Table of Contents</a></strong></p>
 </li>
 </ul>
 
-<h1>
-<a id="directives-and-components" class="anchor" href="#directives-and-components" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Directives and Components</h1>
+<h2>
+<a id="directives-and-components" class="anchor" href="#directives-and-components" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Directives and Components</h2>
 
 <ul>
 <li>
@@ -160,12 +159,8 @@ sg-user.service.ts
 
 <p><em>Why?</em>: This way you will be able to prevent name collisions.</p>
 
-<h3>
-<a id="example-1" class="anchor" href="#example-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h3>
-
-<p><strong>WRONG</strong></p>
-
-<div class="highlight highlight-source-ts"><pre>@Directive({
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* WRONG */</span>
+@Directive({
   selector: <span class="pl-s">'[tooltip]'</span>
 })
 <span class="pl-k">class</span> <span class="pl-en">BootstrapTooltipDirective</span> {}
@@ -182,9 +177,8 @@ sg-user.service.ts
 })
 <span class="pl-k">class</span> <span class="pl-en">AppComponent</span> {}</pre></div>
 
-<p><strong>CORRECT</strong></p>
-
-<div class="highlight highlight-source-ts"><pre>@Directive({
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* CORRECT */</span>
+@Directive({
   selector: <span class="pl-s">'[bsTooltip]'</span>
 })
 <span class="pl-k">class</span> <span class="pl-en">BootstrapTooltipDirective</span> {}
@@ -204,12 +198,7 @@ sg-user.service.ts
 <li>
 <p>Name directives' controllers with <code>Directive</code> suffix and components' controllers with <code>Component</code> suffix. The name of any directive or component should be formed following the rule <code>BasicDescription</code> + <code>Directive</code> or <code>Component</code>.</p>
 
-<h3>
-<a id="example-2" class="anchor" href="#example-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h3>
-
-<p><strong>CORRECT</strong></p>
-
-<div class="highlight highlight-source-ts"><pre>
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* CORRECT */</span>
 @Directive({
   selector: <span class="pl-s">'[sgTooltip]`</span>
 })
@@ -235,12 +224,8 @@ sg-user.service.ts
 
 <p><em>Why?</em>: The metadata declaration attached to the directive is shorter and thus more readable.</p>
 
-<h3>
-<a id="example-3" class="anchor" href="#example-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h3>
-
-<p><strong>WRONG</strong></p>
-
-<div class="highlight highlight-source-ts"><pre>@Directive({
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* WRONG */</span>
+@Directive({
   selector: <span class="pl-s">'[sgSample'</span>],
   host: {
     <span class="pl-s">'(mouseenter)'</span>: <span class="pl-s">'onMouseEnter()'</span>,
@@ -252,9 +237,8 @@ sg-user.service.ts
   <span class="pl-en">onMouseEnter</span>() {...}
 }</pre></div>
 
-<p><strong>CORRECT</strong></p>
-
-<div class="highlight highlight-source-ts"><pre>@Directive({
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* CORRECT */</span>
+@Directive({
   selector: <span class="pl-s">'[sgSample]'</span>
 })
 <span class="pl-k">class</span> <span class="pl-en">SampleDirective</span> {
@@ -274,20 +258,15 @@ sg-user.service.ts
 
 <p><em>Why?</em>: Keeps the element names consistent with the specification for <a href="https://www.w3.org/TR/custom-elements/">Custom Elements</a>.</p>
 
-<h3>
-<a id="example-4" class="anchor" href="#example-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h3>
-
-<p><strong>WRONG</strong></p>
-
-<div class="highlight highlight-source-ts"><pre>@Component({
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* WRONG */</span>
+@Component({
   selector: <span class="pl-s">'[sg-button]'</span>,
   template: <span class="pl-s">`...`</span>
 })
 <span class="pl-k">class</span> <span class="pl-en">ButtonComponent</span> {}</pre></div>
 
-<p><strong>CORRECT</strong></p>
-
-<div class="highlight highlight-source-ts"><pre>@Component({
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* CORRECT */</span>
+@Component({
   selector: <span class="pl-s">'sg-button'</span>,
   template: <span class="pl-s">`...`</span>
 })
@@ -319,12 +298,8 @@ sg-user.service.ts
 
 <p><em>Why?</em>: The metadata declaration attached to the directive is shorter and thus more readable.</p>
 
-<h3>
-<a id="example-5" class="anchor" href="#example-5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h3>
-
-<p><strong>WRONG</strong></p>
-
-<div class="highlight highlight-source-ts"><pre>@Component({
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* WRONG */</span>
+@Component({
   selector: <span class="pl-s">'sg-button'</span>,
   template: <span class="pl-s">`...`</span>,
   inputs: [
@@ -339,9 +314,8 @@ sg-user.service.ts
   <span class="pl-v">label</span>: <span class="pl-k">string</span>;
 }</pre></div>
 
-<p><strong>CORRECT</strong></p>
-
-<div class="highlight highlight-source-ts"><pre>@Component({
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* CORRECT */</span>
+@Component({
   selector: <span class="pl-s">'sg-button'</span>,
   template: <span class="pl-s">`...`</span>
 })
@@ -357,12 +331,8 @@ sg-user.service.ts
 
 <p><em>Why?</em>: May lead to confusion when the output or the input properties of a given directive are named a given way but exported differently as a public API.</p>
 
-<h3>
-<a id="example-6" class="anchor" href="#example-6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h3>
-
-<p><strong>WRONG</strong></p>
-
-<div class="highlight highlight-source-ts"><pre>@Component({
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* WRONG */</span>
+@Component({
   selector: <span class="pl-s">'sg-button'</span>,
   template: <span class="pl-s">`...`</span>
 })
@@ -377,9 +347,8 @@ sg-user.service.ts
 <span class="pl-c">* &lt;/sg-button&gt;</span>
 <span class="pl-c">*/</span></pre></div>
 
-<p><strong>CORRECT</strong></p>
-
-<div class="highlight highlight-source-ts"><pre>@Component({
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* CORRECT */</span>
+@Component({
   selector: <span class="pl-s">'sg-button'</span>,
   template: <span class="pl-s">`...`</span>
 })
@@ -399,12 +368,8 @@ sg-user.service.ts
 
 <p><em>Why?</em>: The input creates one-way binding which means that we can bind it to an expression and its value gets automatically updated. We can inject a property with <a href="https://angular.io/docs/ts/latest/api/core/Attribute-var.html"><code>@Attribute</code></a> to a controller's constructor and get its value a single time.</p>
 
-<h3>
-<a id="example-7" class="anchor" href="#example-7" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h3>
-
-<p><strong>WRONG</strong></p>
-
-<div class="highlight highlight-source-ts"><pre>@Component({
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* WRONG */</span>
+@Component({
   selector: <span class="pl-s">'sg-button'</span>,
   template: <span class="pl-s">`...`</span>
 })
@@ -415,9 +380,8 @@ sg-user.service.ts
   }
 }</pre></div>
 
-<p><strong>CORRECT</strong></p>
-
-<div class="highlight highlight-source-ts"><pre>@Component({
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* CORRECT */</span>
+@Component({
   selector: <span class="pl-s">'sg-button'</span>,
   template: <span class="pl-s">`...`</span>
 })
@@ -428,12 +392,8 @@ sg-user.service.ts
 <li>
 <p>Detach components and directives which are not visible from the view in order to prevent the change detection running over them.</p>
 
-<h3>
-<a id="example-8" class="anchor" href="#example-8" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h3>
-
-<p><strong>CORRECT</strong></p>
-
-<div class="highlight highlight-source-ts"><pre>@Directive({
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* CORRECT */</span>
+@Directive({
   selector: <span class="pl-s">'[pane]'</span>
 })
 <span class="pl-k">class</span> <span class="pl-en">Pane</span> {
@@ -457,12 +417,8 @@ sg-user.service.ts
 
 <p><em>Why?</em>: This way the application will get tightly coupled to the platform and thus won't be able to run independently from it. For instance, a web application injecting native DOM elements won't be able to run in WebWorker, nor be rendered on the server-side.</p>
 
-<h3>
-<a id="example-9" class="anchor" href="#example-9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h3>
-
-<p><strong>WRONG</strong></p>
-
-<div class="highlight highlight-source-ts"><pre>@Component({
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* WRONG */</span>
+@Component({
   selector: <span class="pl-s">'sg-text-field'</span>,
   template: <span class="pl-s">`&lt;input type="text"&gt;`</span>
 })
@@ -474,9 +430,8 @@ sg-user.service.ts
   }
 }</pre></div>
 
-<p><strong>CORRECT</strong></p>
-
-<div class="highlight highlight-source-ts"><pre><span class="pl-k">import</span> {NgModel} from <span class="pl-s">'angular2/common'</span>;
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* CORRECT */</span>
+<span class="pl-k">import</span> {NgModel} from <span class="pl-s">'angular2/common'</span>;
 
 @Component({
   directives: [NgModel],
@@ -488,16 +443,17 @@ sg-user.service.ts
 }</pre></div>
 </li>
 <li>
+<p>Keep the component templates logicless.</p>
+
+<p><em>Why?</em>: Keeping the logic of the components in their controller, instead of template will bring a lot of benefits such as better testability, maintability, reusability.</p>
+</li>
+<li>
 <p>Do not manipulate element referenced within the template.</p>
 
 <p><em>Why?</em>: This way the application will get tightly coupled to the platform and thus won't be able to run independently from it. For instance, a web application injecting native DOM elements won't be able to run in WebWorker, neither be rendered on the server-side.</p>
 
-<h3>
-<a id="example-10" class="anchor" href="#example-10" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h3>
-
-<p><strong>WRONG</strong></p>
-
-<div class="highlight highlight-source-ts"><pre>@Component({
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* WRONG */</span>
+@Component({
   selector: <span class="pl-s">'sg-items-list'</span>,
   template: <span class="pl-s">`</span>
 <span class="pl-s">    &lt;input type="text" #textInput&gt;</span>
@@ -511,9 +467,8 @@ sg-user.service.ts
   }
 }</pre></div>
 
-<p><strong>CORRECT</strong></p>
-
-<div class="highlight highlight-source-ts"><pre><span class="pl-k">import</span> {NgModel} from <span class="pl-s">'angular2/common'</span>;
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* CORRECT */</span>
+<span class="pl-k">import</span> {NgModel} from <span class="pl-s">'angular2/common'</span>;
 
 @Component({
   directives: [NgModel],
@@ -536,12 +491,8 @@ sg-user.service.ts
 
 <p><em>Why?</em>: In case the interface associated to given life-cycle hook is implemented one will get compile-time errors in case the hook is not implemented properly (for instance, the method name is misspelled).</p>
 
-<h3>
-<a id="example-11" class="anchor" href="#example-11" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h3>
-
-<p><strong>WRONG</strong></p>
-
-<div class="highlight highlight-source-ts"><pre>@Component({
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* WRONG */</span>
+@Component({
   selector: <span class="pl-s">'sg-button'</span>,
   template: <span class="pl-s">`...`</span>
 })
@@ -551,9 +502,8 @@ sg-user.service.ts
   }
 }</pre></div>
 
-<p><strong>CORRECT</strong></p>
-
-<div class="highlight highlight-source-ts"><pre><span class="pl-k">import</span> {OnInit} from <span class="pl-s">'angular2/core'</span>;
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* CORRECT */</span>
+<span class="pl-k">import</span> {OnInit} from <span class="pl-s">'angular2/core'</span>;
 
 @Component({
   selector: <span class="pl-s">'sg-button'</span>,
@@ -564,11 +514,13 @@ sg-user.service.ts
     <span class="pl-en">console.log</span>('<span class="pl-v">The</span> <span class="pl-v">component</span> <span class="pl-v">got</span> <span class="pl-v">initialized</span>');
   }
 }</pre></div>
+
+<p><strong><a href="#table-of-contents">Table of Contents</a></strong></p>
 </li>
 </ul>
 
-<h1>
-<a id="services-and-dependency-injection" class="anchor" href="#services-and-dependency-injection" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Services and Dependency Injection</h1>
+<h2>
+<a id="services-and-dependency-injection" class="anchor" href="#services-and-dependency-injection" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Services and Dependency Injection</h2>
 
 <ul>
 <li>
@@ -580,11 +532,13 @@ sg-user.service.ts
 <p>Do not declare global providers in the <a href="https://angular.io/docs/ts/latest/api/platform/browser/bootstrap-function.html"><code>bootstrap</code></a> call, use a top-level component instead.</p>
 
 <p><em>Why?</em>: The providers registered in the <a href="https://angular.io/docs/ts/latest/api/platform/browser/bootstrap-function.html"><code>bootstrap</code></a> method are meant for overriding existing providers rather than declaring dependencies.</p>
+
+<p><strong><a href="#table-of-contents">Table of Contents</a></strong></p>
 </li>
 </ul>
 
-<h1>
-<a id="pipes" class="anchor" href="#pipes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Pipes</h1>
+<h2>
+<a id="pipes" class="anchor" href="#pipes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Pipes</h2>
 
 <ul>
 <li><p>Name pipes' controllers with <code>Pipe</code> as suffix. The name of any pipe should be formed observing the <em>BasicDescription + Pipe</em> rule.</p></li>
@@ -596,9 +550,8 @@ sg-user.service.ts
 <li>
 <p>Name your pipe <code>name</code> property in camelCase.</p>
 
-<p><strong>WRONG</strong></p>
-
-<div class="highlight highlight-source-ts"><pre>@Pipe({
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* WRONG */</span>
+@Pipe({
   name: <span class="pl-s">'sg-transform-something'</span>
 })
 <span class="pl-k">class</span> <span class="pl-en">TransformSomething</span> {
@@ -607,9 +560,8 @@ sg-user.service.ts
   }
 }</pre></div>
 
-<p><strong>CORRECT</strong></p>
-
-<div class="highlight highlight-source-ts"><pre>@Pipe({
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* CORRECT */</span>
+@Pipe({
   name: <span class="pl-s">'sgTransformSomething'</span>
 })
 <span class="pl-k">class</span> <span class="pl-en">TransformSomethingPipe</span> <span class="pl-k">implements</span> <span class="pl-k">PipeTransform</span> {
@@ -627,22 +579,26 @@ sg-user.service.ts
 <p>Wherever stateful (impure) pipes are required, implement the <code>OnDestroy</code> interface.</p>
 
 <p><em>Why?</em> It is likely that a stateful pipe may contain state that should be cleaned up when a binding is destroyed. For example, a subscription to a stream of data may need to be disposed, or an interval may need to be cleared.</p>
+
+<p><strong><a href="#table-of-contents">Table of Contents</a></strong></p>
 </li>
 </ul>
 
-<h1>
-<a id="routing" class="anchor" href="#routing" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Routing</h1>
+<h2>
+<a id="routing" class="anchor" href="#routing" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Routing</h2>
 
 <ul>
 <li>
 <p>Name the routes the same way the components associated with them are called.</p>
 
 <p><em>Why?</em>: This way there is only a single name associated to a given route. This avoids confusion in case a given route is called in a different way to the components associated with it.</p>
+
+<p><strong><a href="#table-of-contents">Table of Contents</a></strong></p>
 </li>
 </ul>
 
-<h1>
-<a id="forms" class="anchor" href="#forms" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Forms</h1>
+<h2>
+<a id="forms" class="anchor" href="#forms" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Forms</h2>
 
 <ul>
 <li>
@@ -650,12 +606,8 @@ sg-user.service.ts
 
 <p><em>Why?</em>: When the name of the control is dynamically generated it will be hard to reference it inside of the controller associated to the form, and may lead to confusion.</p>
 
-<h3>
-<a id="example-12" class="anchor" href="#example-12" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h3>
-
-<p><strong>WRONG</strong></p>
-
-<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">form</span>&gt;
+<div class="highlight highlight-text-html-basic"><pre>/* WRONG */
+&lt;<span class="pl-ent">form</span>&gt;
   &lt;<span class="pl-ent">input</span> [<span class="pl-e">ngControl</span>]=<span class="pl-s"><span class="pl-pds">"</span>foobar<span class="pl-pds">"</span></span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span>&gt;
 &lt;/<span class="pl-ent">form</span>&gt;</pre></div>
 
@@ -664,19 +616,33 @@ sg-user.service.ts
   <span class="pl-v">foobar</span> <span class="pl-k">=</span> <span class="pl-s">'foo'</span>;
 }</pre></div>
 
-<p><strong>CORRECT</strong></p>
-
-<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">form</span>&gt;
+<div class="highlight highlight-text-html-basic"><pre>/* CORRECT */
+&lt;<span class="pl-ent">form</span>&gt;
   &lt;<span class="pl-ent">input</span> <span class="pl-e">ngControl</span>=<span class="pl-s"><span class="pl-pds">"</span>foo<span class="pl-pds">"</span></span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span>&gt;
 &lt;/<span class="pl-ent">form</span>&gt;</pre></div>
 
 <div class="highlight highlight-source-ts"><pre>@Component(...)
 <span class="pl-k">class</span> <span class="pl-en">SampleComponent</span> {}</pre></div>
+
+<p><strong><a href="#table-of-contents">Table of Contents</a></strong></p>
 </li>
 </ul>
 
-<h1>
-<a id="testing" class="anchor" href="#testing" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Testing</h1>
+<h2>
+<a id="reusable-libraries" class="anchor" href="#reusable-libraries" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Reusable libraries</h2>
+
+<ul>
+<li>
+<p>Follow the <a href="https://github.com/angular/angular-cli/blob/master/docs/ng-install.md#b-publisher-guide-preparing-your-library">angular-cli publisher guide</a>.</p>
+
+<p><em>Why?</em>: It will allow your library to be painlessly used with the official Angular 2 CLI tool.</p>
+
+<p><strong><a href="#table-of-contents">Table of Contents</a></strong></p>
+</li>
+</ul>
+
+<h2>
+<a id="testing" class="anchor" href="#testing" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Testing</h2>
 
 <ul>
 <li>
@@ -701,31 +667,33 @@ sg-user.service.ts
 <li>
 <p>Name the test file the following way <code>NAME_OF_THE_TESTED_UNIT.spec.EXT</code>:</p>
 
-<h3>
-<a id="example-13" class="anchor" href="#example-13" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example:</h3>
-
-<p><strong>CORRECT</strong></p>
-
-<pre><code>about.ts
+<pre><code>/* CORRECT */
+about.ts
 about.spec.ts
 </code></pre>
 </li>
-<li><p>Place integration tests and tests that cover multiple code units into a separate <code>tests</code> directory in your project's root.</p></li>
+<li>
+<p>Place integration tests and tests that cover multiple code units into a separate <code>tests</code> directory in your project's root.</p>
+
+<p><strong><a href="#table-of-contents">Table of Contents</a></strong></p>
+</li>
 </ul>
 
-<h1>
-<a id="change-detection" class="anchor" href="#change-detection" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Change detection</h1>
+<h2>
+<a id="change-detection" class="anchor" href="#change-detection" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Change detection</h2>
 
 <ul>
 <li>
 <p>Use <a href="https://angular.io/docs/ts/latest/api/core/ChangeDetectionStrategy-enum.html"><code>OnPush</code></a> change detection strategy for <a href="http://teropa.info/blog/2015/10/18/refactoring-angular-apps-to-components.html#toward-smart-and-dumb-components">pure/dumb components</a> that accepts as input immutable data.</p>
 
 <p><em>Why?</em>: Angular will optimize the performance of your application dramatically by not performing change detection over the entire sub tree with root the given pure component.</p>
+
+<p><strong><a href="#table-of-contents">Table of Contents</a></strong></p>
 </li>
 </ul>
 
-<h1>
-<a id="typescript-specific-practices" class="anchor" href="#typescript-specific-practices" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>TypeScript specific practices</h1>
+<h2>
+<a id="typescript-specific-practices" class="anchor" href="#typescript-specific-practices" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>TypeScript specific practices</h2>
 
 <ul>
 <li>
@@ -741,10 +709,8 @@ about.spec.ts
 <li>
 <p>Use "Façade modules" for exporting the public members of your application/library and hiding the implementation details.</p>
 
-<h3>
-<a id="example-14" class="anchor" href="#example-14" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h3>
-
-<div class="highlight highlight-source-ts"><pre><span class="pl-k">export</span> {NgClass} from <span class="pl-s">'./directives/ng_class'</span>;
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* Example */</span>
+<span class="pl-k">export</span> {NgClass} from <span class="pl-s">'./directives/ng_class'</span>;
 <span class="pl-k">export</span> {NgFor} from <span class="pl-s">'./directives/ng_for'</span>;
 <span class="pl-k">export</span> {NgIf} from <span class="pl-s">'./directives/ng_if'</span>;
 <span class="pl-k">export</span> {NgStyle} from <span class="pl-s">'./directives/ng_style'</span>;
@@ -754,8 +720,8 @@ about.spec.ts
 </li>
 </ul>
 
-<h2>
-<a id="typescript-dependency-injection" class="anchor" href="#typescript-dependency-injection" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>TypeScript dependency injection</h2>
+<h4>
+<a id="typescript-dependency-injection" class="anchor" href="#typescript-dependency-injection" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>TypeScript dependency injection</h4>
 
 <ul>
 <li>
@@ -765,8 +731,8 @@ about.spec.ts
 </li>
 </ul>
 
-<h2>
-<a id="tslint" class="anchor" href="#tslint" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>TSLint</h2>
+<h3>
+<a id="tslint" class="anchor" href="#tslint" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>TSLint</h3>
 
 <ul>
 <li>
@@ -812,14 +778,16 @@ about.spec.ts
     <span class="pl-s"><span class="pl-pds">"</span>variable-name<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>
   }
 }</pre></div>
+
+<p><strong><a href="#table-of-contents">Table of Contents</a></strong></p>
 </li>
 </ul>
 
-<h1>
-<a id="es2015-and-es2016-specific-practices" class="anchor" href="#es2015-and-es2016-specific-practices" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ES2015 and ES2016 specific practices</h1>
+<h2>
+<a id="es2015-and-es2016-specific-practices" class="anchor" href="#es2015-and-es2016-specific-practices" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ES2015 and ES2016 specific practices</h2>
 
-<h1>
-<a id="es5-specific-practices" class="anchor" href="#es5-specific-practices" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ES5 specific practices</h1>
+<h2>
+<a id="es5-specific-practices" class="anchor" href="#es5-specific-practices" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ES5 specific practices</h2>
 
 <ul>
 <li>
@@ -829,12 +797,8 @@ about.spec.ts
 
 <p><em>Why?</em>: The DLS uses function expressions which are closer to the non-hoisted ES2015 classes.</p>
 
-<h3>
-<a id="example-15" class="anchor" href="#example-15" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h3>
-
-<p><strong>WRONG</strong></p>
-
-<div class="highlight highlight-source-js"><pre><span class="pl-k">function</span> <span class="pl-en">Component</span>() {
+<div class="highlight highlight-source-js"><pre><span class="pl-c">/* WRONG */</span>
+<span class="pl-k">function</span> <span class="pl-en">Component</span>() {
   <span class="pl-c">//...</span>
 }
 <span class="pl-smi">Component</span>.<span class="pl-smi">annotations</span> <span class="pl-k">=</span> [
@@ -846,9 +810,8 @@ about.spec.ts
   ])
 ];</pre></div>
 
-<p><strong>CORRECT</strong></p>
-
-<div class="highlight highlight-source-ts"><pre><span class="pl-k">var</span> <span class="pl-v">Component</span> <span class="pl-k">=</span> ng.
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* CORRECT */</span>
+<span class="pl-k">var</span> <span class="pl-v">Component</span> <span class="pl-k">=</span> ng.
   Component({
     <span class="pl-c">//...</span>
   })
@@ -863,8 +826,8 @@ about.spec.ts
 </li>
 </ul>
 
-<h2>
-<a id="jshint" class="anchor" href="#jshint" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>JSHint</h2>
+<h3>
+<a id="jshint" class="anchor" href="#jshint" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>JSHint</h3>
 
 <ul>
 <li>
@@ -883,7 +846,7 @@ about.spec.ts
     <span class="pl-s"><span class="pl-pds">"</span>forin<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
     <span class="pl-s"><span class="pl-pds">"</span>freeze<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
     <span class="pl-s"><span class="pl-pds">"</span>immed<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
-    <span class="pl-s"><span class="pl-pds">"</span>indent<span class="pl-pds">"</span></span>: <span class="pl-c1">4</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>indent<span class="pl-pds">"</span></span>: <span class="pl-c1">2</span>,
     <span class="pl-s"><span class="pl-pds">"</span>latedef<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>nofunc<span class="pl-pds">"</span></span>,
     <span class="pl-s"><span class="pl-pds">"</span>newcap<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
     <span class="pl-s"><span class="pl-pds">"</span>noarg<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
@@ -899,7 +862,7 @@ about.spec.ts
     <span class="pl-s"><span class="pl-pds">"</span>maxdepth<span class="pl-pds">"</span></span>: <span class="pl-c1">5</span>,
     <span class="pl-s"><span class="pl-pds">"</span>maxstatements<span class="pl-pds">"</span></span>: <span class="pl-c1">40</span>,
     <span class="pl-s"><span class="pl-pds">"</span>maxcomplexity<span class="pl-pds">"</span></span>: <span class="pl-c1">8</span>,
-    <span class="pl-s"><span class="pl-pds">"</span>maxlen<span class="pl-pds">"</span></span>: <span class="pl-c1">120</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>maxlen<span class="pl-pds">"</span></span>: <span class="pl-c1">140</span>,
 
     <span class="pl-s"><span class="pl-pds">"</span>asi<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>,
     <span class="pl-s"><span class="pl-pds">"</span>boss<span class="pl-pds">"</span></span>: <span class="pl-c1">false</span>,
@@ -938,8 +901,8 @@ about.spec.ts
 </li>
 </ul>
 
-<h2>
-<a id="jscs" class="anchor" href="#jscs" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>JSCS</h2>
+<h3>
+<a id="jscs" class="anchor" href="#jscs" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>JSCS</h3>
 
 <ul>
 <li>
@@ -964,11 +927,11 @@ about.spec.ts
     <span class="pl-s"><span class="pl-pds">"</span>requireOperatorBeforeLineBreak<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
     <span class="pl-s"><span class="pl-pds">"</span>requireCamelCaseOrUpperCaseIdentifiers<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
     <span class="pl-s"><span class="pl-pds">"</span>maximumLineLength<span class="pl-pds">"</span></span>: {
-      <span class="pl-s"><span class="pl-pds">"</span>value<span class="pl-pds">"</span></span>: <span class="pl-c1">100</span>,
+      <span class="pl-s"><span class="pl-pds">"</span>value<span class="pl-pds">"</span></span>: <span class="pl-c1">140</span>,
       <span class="pl-s"><span class="pl-pds">"</span>allowComments<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
       <span class="pl-s"><span class="pl-pds">"</span>allowRegex<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>
     },
-    <span class="pl-s"><span class="pl-pds">"</span>validateIndentation<span class="pl-pds">"</span></span>: <span class="pl-c1">4</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>validateIndentation<span class="pl-pds">"</span></span>: <span class="pl-c1">2</span>,
     <span class="pl-s"><span class="pl-pds">"</span>validateQuoteMarks<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>'<span class="pl-pds">"</span></span>,
 
     <span class="pl-s"><span class="pl-pds">"</span>disallowMultipleLineStrings<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>,
@@ -1023,11 +986,13 @@ about.spec.ts
     <span class="pl-s"><span class="pl-pds">"</span>requireMultipleVarDecl<span class="pl-pds">"</span></span>: <span class="pl-c1">null</span>,
     <span class="pl-s"><span class="pl-pds">"</span>requireParenthesesAroundIIFE<span class="pl-pds">"</span></span>: <span class="pl-c1">true</span>
 }</pre></div>
+
+<p><strong><a href="#table-of-contents">Table of Contents</a></strong></p>
 </li>
 </ul>
 
-<h1>
-<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h1>
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
 
 <p>MIT</p>
 
