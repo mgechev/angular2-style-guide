@@ -19,72 +19,123 @@ The guidelines described below are based on:
 ## Table of Contents
 
 1. [Directory Structure](#directory-structure)
-2. [Modules](#modules)
-3. [Directives and Components](#directives-and-components)
-4. [Services and Dependency Injection](#services-and-dependency-injection)
-5. [Pipes](#pipes)
-6. [Routing](#routing)
-7. [Forms](#forms)
-8. [Reusable libraries](#reusable-libraries)
-9. [Testing](#testing)
-10. [Change Detection](#change-detection)
-11. [TypeScript specific practices](#typescript-specific-practices)
-12. [ES2015 and ES2016 specific practices](#es2015-and-es2016-specific-practices)
-13. [ES5 specific practices](#es5-specific-practices)
-14. [License](#license)
+2. [Directives and Components](#directives-and-components)
+3. [Services and Dependency Injection](#services-and-dependency-injection)
+4. [Pipes](#pipes)
+5. [Routing](#routing)
+6. [Forms](#forms)
+7. [Reusable libraries](#reusable-libraries)
+8. [Testing](#testing)
+9. [Change Detection](#change-detection)
+10. [TypeScript specific practices](#typescript-specific-practices)
+11. [ES2015 and ES2016 specific practices](#es2015-and-es2016-specific-practices)
+12. [ES5 specific practices](#es5-specific-practices)
+13. [License](#license)
 
 ## Directory Structure
 
-* Create folders named for the feature they represent. When a folder grows to contain more than 7 files, start to consider creating a folder for them. Your threshold may be different, so adjust as needed.
+* Group files by the [bounded context](http://martinfowler.com/bliki/BoundedContext.html) they belong to. When a context (directory, for insance) grows to contain more than 15 files, start to consider creating a separate context by-type for them. Your threshold may be different, so adjust as needed.
+
+  ```
+  .
+  ├── admin
+  │   ├── home-dashboard.component.ts
+  │   ├── home-dashboard.component.html
+  │   ├── home-dashboard.component.css
+  │   ├── home-dashboard.component.spec.ts
+  │   ├── login.component.ts
+  │   ├── login.component.spec.ts
+  │   ├── admin.model.ts
+  │   ├── user-management.service.ts
+  │   └── order-management.service.ts
+  ├── shared
+  │   ├── components
+  │   │   ├── avatar.component.ts
+  │   │   ├── avatar.component.html
+  │   │   ├── login-form.component.ts
+  │   │   ├── login-form.component.html
+  │   │   ├── login-form.component.css
+  │   │   └── login-form.component.spec.ts
+  │   ├── directives
+  │   │   ├── form-validator.directive.ts
+  │   │   ├── form-validator.directive.spec.ts
+  │   │   ├── tooltip.directive.ts
+  │   │   └── tooltip.directive.spec.ts
+  │   └── services
+  │       └── authorization.service.ts
+  ├── pipes
+  │   ├── format-order-name.pipe.ts
+  │   └── format-order-name.pipe.spec.ts
+  └── shop
+      ├── components
+      │   ├── edit-profile.component.ts
+      │   ├── edit-profile.component.html
+      │   ├── edit-profile.component.css
+      │   ├── edit-profile.component.spec.ts
+      │   ├── home.component.ts
+      │   ├── home.component.spec.ts
+      │   ├── home.component.html
+      │   ├── register.component.ts
+      │   └── register.component.spec.ts
+      ├── models
+      │   ├── shopping-cart.model.ts
+      │   ├── shopping-item.model.ts
+      │   └── user.ts
+      └── services
+          └── checkout.service.ts
+  ```
+
+  *Why?*: The level of reusability of logic between bounded contexts should be low. On the other hand each code unit will belong to the bounded context it is associated with and will not pollute the directory structure.
+
+  *Why?*: Separation by bounded context will allow easier code reusability. In the general case a small, to medium applicaiton will contain a single bounded context, which will lead to a flat directory structure as the following:
+
+  ```
+  shop
+  ├── components
+  │   ├── edit-profile.component.ts
+  │   ├── edit-profile.component.spec.ts
+  │   ├── edit-profile.html
+  │   ├── home.component.ts
+  │   ├── home.component.spec.ts
+  │   ├── home.html
+  │   ├── register.component.ts
+  │   └── register.component.spec.ts
+  ├── models
+  │   ├── shopping-cart.ts
+  │   ├── shopping-item.ts
+  │   └── user.ts
+  └── services
+      └── checkout.service.ts
+  ```
 
   *Why?*: A developer can locate the code, identify what each file represents at a glance, the structure is flat as can be, and there is no repetitive nor redundant names.
 
-  *Why?*: When there are a lot of files (10+) locating them is easier with a consistent folder structures and more difficult in flat structures.
+  *Why?*: When there are a lot of files (15+) locating them is easier with a consistent folder structures and more difficult in flat structures.
 
-  ```
-  ├── src
-  │   ├── about
-  │   │   └── components
-  │   │       ├── about-us.e2e.ts
-  │   │       ├── about-us.ts
-  │   │       └── about-us.spec.ts
-  │   ├── master
-  │   │   └── components
-  │   │       ├── master.css
-  │   │       ├── master.e2e.ts
-  │   │       ├── master.html
-  │   │       ├── master.ts
-  │   │       └── master.spec.ts
-  │   ├── assets
-  │   │   ├── img
-  │   │   │   └── smile.png
-  │   │   └── main.css
-  │   ├── home
-  │   │   └── components
-  │   │       ├── home.css
-  │   │       ├── home.ts
-  │   │       └── home.spec.ts
-  │   ├── shared
-  │   │   └── services
-  │   │       ├── name_list.ts
-  │   │       └── name_list.spec.ts
-  │   ├── main.ts
-  │   └── index.html
-  ```
-
-## Modules
-
-* Keep the modules self-contained and coherent. Each module should have a [single reason to change](https://en.wikipedia.org/wiki/Single_responsibility_principle).
-
-  *Why?*: This way the modules will be more reusable, and thus composable.
-
-* Keep each code unit (component, directive, service, pipe, etc.) into a separate file. If the unit uses other internal for the given module logic you can keep it in the same module, without exporting it.
+* Define only a single code unit (component, directive, service, pipe, etc.) per file. If the unit uses other internal for the given module logic you can keep it in the same module, without exporting it.
 
   *Why?*: The definitions will be easier to find simply by looking at the directory structure.
 
   *Why?*: Do not export private APIs because you need to manage them and keep them consistent for the end users.
 
-* Name the modules with `lower-kebab-case`.
+* Name the files which contain component, directives, pipes and services definition with the corresponding suffix.
+
+  ```
+  // Contains the "home-dashboard" component
+  home-dashboard.component.ts
+
+  // Contains the ShoppingCart model. Notice that there is no suffix for the models.
+  shopping-cart.ts
+
+  // Contains the logic for the "checkout" service.
+  checkout.service.ts
+  ```
+
+* Keep the modules self-contained and coherent. Each module should have a [single reason to change](https://en.wikipedia.org/wiki/Single_responsibility_principle).
+
+  *Why?*: This way the modules will be more reusable, and thus composable.
+
+* Name the modules/directories with `lower-kebab-case`.
 
   *Why?*: Using lower case will not cause problem across platforms with different case sensitivity.
 
@@ -94,8 +145,8 @@ The guidelines described below are based on:
 
   ```
   /* CORRECT */
-  sg-tooltip.directive.ts
-  sg-user.service.ts
+  tooltip.directive.ts
+  user.service.ts
   ```
   **[Table of Contents](#table-of-contents)**
 
@@ -105,11 +156,11 @@ The guidelines described below are based on:
 
   *Why?*: There could be many directives per element, which makes it more suitable to use attributes as opposed to elements.
 
-* Use lowerCamelCase for naming the selectors of your directives.
+* Use `lowerCamelCase` for naming the selectors of your directives.
 
   *Why?*: Keeps the names of the properties defined in the controllers that are bound to the view consistent with the attribute names.
 
-  *Why?*: The Angular 2 HTML parser is case sensitive so lowerCamelCase attributes are well supported.
+  *Why?*: The Angular 2 HTML parser is case sensitive so `lowerCamelCase` attributes are well supported.
 
 * Use custom prefix for the selector of your directives (for instance below is used the prefix `sg` from **S**tyle **G**uide).
 
@@ -214,7 +265,7 @@ The guidelines described below are based on:
 
   *Why?*: Components are the actual elements in our applications, compared to directives which only augment the elements.
 
-* Use kebab-case for naming the element selectors of your components.
+* Use `kebab-case` for naming the element selectors of your components.
 
   *Why?*: Keeps the element names consistent with the specification for [Custom Elements](https://www.w3.org/TR/custom-elements/).
 
@@ -251,6 +302,8 @@ The guidelines described below are based on:
 * Extract the more complex and bigger templates, longer than 15 lines of code, into a separate file and put them next to their controllers' definition.
 
   *Why?*: In case a big and complex template is inlined in the component metadata it may shift the focus from the component's logic defined within the controller.
+
+* Locate the template of the component in the same directory where the component's logic resides in.
 
 * Use [`@Input`](https://angular.io/docs/ts/latest/api/core/Input-var.html) and [`@Output`](https://angular.io/docs/ts/latest/api/core/Output-var.html) instead of the `inputs` and `outputs` properties of the [`@Directive`](https://angular.io/docs/ts/latest/api/core/Directive-decorator.html) and [`@Component`](https://angular.io/docs/ts/latest/api/core/Component-decorator.html) decorators:
 
