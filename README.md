@@ -45,7 +45,7 @@ The guidelines described below are based on:
   │   ├── home-dashboard.component.spec.ts
   │   ├── login.component.ts
   │   ├── login.component.spec.ts
-  │   ├── admin.model.ts
+  │   ├── admin.ts
   │   ├── user-management.service.ts
   │   └── order-management.service.ts
   ├── shared
@@ -78,8 +78,8 @@ The guidelines described below are based on:
       │   ├── register.component.ts
       │   └── register.component.spec.ts
       ├── models
-      │   ├── shopping-cart.model.ts
-      │   ├── shopping-item.model.ts
+      │   ├── shopping-cart.ts
+      │   ├── shopping-item.ts
       │   └── user.ts
       └── services
           └── checkout.service.ts
