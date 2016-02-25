@@ -526,7 +526,7 @@ The guidelines described below are based on:
     template: `...`
   })
   class ButtonComponent {
-    ngOnInit {
+    ngOnInit() {
       console.log('The component got initialized');
     }
   }
@@ -541,7 +541,7 @@ The guidelines described below are based on:
     template: `...`
   })
   class ButtonComponent implements OnInit {
-    ngOnInit {
+    ngOnInit() {
       console.log('The component got initialized');
     }
   }
