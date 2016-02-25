@@ -80,7 +80,7 @@ The guidelines described below are based on:
       ├── models
       │   ├── shopping-cart.model.ts
       │   ├── shopping-item.model.ts
-      │   └── user.ts
+      │   └── user.model.ts
       └── services
           └── checkout.service.ts
   ```
@@ -94,16 +94,16 @@ The guidelines described below are based on:
   ├── components
   │   ├── edit-profile.component.ts
   │   ├── edit-profile.component.spec.ts
-  │   ├── edit-profile.html
+  │   ├── edit-profile.component.html
   │   ├── home.component.ts
   │   ├── home.component.spec.ts
-  │   ├── home.html
+  │   ├── home.component.html
   │   ├── register.component.ts
   │   └── register.component.spec.ts
   ├── models
-  │   ├── shopping-cart.ts
-  │   ├── shopping-item.ts
-  │   └── user.ts
+  │   ├── shopping-cart.model.ts
+  │   ├── shopping-item.model.ts
+  │   └── user.model.ts
   └── services
       └── checkout.service.ts
   ```
@@ -125,7 +125,7 @@ The guidelines described below are based on:
   home-dashboard.component.ts
 
   // Contains the ShoppingCart model. Notice that there is no suffix for the models.
-  shopping-cart.ts
+  shopping-cart.model.ts
 
   // Contains the logic for the "checkout" service.
   checkout.service.ts
