@@ -125,7 +125,7 @@ The guidelines described below are based on:
   // Contains the "home-dashboard" component
   home-dashboard.component.ts
 
-  // Contains the ShoppingCart model. Notice that there is no suffix for the models.
+  // Contains the ShoppingCart model.
   shopping-cart.model.ts
 
   // Contains the logic for the "checkout" service.
