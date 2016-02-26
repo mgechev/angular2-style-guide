@@ -35,7 +35,7 @@ The guidelines described below are based on:
 
 ## Directory Structure
 
-* Group files by the [bounded context](http://martinfowler.com/bliki/BoundedContext.html) they belong to. When a context (directory, for insance) grows to contain more than 15 files, start to consider creating a separate context by-type for them. Your threshold may be different, so adjust as needed.
+* Group files by the [bounded context](http://martinfowler.com/bliki/BoundedContext.html) they belong to. When a context (directory, for instance) grows to contain more than 15 files, start to consider creating a separate context by-type for them. Your threshold may be different, so adjust as needed.
 
   ```
   .
@@ -88,7 +88,7 @@ The guidelines described below are based on:
 
   *Why?*: The level of reusability of logic between bounded contexts should be low. On the other hand each code unit will belong to the bounded context it is associated with and will not pollute the directory structure.
 
-  *Why?*: Separation by bounded context will allow easier code reusability. In the general case a small, to medium applicaiton will contain a single bounded context, which will lead to a flat directory structure as the following:
+  *Why?*: Separation by bounded context will allow easier code reusability. In the general case a small, to medium application will contain a single bounded context, which will lead to a flat directory structure as the following:
 
   ```
   shop
