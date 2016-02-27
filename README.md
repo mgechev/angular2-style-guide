@@ -237,7 +237,7 @@ The guidelines described below are based on:
   ```ts
   /* WRONG */
   @Directive({
-    selector: '[sgSample'],
+    selector: '[sgSample]',
     host: {
       '(mouseenter)': 'onMouseEnter()',
       'role': 'button'
@@ -805,7 +805,7 @@ The guidelines described below are based on:
       //...
     ])
     .Class({
-      constructor: functions () {
+      constructor: function () {
         //...
       }
     });
