@@ -25,13 +25,14 @@ The guidelines described below are based on:
 4. [Pipes](#pipes)
 5. [Routing](#routing)
 6. [Forms](#forms)
-7. [Reusable libraries](#reusable-libraries)
-8. [Testing](#testing)
-9. [Change Detection](#change-detection)
-10. [TypeScript specific practices](#typescript-specific-practices)
-11. [ES2015 and ES2016 specific practices](#es2015-and-es2016-specific-practices)
-12. [ES5 specific practices](#es5-specific-practices)
-13. [License](#license)
+7. [Events](#events)
+8. [Reusable libraries](#reusable-libraries)
+9. [Testing](#testing)
+10. [Change Detection](#change-detection)
+11. [TypeScript specific practices](#typescript-specific-practices)
+12. [ES2015 and ES2016 specific practices](#es2015-and-es2016-specific-practices)
+13. [ES5 specific practices](#es5-specific-practices)
+14. [License](#license)
 
 ## Directory Structure
 
@@ -643,6 +644,39 @@ The guidelines described below are based on:
   ```
   **[Table of Contents](#table-of-contents)**
 
+## Events
+
+* Name events without the prefix 'on'.
+* Name your event handler methods with the prefix 'on' followed by the event name.
+
+```ts
+/* WRONG */
+export class VoterComponent {
+  @Output() onVoted = new EventEmitter<boolean>();
+}
+
+<my-voter (onVoted)="onVoted($event)"></my-voter>
+```
+```ts
+/* CORRECT */
+export class VoterComponent {
+  @Output() voted = new EventEmitter<boolean>();
+}
+
+<my-voter (voted)="onVoted($event)"></my-voter>
+```
+*Why?*: This is to be consistent with built-in events like button clicks:
+```ts
+<button (click)="showDetails()">Show Details</button>
+```
+*Why?*: Angular allows for an [alternative syntax](https://angular.io/docs/ts/latest/guide/template-syntax.html#!#binding-syntax) `on-*`. If the event itself was prefixed with 'on' this would result in an `on-onEvent` binding expression.
+```ts
+/* CORRECT */
+<hero-list (heroSelected)="onHeroSelected(selectedHero)"></hero-list>
+<hero-list on-heroSelected="onHeroSelected(selectedHero)"></hero-list>
+```
+  **[Table of Contents](#table-of-contents)**
+  
 ## Reusable libraries
 
 * Follow the [angular-cli publisher guide](https://github.com/angular/angular-cli/blob/master/docs/ng-install.md#b-publisher-guide-preparing-your-library).
