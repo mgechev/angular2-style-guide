@@ -288,6 +288,37 @@ The guidelines described below are based on:
   class ButtonComponent {}
   ```
 
+* Name events without the prefix `on`.
+* Name your event handler methods with the prefix `on` followed by the event name.
+
+```ts
+/* WRONG */
+export class VoterComponent {
+  @Output() onVoted = new EventEmitter<boolean>();
+}
+
+<my-voter (onVoted)="onVoted($event)"></my-voter>
+```
+```ts
+/* CORRECT */
+export class VoterComponent {
+  @Output() voted = new EventEmitter<boolean>();
+}
+
+<my-voter (voted)="onVoted($event)"></my-voter>
+```
+*Why?*: This is to be consistent with built-in events like button clicks:
+```ts
+<button (click)="showDetails()">Show Details</button>
+```
+*Why?*: Angular allows for an [alternative syntax](https://angular.io/docs/ts/latest/guide/template-syntax.html#!#binding-syntax) `on-*`. If the event itself was prefixed with `on` this would result in an `on-onEvent` binding expression.
+```ts
+/* CORRECT */
+<hero-list (heroSelected)="onHeroSelected(selectedHero)"></hero-list>
+<hero-list on-heroSelected="onHeroSelected(selectedHero)"></hero-list>
+```
+  **[Table of Contents](#table-of-contents)**
+
 * Keep the components as simple and coherent as possible but not too simple.
 
   *Why?*: Simple coherent components are easier to reason about, more reusable and composable.
