@@ -240,7 +240,7 @@ The guidelines described below are based on:
     selector: '[sgSample'],
     host: {
       '(mouseenter)': 'onMouseEnter()',
-      'role': 'button'
+      'attr.role': 'button'
     }
   })
   class SampleDirective {
@@ -255,7 +255,7 @@ The guidelines described below are based on:
     selector: '[sgSample]'
   })
   class SampleDirective {
-    @HostBinding('role') button;
+    @HostBinding('attr.role') button;
     @HostListener('mouseenter') onMouseEnter() {...}
   }
   ```
