@@ -255,7 +255,7 @@ The guidelines described below are based on:
     selector: '[sgSample]'
   })
   class SampleDirective {
-    @HostBinding('role') button;
+    @HostBinding('attr.role') role = 'button';
     @HostListener('mouseenter') onMouseEnter() {...}
   }
   ```
