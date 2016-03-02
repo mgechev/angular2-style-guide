@@ -714,7 +714,7 @@ The guidelines described below are based on:
   export {CORE_DIRECTIVES} from './directives/core_directives';
   ```
 
-#### TypeScript dependency injection
+### TypeScript dependency injection
 
 * Use the [`@Injectable()`](https://angular.io/docs/ts/latest/api/core/Injectable-decorator.html) decorator instead of explicitly declaring the dependencies using [`@Inject(TOKEN)`](https://angular.io/docs/ts/latest/api/testing/inject-function.html).
 
