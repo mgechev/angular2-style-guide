@@ -22,7 +22,8 @@
       <h1>
 <a id="-angular-2-style-guide" class="anchor" href="#-angular-2-style-guide" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><img src="https://raw.githubusercontent.com/mgechev/angular2-style-guide/master/assets/logo.png" alt="Angular 2 Style Guide"> Angular 2 Style Guide</h1>
 
-<p><a href="https://gitter.im/mgechev/angular2-style-guide?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://badges.gitter.im/mgechev/angular2-style-guide.svg" alt="Join the chat at https://gitter.im/mgechev/angular2-style-guide"></a></p>
+<p><a href="https://github.com/mgechev/angular2-style-guide"><img src="https://mgechev.github.io/angular2-style-guide/images/badge.svg" alt="Angular 2 Style Guide"></a>
+<a href="https://gitter.im/mgechev/angular2-style-guide?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://badges.gitter.im/mgechev/angular2-style-guide.svg" alt="Join the chat at https://gitter.im/mgechev/angular2-style-guide"></a></p>
 
 <p>The purpose of the following style guide is to present a set of best practices and style guidelines for the development of Angular 2 applications.
 If you are looking for an opinionated style guide for syntax, conventions, and structuring Angular 2 applications, then you can step in!</p>
@@ -65,7 +66,7 @@ If you are looking for an opinionated style guide for syntax, conventions, and s
 
 <ul>
 <li>
-<p>Group files by the <a href="http://martinfowler.com/bliki/BoundedContext.html">bounded context</a> they belong to. When a context (directory, for insance) grows to contain more than 15 files, start to consider creating a separate context by-type for them. Your threshold may be different, so adjust as needed.</p>
+<p>Group files by the <a href="http://martinfowler.com/bliki/BoundedContext.html">bounded context</a> they belong to. When a context (directory, for instance) grows to contain more than 15 files, start to consider creating a separate context by-type for them. Your threshold may be different, so adjust as needed.</p>
 
 <pre><code>.
 ├── admin
@@ -154,7 +155,7 @@ If you are looking for an opinionated style guide for syntax, conventions, and s
 <pre><code>// Contains the "home-dashboard" component
 home-dashboard.component.ts
 
-// Contains the ShoppingCart model. Notice that there is no suffix for the models.
+// Contains the ShoppingCart model.
 shopping-cart.model.ts
 
 // Contains the logic for the "checkout" service.
@@ -275,11 +276,11 @@ user.service.ts
   selector: <span class="pl-s">'[sgSample'</span>],
   host: {
     <span class="pl-s">'(mouseenter)'</span>: <span class="pl-s">'onMouseEnter()'</span>,
-    <span class="pl-s">'role'</span>: <span class="pl-s">'button'</span>
+    <span class="pl-s">'attr.role'</span>: <span class="pl-s">'button'</span>
   }
 })
 <span class="pl-k">class</span> <span class="pl-en">SampleDirective</span> {
-  button;
+  <span class="pl-v">role</span> <span class="pl-k">=</span> <span class="pl-s">'button'</span>;
   <span class="pl-en">onMouseEnter</span>() {...}
 }</pre></div>
 
@@ -288,7 +289,7 @@ user.service.ts
   selector: <span class="pl-s">'[sgSample]'</span>
 })
 <span class="pl-k">class</span> <span class="pl-en">SampleDirective</span> {
-  @<span class="pl-en">HostBinding</span>('<span class="pl-v">role</span>') button;
+  @<span class="pl-en">HostBinding</span>('<span class="pl-v">attr</span>.<span class="pl-v">role</span>') role = 'button';
   @<span class="pl-en">HostListener</span>('<span class="pl-v">mouseenter</span>') <span class="pl-en">onMouseEnter</span>() {...}
 }</pre></div>
 </li>
