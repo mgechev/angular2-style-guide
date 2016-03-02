@@ -31,8 +31,7 @@ The guidelines described below are based on:
 10. [TypeScript specific practices](#typescript-specific-practices)
 11. [ES2015 and ES2016 specific practices](#es2015-and-es2016-specific-practices)
 12. [ES5 specific practices](#es5-specific-practices)
-13. [Contributors](#contributors)
-14. [License](#license)
+13. [License](#license)
 
 ## Directory Structure
 
@@ -970,16 +969,7 @@ The guidelines described below are based on:
   ```
   **[Table of Contents](#table-of-contents)**
 
-## Contributors
-
-[<img alt="mgechev" src="https://avatars.githubusercontent.com/u/455023?v=3&s=117" width="117">](https://github.com/mgechev) |[<img alt="deeleman" src="https://avatars.githubusercontent.com/u/1104146?v=3&s=117" width="117">](https://github.com/deeleman) |[<img alt="d3viant0ne" src="https://avatars.githubusercontent.com/u/8420490?v=3&s=117" width="117">](https://github.com/d3viant0ne) |[<img alt="nareshbhatia" src="https://avatars.githubusercontent.com/u/1220198?v=3&s=117" width="117">](https://github.com/nareshbhatia) |[<img alt="lennonjesus" src="https://avatars.githubusercontent.com/u/36691?v=3&s=117" width="117">](https://github.com/lennonjesus) |[<img alt="ocombe" src="https://avatars.githubusercontent.com/u/265378?v=3&s=117" width="117">](https://github.com/ocombe) |
-:---: |:---: |:---: |:---: |:---: |:---: |
-[mgechev](https://github.com/mgechev) |[deeleman](https://github.com/deeleman) |[d3viant0ne](https://github.com/d3viant0ne) |[nareshbhatia](https://github.com/nareshbhatia) |[lennonjesus](https://github.com/lennonjesus) |[ocombe](https://github.com/ocombe) |
-
-[<img alt="RossJHagan" src="https://avatars.githubusercontent.com/u/1782891?v=3&s=117" width="117">](https://github.com/RossJHagan) |[<img alt="ryanhca" src="https://avatars.githubusercontent.com/u/8798259?v=3&s=117" width="117">](https://github.com/ryanhca) |
-:---: |:---: |
-[RossJHagan](https://github.com/RossJHagan) |[ryanhca](https://github.com/ryanhca) |
-
 ## License
 
 MIT
+
