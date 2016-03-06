@@ -645,9 +645,7 @@ The guidelines described below are based on:
 
 ## Reusable libraries
 
-* Follow the [angular-cli publisher guide](https://github.com/angular/angular-cli/blob/master/docs/ng-install.md#b-publisher-guide-preparing-your-library).
-
-  *Why?*: It will allow your library to be painlessly used with the official Angular 2 CLI tool.
+Waiting for announcement of official module format by [angular-cli](https://github.com/angular/angular-cli).
 
   **[Table of Contents](#table-of-contents)**
 
