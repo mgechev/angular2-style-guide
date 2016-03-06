@@ -31,7 +31,8 @@ The guidelines described below are based on:
 10. [TypeScript specific practices](#typescript-specific-practices)
 11. [ES2015 and ES2016 specific practices](#es2015-and-es2016-specific-practices)
 12. [ES5 specific practices](#es5-specific-practices)
-13. [License](#license)
+13. [Tooling](#tooling)
+14. [License](#license)
 
 ## Directory Structure
 
@@ -996,6 +997,12 @@ class MyClass {
   }
   ```
   **[Table of Contents](#table-of-contents)**
+
+## Tooling
+
+- [ng2lint - set of tslint rules Angular 2](https://github.com/mgechev/ng2lint).
+- [Sublimt Text snippets Angular 2](https://github.com/evanplaice/angular2-snippets).
+- [WebStorem snippets Angular 2](https://github.com/d3viant0ne/angular2-webstorm-templates)
 
 ## License
 
