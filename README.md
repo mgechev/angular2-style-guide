@@ -119,7 +119,7 @@ The guidelines described below are based on:
 
   *Why?*: Do not export private APIs because you need to manage them and keep them consistent for the end users.
 
-* Name the files which contain component, directives, pipes and services definition with the corresponding suffix.
+* Name the files which contain component, directives, pipes, services or other code unit with the corresponding suffix.
 
   ```
   // Contains the "home-dashboard" component
@@ -130,6 +130,10 @@ The guidelines described below are based on:
 
   // Contains the logic for the "checkout" service.
   checkout.service.ts
+
+  // For redux-like architecture
+  todo.store.ts
+  todo.reducer.ts
   ```
 
 * Keep the modules self-contained and coherent. Each module should have a [single reason to change](https://en.wikipedia.org/wiki/Single_responsibility_principle).
@@ -717,21 +721,21 @@ Waiting for announcement of official module format by [angular-cli](https://gith
 * Use the [style-guide](https://github.com/Microsoft/TypeScript/wiki/Coding-guidelines) provided by Microsoft for writing your TypeScript code.
 
   *Why?*: It is a standardized guide that corresponds very well with the included paradigms and patterns.
-  
+
 * (From [Classes.md#Accessors](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Classes.md#accessors)) Do not use `_` in variable names unless it's a field for a property.
 
 ```ts
 class MyClass {
   private myPrivateString:string = 'foobar';
   public myPublicString:string = 'foobar, but public';
-  
+
   //exception: property field
   private _answerToEverything:number = 42;
-  
+
   public get answerToEverything():number {
     return this._answerToEverything;
   }
-  
+
   public set answerToEverything(value:number) {
     this._answerToEverything = value;
   }
