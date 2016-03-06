@@ -712,7 +712,33 @@ Waiting for announcement of official module format by [angular-cli](https://gith
   export {CORE_DIRECTIVES} from './directives/core_directives';
   ```
 
-#### TypeScript dependency injection
+### TypeScript code style
+
+* Use the [style-guide](https://github.com/Microsoft/TypeScript/wiki/Coding-guidelines) provided by Microsoft for writing your TypeScript code.
+
+  *Why?*: It is a standardized guide that corresponds very well with the included paradigms and patterns.
+  
+* (From [Classes.md#Accessors](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Classes.md#accessors)) Do not use `_` in variable names unless it's a field for a property.
+
+```ts
+class MyClass {
+  private myPrivateString:string = 'foobar';
+  public myPublicString:string = 'foobar, but public';
+  
+  //exception: property field
+  private _answerToEverything:number = 42;
+  
+  public get answerToEverything():number {
+    return this._answerToEverything;
+  }
+  
+  public set answerToEverything(value:number) {
+    this._answerToEverything = value;
+  }
+}
+```
+
+### TypeScript dependency injection
 
 * Use the [`@Injectable()`](https://angular.io/docs/ts/latest/api/core/Injectable-decorator.html) decorator instead of explicitly declaring the dependencies using [`@Inject(TOKEN)`](https://angular.io/docs/ts/latest/api/testing/inject-function.html).
 
