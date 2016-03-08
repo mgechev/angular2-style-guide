@@ -58,7 +58,7 @@ If you are looking for an opinionated style guide for syntax, conventions, and s
 <li><a href="#typescript-specific-practices">TypeScript specific practices</a></li>
 <li><a href="#es2015-and-es2016-specific-practices">ES2015 and ES2016 specific practices</a></li>
 <li><a href="#es5-specific-practices">ES5 specific practices</a></li>
-<li><a href="#contributors">Contributors</a></li>
+<li><a href="#tooling">Tooling</a></li>
 <li><a href="#license">License</a></li>
 </ol>
 
@@ -151,7 +151,7 @@ If you are looking for an opinionated style guide for syntax, conventions, and s
 <p><em>Why?</em>: Do not export private APIs because you need to manage them and keep them consistent for the end users.</p>
 </li>
 <li>
-<p>Name the files which contain component, directives, pipes and services definition with the corresponding suffix.</p>
+<p>Name the files which contain component, directives, pipes, services or other code unit with the corresponding suffix.</p>
 
 <pre><code>// Contains the "home-dashboard" component
 home-dashboard.component.ts
@@ -161,6 +161,10 @@ shopping-cart.model.ts
 
 // Contains the logic for the "checkout" service.
 checkout.service.ts
+
+// For redux-like architecture
+todo.store.ts
+todo.reducer.ts
 </code></pre>
 </li>
 <li>
@@ -680,15 +684,9 @@ user.service.ts
 <h2>
 <a id="reusable-libraries" class="anchor" href="#reusable-libraries" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Reusable libraries</h2>
 
-<ul>
-<li>
-<p>Follow the <a href="https://github.com/angular/angular-cli/blob/master/docs/ng-install.md#b-publisher-guide-preparing-your-library">angular-cli publisher guide</a>.</p>
-
-<p><em>Why?</em>: It will allow your library to be painlessly used with the official Angular 2 CLI tool.</p>
+<p>Waiting for announcement of official module format by <a href="https://github.com/angular/angular-cli">angular-cli</a>.</p>
 
 <p><strong><a href="#table-of-contents">Table of Contents</a></strong></p>
-</li>
-</ul>
 
 <h2>
 <a id="testing" class="anchor" href="#testing" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Testing</h2>
@@ -769,8 +767,36 @@ about.spec.ts
 </li>
 </ul>
 
-<h4>
-<a id="typescript-dependency-injection" class="anchor" href="#typescript-dependency-injection" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>TypeScript dependency injection</h4>
+<h3>
+<a id="typescript-code-style" class="anchor" href="#typescript-code-style" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>TypeScript code style</h3>
+
+<ul>
+<li>
+<p>Use the <a href="https://github.com/Microsoft/TypeScript/wiki/Coding-guidelines">style-guide</a> provided by Microsoft for writing your TypeScript code.</p>
+
+<p><em>Why?</em>: It is a standardized guide that corresponds very well with the included paradigms and patterns.</p>
+</li>
+<li><p>(From <a href="https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Classes.md#accessors">Classes.md#Accessors</a>) Do not use <code>_</code> in variable names unless it's a field for a property.</p></li>
+</ul>
+
+<div class="highlight highlight-source-ts"><pre><span class="pl-k">class</span> <span class="pl-en">MyClass</span> {
+  <span class="pl-k">private</span> <span class="pl-v">myPrivateString</span>:<span class="pl-k">string</span> <span class="pl-k">=</span> <span class="pl-s">'foobar'</span>;
+  <span class="pl-k">public</span> <span class="pl-v">myPublicString</span>:<span class="pl-k">string</span> <span class="pl-k">=</span> <span class="pl-s">'foobar, but public'</span>;
+
+  <span class="pl-c">//exception: property field</span>
+  <span class="pl-k">private</span> <span class="pl-v">_answerToEverything</span>:<span class="pl-k">number</span> <span class="pl-k">=</span> <span class="pl-c1">42</span>;
+
+  <span class="pl-k">public</span> <span class="pl-k">get</span> <span class="pl-en">answerToEverything</span>():<span class="pl-k">number</span> {
+    <span class="pl-k">return</span> <span class="pl-c1">this</span>._answerToEverything;
+  }
+
+  <span class="pl-k">public</span> <span class="pl-k">set</span> <span class="pl-en">answerToEverything</span>(<span class="pl-v">value</span>:<span class="pl-k">number</span>) {
+    <span class="pl-c1">this</span>._answerToEverything <span class="pl-k">=</span> value;
+  }
+}</pre></div>
+
+<h3>
+<a id="typescript-dependency-injection" class="anchor" href="#typescript-dependency-injection" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>TypeScript dependency injection</h3>
 
 <ul>
 <li>
@@ -1041,45 +1067,15 @@ about.spec.ts
 </ul>
 
 <h2>
-<a id="contributors" class="anchor" href="#contributors" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contributors</h2>
+<a id="tooling" class="anchor" href="#tooling" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Tooling</h2>
 
-<table>
-<thead>
-<tr>
-<th align="center"><a href="https://github.com/mgechev"><img alt="mgechev" src="https://avatars.githubusercontent.com/u/455023?v=3&amp;s=117" width="117"></a></th>
-<th align="center"><a href="https://github.com/deeleman"><img alt="deeleman" src="https://avatars.githubusercontent.com/u/1104146?v=3&amp;s=117" width="117"></a></th>
-<th align="center"><a href="https://github.com/d3viant0ne"><img alt="d3viant0ne" src="https://avatars.githubusercontent.com/u/8420490?v=3&amp;s=117" width="117"></a></th>
-<th align="center"><a href="https://github.com/nareshbhatia"><img alt="nareshbhatia" src="https://avatars.githubusercontent.com/u/1220198?v=3&amp;s=117" width="117"></a></th>
-<th align="center"><a href="https://github.com/lennonjesus"><img alt="lennonjesus" src="https://avatars.githubusercontent.com/u/36691?v=3&amp;s=117" width="117"></a></th>
-<th align="center"><a href="https://github.com/ocombe"><img alt="ocombe" src="https://avatars.githubusercontent.com/u/265378?v=3&amp;s=117" width="117"></a></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center"><a href="https://github.com/mgechev">mgechev</a></td>
-<td align="center"><a href="https://github.com/deeleman">deeleman</a></td>
-<td align="center"><a href="https://github.com/d3viant0ne">d3viant0ne</a></td>
-<td align="center"><a href="https://github.com/nareshbhatia">nareshbhatia</a></td>
-<td align="center"><a href="https://github.com/lennonjesus">lennonjesus</a></td>
-<td align="center"><a href="https://github.com/ocombe">ocombe</a></td>
-</tr>
-</tbody>
-</table>
-
-<table>
-<thead>
-<tr>
-<th align="center"><a href="https://github.com/RossJHagan"><img alt="RossJHagan" src="https://avatars.githubusercontent.com/u/1782891?v=3&amp;s=117" width="117"></a></th>
-<th align="center"><a href="https://github.com/ryanhca"><img alt="ryanhca" src="https://avatars.githubusercontent.com/u/8798259?v=3&amp;s=117" width="117"></a></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center"><a href="https://github.com/RossJHagan">RossJHagan</a></td>
-<td align="center"><a href="https://github.com/ryanhca">ryanhca</a></td>
-</tr>
-</tbody>
-</table>
+<ul>
+<li>
+<a href="https://github.com/mgechev/ng2lint">ng2lint - set of tslint rules Angular 2</a>.</li>
+<li>
+<a href="https://github.com/evanplaice/angular2-snippets">Sublimt Text snippets Angular 2</a>.</li>
+<li><a href="https://github.com/d3viant0ne/angular2-webstorm-templates">WebStorem snippets Angular 2</a></li>
+</ul>
 
 <h2>
 <a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
