@@ -1002,9 +1002,8 @@ class MyClass {
 
 - [ng2lint - set of tslint rules Angular 2](https://github.com/mgechev/ng2lint).
 - [Sublimt Text snippets Angular 2](https://github.com/evanplaice/angular2-snippets).
-- [WebStorem snippets Angular 2](https://github.com/d3viant0ne/angular2-webstorm-templates)
+- [WebStorm snippets Angular 2](https://github.com/d3viant0ne/angular2-webstorm-templates)
 
 ## License
 
 MIT
-
