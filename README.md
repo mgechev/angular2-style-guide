@@ -145,7 +145,7 @@ The guidelines described below are based on:
   *Why?*: Keeps consistency with AngularJS 1.x style guidelines.
 
   ```
-  /* CORRECT */
+  /* RECOMMENDED */
   tooltip.directive.ts
   user.service.ts
   ```
@@ -168,7 +168,7 @@ The guidelines described below are based on:
   *Why?*: This way you will be able to prevent name collisions.
 
   ```ts
-  /* WRONG */
+  /* AVOID */
   @Directive({
     selector: '[tooltip]'
   })
@@ -188,7 +188,7 @@ The guidelines described below are based on:
   ```
 
   ```ts
-  /* CORRECT */
+  /* RECOMMENDED */
   @Directive({
     selector: '[bsTooltip]'
   })
@@ -210,7 +210,7 @@ The guidelines described below are based on:
 * Name directives' controllers with `Directive` suffix and components' controllers with `Component` suffix. The name of any directive or component should be formed following the rule `BasicDescription` + `Directive` or `Component`.
 
   ```ts
-  /* CORRECT */
+  /* RECOMMENDED */
   @Directive({
     selector: '[sgTooltip]`
   })
@@ -235,7 +235,7 @@ The guidelines described below are based on:
   *Why?*: The metadata declaration attached to the directive is shorter and thus more readable.
 
   ```ts
-  /* WRONG */
+  /* AVOID */
   @Directive({
     selector: '[sgSample'],
     host: {
@@ -250,7 +250,7 @@ The guidelines described below are based on:
   ```
 
   ```ts
-  /* CORRECT */
+  /* RECOMMENDED */
   @Directive({
     selector: '[sgSample]'
   })
@@ -271,7 +271,7 @@ The guidelines described below are based on:
   *Why?*: Keeps the element names consistent with the specification for [Custom Elements](https://www.w3.org/TR/custom-elements/).
 
   ```ts
-  /* WRONG */
+  /* AVOID */
   @Component({
     selector: '[sg-button]',
     template: `...`
@@ -280,7 +280,7 @@ The guidelines described below are based on:
   ```
 
   ```ts
-  /* CORRECT */
+  /* RECOMMENDED */
   @Component({
     selector: 'sg-button',
     template: `...`
@@ -313,7 +313,7 @@ The guidelines described below are based on:
   *Why?*: The metadata declaration attached to the directive is shorter and thus more readable.
 
   ```ts
-  /* WRONG */
+  /* AVOID */
   @Component({
     selector: 'sg-button',
     template: `...`,
@@ -331,7 +331,7 @@ The guidelines described below are based on:
   ```
 
   ```ts
-  /* CORRECT */
+  /* RECOMMENDED */
   @Component({
     selector: 'sg-button',
     template: `...`
@@ -348,7 +348,7 @@ The guidelines described below are based on:
   *Why?*: May lead to confusion when the output or the input properties of a given directive are named a given way but exported differently as a public API.
 
   ```ts
-  /* WRONG */
+  /* AVOID */
   @Component({
     selector: 'sg-button',
     template: `...`
@@ -366,7 +366,7 @@ The guidelines described below are based on:
   ```
 
   ```ts
-  /* CORRECT */
+  /* RECOMMENDED */
   @Component({
     selector: 'sg-button',
     template: `...`
@@ -388,7 +388,7 @@ The guidelines described below are based on:
   *Why?*: The input creates one-way binding which means that we can bind it to an expression and its value gets automatically updated. We can inject a property with [`@Attribute`](https://angular.io/docs/ts/latest/api/core/Attribute-var.html) to a controller's constructor and get its value a single time.
 
   ```ts
-  /* WRONG */
+  /* AVOID */
   @Component({
     selector: 'sg-button',
     template: `...`
@@ -402,7 +402,7 @@ The guidelines described below are based on:
   ```
 
   ```ts
-  /* CORRECT */
+  /* RECOMMENDED */
   @Component({
     selector: 'sg-button',
     template: `...`
@@ -415,7 +415,7 @@ The guidelines described below are based on:
 * Detach components and directives which are not visible from the view in order to prevent the change detection running over them.
 
   ```ts
-  /* CORRECT */
+  /* RECOMMENDED */
   @Directive({
     selector: '[pane]'
   })
@@ -441,7 +441,7 @@ The guidelines described below are based on:
   *Why?*: This way the application will get tightly coupled to the platform and thus won't be able to run independently from it. For instance, a web application injecting native DOM elements won't be able to run in WebWorker, nor be rendered on the server-side.
 
   ```ts
-  /* WRONG */
+  /* AVOID */
   @Component({
     selector: 'sg-text-field',
     template: `<input type="text">`
@@ -456,7 +456,7 @@ The guidelines described below are based on:
   ```
 
   ```ts
-  /* CORRECT */
+  /* RECOMMENDED */
   import {NgModel} from 'angular2/common';
 
   @Component({
@@ -478,7 +478,7 @@ The guidelines described below are based on:
   *Why?*: This way the application will get tightly coupled to the platform and thus won't be able to run independently from it. For instance, a web application injecting native DOM elements won't be able to run in WebWorker, neither be rendered on the server-side.
 
   ```ts
-  /* WRONG */
+  /* AVOID */
   @Component({
     selector: 'sg-items-list',
     template: `
@@ -495,7 +495,7 @@ The guidelines described below are based on:
   ```
 
   ```ts
-  /* CORRECT */
+  /* RECOMMENDED */
   import {NgModel} from 'angular2/common';
 
   @Component({
@@ -520,7 +520,7 @@ The guidelines described below are based on:
   *Why?*: In case the interface associated to given life-cycle hook is implemented one will get compile-time errors in case the hook is not implemented properly (for instance, the method name is misspelled).
 
   ```ts
-  /* WRONG */
+  /* AVOID */
   @Component({
     selector: 'sg-button',
     template: `...`
@@ -533,7 +533,7 @@ The guidelines described below are based on:
   ```
 
   ```ts
-  /* CORRECT */
+  /* RECOMMENDED */
   import {OnInit} from 'angular2/core';
 
   @Component({
@@ -571,7 +571,7 @@ The guidelines described below are based on:
 * Name your pipe `name` property in camelCase.
 
   ```ts
-  /* WRONG */
+  /* AVOID */
   @Pipe({
     name: 'sg-transform-something'
   })
@@ -583,7 +583,7 @@ The guidelines described below are based on:
   ```
 
   ```ts
-  /* CORRECT */
+  /* RECOMMENDED */
   @Pipe({
     name: 'sgTransformSomething'
   })
@@ -619,7 +619,7 @@ The guidelines described below are based on:
   *Why?*: When the name of the control is dynamically generated it will be hard to reference it inside of the controller associated to the form, and may lead to confusion.
 
   ```html
-  /* WRONG */
+  /* AVOID */
   <form>
     <input [ngControl]="foobar" type="text">
   </form>
@@ -632,7 +632,7 @@ The guidelines described below are based on:
   ```
 
   ```html
-  /* CORRECT */
+  /* RECOMMENDED */
   <form>
     <input ngControl="foo" type="text">
   </form>
@@ -674,7 +674,7 @@ The guidelines described below are based on:
 * Name the test file the following way `NAME_OF_THE_TESTED_UNIT.spec.EXT`:
 
   ```
-  /* CORRECT */
+  /* RECOMMENDED */
   about.ts
   about.spec.ts
   ```
@@ -807,7 +807,7 @@ class MyClass {
   *Why?*: The DLS uses function expressions which are closer to the non-hoisted ES2015 classes.
 
   ```js
-  /* WRONG */
+  /* AVOID */
   function Component() {
     //...
   }
@@ -822,7 +822,7 @@ class MyClass {
   ```
 
   ```ts
-  /* CORRECT */
+  /* RECOMMENDED */
   var Component = ng.
     Component({
       //...
