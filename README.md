@@ -6,7 +6,7 @@
 The purpose of the following style guide is to present a set of best practices and style guidelines for the development of Angular 2 applications.
 If you are looking for an opinionated style guide for syntax, conventions, and structuring Angular 2 applications, then you can step in!
 
-**Disclaimer: The document is in alpha version which means that some the guidelines will change and new will be added.**
+**Disclaimer: This document is an alpha version which means that some of the guidelines will change and new ones will be added.**
 
 You are welcome to join the discussion of the best [practices here](https://github.com/mgechev/angular2-style-guide/issues).
 
