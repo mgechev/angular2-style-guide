@@ -322,7 +322,6 @@ export class VoterComponent {
 <hero-list (heroSelected)="onHeroSelected(selectedHero)"></hero-list>
 <hero-list on-heroSelected="onHeroSelected(selectedHero)"></hero-list>
 ```
-  **[Table of Contents](#table-of-contents)**
 
 * Keep the components as simple and coherent as possible but not too simple.
 
