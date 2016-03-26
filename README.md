@@ -89,7 +89,7 @@ The guidelines described below are based on:
 
   *Why?*: The level of reusability of logic between bounded contexts should be low. On the other hand each code unit will belong to the bounded context it is associated with and will not pollute the directory structure.
 
-  *Why?*: Separation by bounded context will allow easier code reusability. In the general case a small, to medium applicaiton will contain a single bounded context, which will lead to a flat directory structure as the following:
+  *Why?*: Separation by bounded context will allow easier code reusability. In the general case a small, to medium application will contain a single bounded context, which will lead to a flat directory structure as the following:
 
   ```
   shop
@@ -242,7 +242,7 @@ The guidelines described below are based on:
   ```ts
   /* AVOID */
   @Directive({
-    selector: '[sgSample'],
+    selector: '[sgSample]',
     host: {
       '(mouseenter)': 'onMouseEnter()',
       'attr.role': 'button'
@@ -291,6 +291,36 @@ The guidelines described below are based on:
     template: `...`
   })
   class ButtonComponent {}
+  ```
+
+* Name events without the prefix `on`.
+* Name your event handler methods with the prefix `on` followed by the event name.
+
+  ```ts
+  /* AVOID */
+  export class VoterComponent {
+    @Output() onVoted = new EventEmitter<boolean>();
+  }
+
+  <my-voter (onVoted)="onVoted($event)"></my-voter>
+  ```
+  ```ts
+  /* RECOMMENDED */
+  export class VoterComponent {
+    @Output() voted = new EventEmitter<boolean>();
+  }
+  
+  <my-voter (voted)="onVoted($event)"></my-voter>
+  ```
+  *Why?*: This is to be consistent with built-in events like button clicks:
+  ```ts
+  <button (click)="showDetails()">Show Details</button>
+  ```
+  *Why?*: Angular allows for an [alternative syntax](https://angular.io/docs/ts/latest/guide/template-syntax.html#!#binding-syntax) `on-*`. If the event itself was prefixed with `on` this would result in an `on-onEvent` binding expression.
+  ```ts
+  /* RECOMMENDED */
+  <hero-list (heroSelected)="onHeroSelected(selectedHero)"></hero-list>
+  <hero-list on-heroSelected="onHeroSelected(selectedHero)"></hero-list>
   ```
 
 * Keep the components as simple and coherent as possible but not too simple.
@@ -531,7 +561,7 @@ The guidelines described below are based on:
     template: `...`
   })
   class ButtonComponent {
-    ngOnInit {
+    ngOnInit() {
       console.log('The component got initialized');
     }
   }
@@ -546,7 +576,7 @@ The guidelines described below are based on:
     template: `...`
   })
   class ButtonComponent implements OnInit {
-    ngOnInit {
+    ngOnInit() {
       console.log('The component got initialized');
     }
   }
@@ -834,7 +864,7 @@ class MyClass {
       //...
     ])
     .Class({
-      constructor: functions () {
+      constructor: function () {
         //...
       }
     });
