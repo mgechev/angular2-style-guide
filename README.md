@@ -309,7 +309,7 @@ The guidelines described below are based on:
   export class VoterComponent {
     @Output() voted = new EventEmitter<boolean>();
   }
-  
+
   <my-voter (voted)="onVoted($event)"></my-voter>
   ```
   *Why?*: This is to be consistent with built-in events like button clicks:
@@ -1030,7 +1030,7 @@ class MyClass {
 
 ## Tooling
 
-- [ng2lint - set of tslint rules Angular 2](https://github.com/mgechev/ng2lint).
+- [codelyzer - set of tslint rules Angular 2](https://github.com/mgechev/codelyzer).
 - [Sublime Text snippets Angular 2](https://github.com/evanplaice/angular2-snippets).
 - [WebStorm snippets Angular 2](https://github.com/d3viant0ne/angular2-webstorm-templates)
 
