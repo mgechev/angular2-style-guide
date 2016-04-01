@@ -28,7 +28,7 @@
 <p>The purpose of the following style guide is to present a set of best practices and style guidelines for the development of Angular 2 applications.
 If you are looking for an opinionated style guide for syntax, conventions, and structuring Angular 2 applications, then you can step in!</p>
 
-<p><strong>Disclaimer: The document is in alpha version which means that some the guidelines will change and new will be added.</strong></p>
+<p><strong>Disclaimer: This document is an alpha version which means that some of the guidelines will change and new ones will be added.</strong></p>
 
 <p>You are welcome to join the discussion of the best <a href="https://github.com/mgechev/angular2-style-guide/issues">practices here</a>.</p>
 
@@ -119,7 +119,7 @@ If you are looking for an opinionated style guide for syntax, conventions, and s
 
 <p><em>Why?</em>: The level of reusability of logic between bounded contexts should be low. On the other hand each code unit will belong to the bounded context it is associated with and will not pollute the directory structure.</p>
 
-<p><em>Why?</em>: Separation by bounded context will allow easier code reusability. In the general case a small, to medium applicaiton will contain a single bounded context, which will lead to a flat directory structure as the following:</p>
+<p><em>Why?</em>: Separation by bounded context will allow easier code reusability. In the general case a small, to medium application will contain a single bounded context, which will lead to a flat directory structure as the following:</p>
 
 <pre><code>shop
 ├── components
@@ -181,7 +181,7 @@ todo.reducer.ts
 
 <p><em>Why?</em>: Keeps consistency with AngularJS 1.x style guidelines.</p>
 
-<pre><code>/* CORRECT */
+<pre><code>/* RECOMMENDED */
 tooltip.directive.ts
 user.service.ts
 </code></pre>
@@ -211,7 +211,7 @@ user.service.ts
 
 <p><em>Why?</em>: This way you will be able to prevent name collisions.</p>
 
-<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* WRONG */</span>
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* AVOID */</span>
 @Directive({
   selector: <span class="pl-s">'[tooltip]'</span>
 })
@@ -229,7 +229,7 @@ user.service.ts
 })
 <span class="pl-k">class</span> <span class="pl-en">AppComponent</span> {}</pre></div>
 
-<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* CORRECT */</span>
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* RECOMMENDED */</span>
 @Directive({
   selector: <span class="pl-s">'[bsTooltip]'</span>
 })
@@ -250,7 +250,7 @@ user.service.ts
 <li>
 <p>Name directives' controllers with <code>Directive</code> suffix and components' controllers with <code>Component</code> suffix. The name of any directive or component should be formed following the rule <code>BasicDescription</code> + <code>Directive</code> or <code>Component</code>.</p>
 
-<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* CORRECT */</span>
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* RECOMMENDED */</span>
 @Directive({
   selector: <span class="pl-s">'[sgTooltip]`</span>
 })
@@ -276,9 +276,9 @@ user.service.ts
 
 <p><em>Why?</em>: The metadata declaration attached to the directive is shorter and thus more readable.</p>
 
-<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* WRONG */</span>
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* AVOID */</span>
 @Directive({
-  selector: <span class="pl-s">'[sgSample'</span>],
+  selector: <span class="pl-s">'[sgSample]'</span>,
   host: {
     <span class="pl-s">'(mouseenter)'</span>: <span class="pl-s">'onMouseEnter()'</span>,
     <span class="pl-s">'attr.role'</span>: <span class="pl-s">'button'</span>
@@ -289,7 +289,7 @@ user.service.ts
   <span class="pl-en">onMouseEnter</span>() {...}
 }</pre></div>
 
-<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* CORRECT */</span>
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* RECOMMENDED */</span>
 @Directive({
   selector: <span class="pl-s">'[sgSample]'</span>
 })
@@ -310,19 +310,47 @@ user.service.ts
 
 <p><em>Why?</em>: Keeps the element names consistent with the specification for <a href="https://www.w3.org/TR/custom-elements/">Custom Elements</a>.</p>
 
-<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* WRONG */</span>
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* AVOID */</span>
 @Component({
   selector: <span class="pl-s">'[sg-button]'</span>,
   template: <span class="pl-s">`...`</span>
 })
 <span class="pl-k">class</span> <span class="pl-en">ButtonComponent</span> {}</pre></div>
 
-<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* CORRECT */</span>
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* RECOMMENDED */</span>
 @Component({
   selector: <span class="pl-s">'sg-button'</span>,
   template: <span class="pl-s">`...`</span>
 })
 <span class="pl-k">class</span> <span class="pl-en">ButtonComponent</span> {}</pre></div>
+</li>
+<li><p>Name events without the prefix <code>on</code>.</p></li>
+<li>
+<p>Name your event handler methods with the prefix <code>on</code> followed by the event name.</p>
+
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* AVOID */</span>
+<span class="pl-k">export</span> <span class="pl-k">class</span> <span class="pl-en">VoterComponent</span> {
+  @<span class="pl-en">Output</span>() onVoted = new <span class="pl-en">EventEmitter</span>&lt;<span class="pl-k">boolean</span>&gt;();
+}
+
+<span class="pl-k">&lt;</span>my<span class="pl-k">-</span>voter (onVoted)<span class="pl-k">=</span><span class="pl-s">"onVoted($event)"</span><span class="pl-k">&gt;</span>&lt;/my-voter&gt;</pre></div>
+
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* RECOMMENDED */</span>
+<span class="pl-k">export</span> <span class="pl-k">class</span> <span class="pl-en">VoterComponent</span> {
+  @<span class="pl-en">Output</span>() voted = new <span class="pl-en">EventEmitter</span>&lt;<span class="pl-k">boolean</span>&gt;();
+}
+
+<span class="pl-k">&lt;</span>my<span class="pl-k">-</span>voter (voted)<span class="pl-k">=</span><span class="pl-s">"onVoted($event)"</span><span class="pl-k">&gt;</span>&lt;/my-voter&gt;</pre></div>
+
+<p><em>Why?</em>: This is to be consistent with built-in events like button clicks:</p>
+
+<div class="highlight highlight-source-ts"><pre><span class="pl-k">&lt;</span>button (click)<span class="pl-k">=</span><span class="pl-s">"showDetails()"</span><span class="pl-k">&gt;</span>Show <span class="pl-en">Details</span>&lt;/button&gt;</pre></div>
+
+<p><em>Why?</em>: Angular allows for an <a href="https://angular.io/docs/ts/latest/guide/template-syntax.html#!#binding-syntax">alternative syntax</a> <code>on-*</code>. If the event itself was prefixed with <code>on</code> this would result in an <code>on-onEvent</code> binding expression.</p>
+
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* RECOMMENDED */</span>
+<span class="pl-k">&lt;</span>hero<span class="pl-k">-</span>list (heroSelected)<span class="pl-k">=</span><span class="pl-s">"onHeroSelected(selectedHero)"</span><span class="pl-k">&gt;</span>&lt;/hero-list&gt;
+<span class="pl-k">&lt;</span>hero<span class="pl-k">-</span>list on<span class="pl-k">-</span>heroSelected<span class="pl-k">=</span><span class="pl-s">"onHeroSelected(selectedHero)"</span><span class="pl-k">&gt;</span>&lt;/hero-list&gt;</pre></div>
 </li>
 <li>
 <p>Keep the components as simple and coherent as possible but not too simple.</p>
@@ -351,7 +379,7 @@ user.service.ts
 
 <p><em>Why?</em>: The metadata declaration attached to the directive is shorter and thus more readable.</p>
 
-<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* WRONG */</span>
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* AVOID */</span>
 @Component({
   selector: <span class="pl-s">'sg-button'</span>,
   template: <span class="pl-s">`...`</span>,
@@ -367,7 +395,7 @@ user.service.ts
   <span class="pl-v">label</span>: <span class="pl-k">string</span>;
 }</pre></div>
 
-<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* CORRECT */</span>
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* RECOMMENDED */</span>
 @Component({
   selector: <span class="pl-s">'sg-button'</span>,
   template: <span class="pl-s">`...`</span>
@@ -384,7 +412,7 @@ user.service.ts
 
 <p><em>Why?</em>: May lead to confusion when the output or the input properties of a given directive are named a given way but exported differently as a public API.</p>
 
-<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* WRONG */</span>
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* AVOID */</span>
 @Component({
   selector: <span class="pl-s">'sg-button'</span>,
   template: <span class="pl-s">`...`</span>
@@ -400,7 +428,7 @@ user.service.ts
 <span class="pl-c">* &lt;/sg-button&gt;</span>
 <span class="pl-c">*/</span></pre></div>
 
-<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* CORRECT */</span>
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* RECOMMENDED */</span>
 @Component({
   selector: <span class="pl-s">'sg-button'</span>,
   template: <span class="pl-s">`...`</span>
@@ -421,7 +449,7 @@ user.service.ts
 
 <p><em>Why?</em>: The input creates one-way binding which means that we can bind it to an expression and its value gets automatically updated. We can inject a property with <a href="https://angular.io/docs/ts/latest/api/core/Attribute-var.html"><code>@Attribute</code></a> to a controller's constructor and get its value a single time.</p>
 
-<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* WRONG */</span>
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* AVOID */</span>
 @Component({
   selector: <span class="pl-s">'sg-button'</span>,
   template: <span class="pl-s">`...`</span>
@@ -433,7 +461,7 @@ user.service.ts
   }
 }</pre></div>
 
-<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* CORRECT */</span>
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* RECOMMENDED */</span>
 @Component({
   selector: <span class="pl-s">'sg-button'</span>,
   template: <span class="pl-s">`...`</span>
@@ -445,7 +473,7 @@ user.service.ts
 <li>
 <p>Detach components and directives which are not visible from the view in order to prevent the change detection running over them.</p>
 
-<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* CORRECT */</span>
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* RECOMMENDED */</span>
 @Directive({
   selector: <span class="pl-s">'[pane]'</span>
 })
@@ -470,7 +498,7 @@ user.service.ts
 
 <p><em>Why?</em>: This way the application will get tightly coupled to the platform and thus won't be able to run independently from it. For instance, a web application injecting native DOM elements won't be able to run in WebWorker, nor be rendered on the server-side.</p>
 
-<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* WRONG */</span>
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* AVOID */</span>
 @Component({
   selector: <span class="pl-s">'sg-text-field'</span>,
   template: <span class="pl-s">`&lt;input type="text"&gt;`</span>
@@ -483,8 +511,8 @@ user.service.ts
   }
 }</pre></div>
 
-<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* CORRECT */</span>
-<span class="pl-k">import</span> {NgModel} from <span class="pl-s">'angular2/common'</span>;
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* RECOMMENDED */</span>
+<span class="pl-k">import</span> {NgModel} <span class="pl-k">from</span> <span class="pl-s">'angular2/common'</span>;
 
 @Component({
   directives: [NgModel],
@@ -505,7 +533,7 @@ user.service.ts
 
 <p><em>Why?</em>: This way the application will get tightly coupled to the platform and thus won't be able to run independently from it. For instance, a web application injecting native DOM elements won't be able to run in WebWorker, neither be rendered on the server-side.</p>
 
-<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* WRONG */</span>
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* AVOID */</span>
 @Component({
   selector: <span class="pl-s">'sg-items-list'</span>,
   template: <span class="pl-s">`</span>
@@ -520,8 +548,8 @@ user.service.ts
   }
 }</pre></div>
 
-<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* CORRECT */</span>
-<span class="pl-k">import</span> {NgModel} from <span class="pl-s">'angular2/common'</span>;
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* RECOMMENDED */</span>
+<span class="pl-k">import</span> {NgModel} <span class="pl-k">from</span> <span class="pl-s">'angular2/common'</span>;
 
 @Component({
   directives: [NgModel],
@@ -544,27 +572,27 @@ user.service.ts
 
 <p><em>Why?</em>: In case the interface associated to given life-cycle hook is implemented one will get compile-time errors in case the hook is not implemented properly (for instance, the method name is misspelled).</p>
 
-<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* WRONG */</span>
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* AVOID */</span>
 @Component({
   selector: <span class="pl-s">'sg-button'</span>,
   template: <span class="pl-s">`...`</span>
 })
 <span class="pl-k">class</span> <span class="pl-en">ButtonComponent</span> {
-  ngOnInit {
-    <span class="pl-en">console.log</span>('<span class="pl-v">The</span> <span class="pl-v">component</span> <span class="pl-v">got</span> <span class="pl-v">initialized</span>');
+  <span class="pl-en">ngOnInit</span>() {
+    console.log(<span class="pl-s">'The component got initialized'</span>);
   }
 }</pre></div>
 
-<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* CORRECT */</span>
-<span class="pl-k">import</span> {OnInit} from <span class="pl-s">'angular2/core'</span>;
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* RECOMMENDED */</span>
+<span class="pl-k">import</span> {OnInit} <span class="pl-k">from</span> <span class="pl-s">'angular2/core'</span>;
 
 @Component({
   selector: <span class="pl-s">'sg-button'</span>,
   template: <span class="pl-s">`...`</span>
 })
 <span class="pl-k">class</span> <span class="pl-en">ButtonComponent</span> <span class="pl-k">implements</span> <span class="pl-k">OnInit</span> {
-  ngOnInit {
-    <span class="pl-en">console.log</span>('<span class="pl-v">The</span> <span class="pl-v">component</span> <span class="pl-v">got</span> <span class="pl-v">initialized</span>');
+  <span class="pl-en">ngOnInit</span>() {
+    console.log(<span class="pl-s">'The component got initialized'</span>);
   }
 }</pre></div>
 
@@ -603,7 +631,7 @@ user.service.ts
 <li>
 <p>Name your pipe <code>name</code> property in camelCase.</p>
 
-<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* WRONG */</span>
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* AVOID */</span>
 @Pipe({
   name: <span class="pl-s">'sg-transform-something'</span>
 })
@@ -613,7 +641,7 @@ user.service.ts
   }
 }</pre></div>
 
-<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* CORRECT */</span>
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* RECOMMENDED */</span>
 @Pipe({
   name: <span class="pl-s">'sgTransformSomething'</span>
 })
@@ -659,7 +687,7 @@ user.service.ts
 
 <p><em>Why?</em>: When the name of the control is dynamically generated it will be hard to reference it inside of the controller associated to the form, and may lead to confusion.</p>
 
-<div class="highlight highlight-text-html-basic"><pre>/* WRONG */
+<div class="highlight highlight-text-html-basic"><pre>/* AVOID */
 &lt;<span class="pl-ent">form</span>&gt;
   &lt;<span class="pl-ent">input</span> [<span class="pl-e">ngControl</span>]=<span class="pl-s"><span class="pl-pds">"</span>foobar<span class="pl-pds">"</span></span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span>&gt;
 &lt;/<span class="pl-ent">form</span>&gt;</pre></div>
@@ -669,7 +697,7 @@ user.service.ts
   <span class="pl-v">foobar</span> <span class="pl-k">=</span> <span class="pl-s">'foo'</span>;
 }</pre></div>
 
-<div class="highlight highlight-text-html-basic"><pre>/* CORRECT */
+<div class="highlight highlight-text-html-basic"><pre>/* RECOMMENDED */
 &lt;<span class="pl-ent">form</span>&gt;
   &lt;<span class="pl-ent">input</span> <span class="pl-e">ngControl</span>=<span class="pl-s"><span class="pl-pds">"</span>foo<span class="pl-pds">"</span></span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span>&gt;
 &lt;/<span class="pl-ent">form</span>&gt;</pre></div>
@@ -714,7 +742,7 @@ user.service.ts
 <li>
 <p>Name the test file the following way <code>NAME_OF_THE_TESTED_UNIT.spec.EXT</code>:</p>
 
-<pre><code>/* CORRECT */
+<pre><code>/* RECOMMENDED */
 about.ts
 about.spec.ts
 </code></pre>
@@ -757,13 +785,13 @@ about.spec.ts
 <p>Use "Façade modules" for exporting the public members of your application/library and hiding the implementation details.</p>
 
 <div class="highlight highlight-source-ts"><pre><span class="pl-c">/* Example */</span>
-<span class="pl-k">export</span> {NgClass} from <span class="pl-s">'./directives/ng_class'</span>;
-<span class="pl-k">export</span> {NgFor} from <span class="pl-s">'./directives/ng_for'</span>;
-<span class="pl-k">export</span> {NgIf} from <span class="pl-s">'./directives/ng_if'</span>;
-<span class="pl-k">export</span> {NgStyle} from <span class="pl-s">'./directives/ng_style'</span>;
-<span class="pl-k">export</span> {NgSwitch, NgSwitchWhen, NgSwitchDefault} from <span class="pl-s">'./directives/ng_switch'</span>;
-<span class="pl-k">export</span> <span class="pl-k">*</span> from <span class="pl-s">'./directives/observable_list_diff'</span>;
-<span class="pl-k">export</span> {CORE_DIRECTIVES} from <span class="pl-s">'./directives/core_directives'</span>;</pre></div>
+<span class="pl-k">export</span> {NgClass} <span class="pl-k">from</span> <span class="pl-s">'./directives/ng_class'</span>;
+<span class="pl-k">export</span> {NgFor} <span class="pl-k">from</span> <span class="pl-s">'./directives/ng_for'</span>;
+<span class="pl-k">export</span> {NgIf} <span class="pl-k">from</span> <span class="pl-s">'./directives/ng_if'</span>;
+<span class="pl-k">export</span> {NgStyle} <span class="pl-k">from</span> <span class="pl-s">'./directives/ng_style'</span>;
+<span class="pl-k">export</span> {NgSwitch, NgSwitchWhen, NgSwitchDefault} <span class="pl-k">from</span> <span class="pl-s">'./directives/ng_switch'</span>;
+<span class="pl-k">export</span> <span class="pl-k">*</span> <span class="pl-k">from</span> <span class="pl-s">'./directives/observable_list_diff'</span>;
+<span class="pl-k">export</span> {CORE_DIRECTIVES} <span class="pl-k">from</span> <span class="pl-s">'./directives/core_directives'</span>;</pre></div>
 </li>
 </ul>
 
@@ -872,7 +900,7 @@ about.spec.ts
 
 <p><em>Why?</em>: The DLS uses function expressions which are closer to the non-hoisted ES2015 classes.</p>
 
-<div class="highlight highlight-source-js"><pre><span class="pl-c">/* WRONG */</span>
+<div class="highlight highlight-source-js"><pre><span class="pl-c">/* AVOID */</span>
 <span class="pl-k">function</span> <span class="pl-en">Component</span>() {
   <span class="pl-c">//...</span>
 }
@@ -885,8 +913,8 @@ about.spec.ts
   ])
 ];</pre></div>
 
-<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* CORRECT */</span>
-<span class="pl-k">var</span> <span class="pl-v">Component</span> <span class="pl-k">=</span> ng.
+<div class="highlight highlight-source-ts"><pre><span class="pl-c">/* RECOMMENDED */</span>
+<span class="pl-k">var</span> <span class="pl-v">Component</span> = ng.
   Component({
     <span class="pl-c">//...</span>
   })
@@ -894,7 +922,7 @@ about.spec.ts
     <span class="pl-c">//...</span>
   ])
   .Class({
-    constructor: functions () {
+    constructor: <span class="pl-k">function</span> () {
       <span class="pl-c">//...</span>
     }
   });</pre></div>
@@ -1071,10 +1099,10 @@ about.spec.ts
 
 <ul>
 <li>
-<a href="https://github.com/mgechev/ng2lint">ng2lint - set of tslint rules for Angular 2</a>.</li>
+<a href="https://github.com/mgechev/codelyzer">codelyzer - set of tslint rules Angular 2</a>.</li>
 <li>
-<a href="https://github.com/evanplaice/angular2-snippets">Sublime Text snippets for Angular 2</a>.</li>
-<li><a href="https://github.com/d3viant0ne/angular2-webstorm-templates">WebStorm snippets for Angular 2</a></li>
+<a href="https://github.com/evanplaice/angular2-snippets">Sublime Text snippets Angular 2</a>.</li>
+<li><a href="https://github.com/d3viant0ne/angular2-webstorm-templates">WebStorm snippets Angular 2</a></li>
 </ul>
 
 <h2>
