@@ -22,6 +22,7 @@ The guidelines described below are based on:
 - [angular-cli](https://github.com/angular/angular-cli)
 - [angular2-seed](https://github.com/mgechev/angular2-seed)
 - [angular2-webpack-starter](https://github.com/AngularClass/angular2-webpack-starter)
+- [ng2-bootstrap](https://github.com/valor-software/ng2-bootstrap)
 
 ## Table of Contents
 
