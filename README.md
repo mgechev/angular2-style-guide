@@ -157,6 +157,28 @@ The guidelines described below are based on:
   import {RegisterComponent} from './shop';
   ```
 
+* The second level division of the directory structure, which is associated with given bounded context and excludes the nested bounded context, should be by either code unit type (as illustrated on the examples above) or by feature like shown below:
+
+  shop
+  ├── edit-profile
+  │   ├── edit-profile.component.ts
+  │   ├── edit-profile.component.spec.ts
+  │   └── edit-profile.component.html
+  ├── home
+  │   ├── home.component.ts
+  │   ├── home.component.spec.ts
+  │   └── home.component.html
+  ├── register
+  │   ├── register.component.ts
+  │   └── register.component.spec.ts
+  ├── common
+  │   ├── shopping-cart.model.ts
+  │   ├── shopping-item.model.ts
+  │   ├── checkout.service.ts
+  │   ├── user.model.ts
+  │   └── index.ts
+  └── index.ts
+
 * In case given bounded context contains two or more child contexts, divide them into separate directories:
 
   ```
