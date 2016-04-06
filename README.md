@@ -42,7 +42,7 @@ The guidelines described below are based on:
 
 ## Directory Structure
 
-* Group files by the [bounded context](http://martinfowler.com/bliki/BoundedContext.html) they belong to. When a context (directory, for instance) grows to contain more than 15 files, start to consider creating a separate context by-type for them. Your threshold may be different, so adjust as needed:
+* Group files by the [bounded context](http://martinfowler.com/bliki/BoundedContext.html) they belong to. When a context (directory, for instance) grows to contain more than 9 files, start to consider creating a separate context by-type for them. Your threshold may be different, so adjust as needed:
 
   ```
   .
@@ -120,7 +120,122 @@ The guidelines described below are based on:
 
   *Why?*: A developer can locate the code, identify what each file represents at a glance, the structure is flat as can be, and there is no repetitive nor redundant names.
 
-  *Why?*: When there are a lot of files (15+) locating them is easier with a consistent folder structures and more difficult in flat structures.
+  *Why?*: When there are a lot of files (9+) locating them is easier with a consistent folder structures and more difficult in flat structures.
+
+* Export and access all public members for given bounded context by its `index.ts` file located in the root directory of the context itself (for more information take a look at [this issue](https://github.com/mgechev/angular2-style-guide/issues/10)).
+
+  *Why?*: Having a facade which exports the public members enforces [encapsulation](https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)).
+
+  *Why?*: Exporting all public members using a high-level facade shortens the paths to the individual code units.
+
+  ```
+  shop
+  ├── components
+  │   └── register.component.ts
+  └── index.ts
+  ```
+  For instance, in case the `register` component is exported with the `index.ts` facade by:
+
+  ```ts
+  // index.ts
+  export * from './components/register.component';
+  ```
+
+  On the example below, we can import it using:
+
+  ```ts
+  import {RegisterComponent} from './shop/index';
+  ```
+  Instead of:
+  ```ts
+  import {RegisterComponent} from './shop/components/register.component.spec';
+  ```
+
+  *Why?*: Can be applied with TypeScript's compiler option: `moduleResolution: node`, which will reduce the import to:
+
+  ```ts
+  import {RegisterComponent} from './shop';
+  ```
+
+* In case given bounded context contains two or more child contexts, divide them into separate directories:
+
+  ```
+  shop
+  ├── cart
+  │   ├── components
+  │   └── index.ts
+  ├── checkout
+  │   ├── components
+  │   └── index.ts
+  └── services
+  ```
+
+  There is a single top-level bounded context here called `shop` and two child contexts called `cart` and `checkout`.
+
+  *Why?*: Grouping the contexts in such a way will stimulate lazy-loading and bundling of the child contexts together.
+
+  *Why?*: This directory structure naturally follows the root-level division by bounded contexts.
+
+* Implement lazy-loading and/or bundling by bounded contexts. For instance:
+
+  ```
+  .
+  ├── admin
+  │   ├── components
+  │   │   └─ admin.component.ts
+  │   └── index.ts
+  │── shop
+  │   ├── cart
+  │   │   ├── ...
+  │   │   └── index.ts
+  │   ├── checkout
+  │   │   ├── ...
+  │   │   └── index.ts
+  │   ├── components
+  │   │   └─ shop.component.ts
+  │   └── index.ts
+  ├── components
+  │   └── app.component.ts
+  ├── directives
+  │   └── ...
+  ├── services
+  │   └── ...
+  └── pipes
+      └── ...
+  ```
+
+  In case the `app.component.ts` file contains the following route definition:
+
+  ```ts
+  @RouteConfig([
+    {
+      loader: () => System.import('../shop/index').then((m: any) => m.AdminComponent),
+      path: '/admin'
+    },
+    {
+      loader: () => System.import('../shop/index').then((m: any) => m.ShopComponent),
+      path: '/shop'
+    }
+  ])
+  export class AppComponent {...}
+  ```
+
+  And the user opens `https://example.com/shop`, during the initial load time the browser should load **only**:
+
+  - All top-level code units in `components`, `directives`, `services`, `pipes`.
+  - The entire `shop` bounded context, except its nested bounded contexts (in this case they should be loaded-lazily, just like the top-level bounded contexts).
+
+  *Why?*: In big projects will be loaded only the part of the application required for the selected functionality (in this case the shop module).
+
+* Do not access directly code units located in another bounded context located on the same or lower level of nesting. The only two exceptions are: via an `AsyncRoute` (since by default such bounded contexts are loaded lazily) or in case the application is not supposed to be lazily loaded (which in case of big applications is considered as a bad practice).
+
+  *Why?*: This way the lazy loading will be prevented, since the lower level bounded context will be bundled (or loaded) together with their parent bounded contexts.
+
+* Define all shared among bounded contexts components into a top-level directories. The code units can be combined into different directories by name, or in case their count grows significantly they should be grouped by type (as shown above).
+
+  *Why?*: The usage of `shared` directory for the common code units requires longer import paths without bringing much value.
+
+  *Why?*: The used across bounded contexts code units are supposed to be loaded/bundled before/together with all nested bounded contexts and reused across them.
 
 * Export and access all public members for given bounded context by its `index.ts` file located in the root directory of the context itself (for more information take a look at [this issue](https://github.com/mgechev/angular2-style-guide/issues/10)).
 
