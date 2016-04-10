@@ -158,7 +158,7 @@ The guidelines described below are based on:
   ```
 
 * The second level division of the directory structure, which is associated with given bounded context and excludes the nested bounded context, should be by either code unit type (as illustrated on the examples above) or by feature like shown below:
- 
+
   ```
   shop
   ├── edit-profile
@@ -180,7 +180,7 @@ The guidelines described below are based on:
   │   └── index.ts
   └── index.ts
   ```
-  
+
 * In case given bounded context contains two or more child contexts, divide them into separate directories:
 
   ```
@@ -270,7 +270,7 @@ The guidelines described below are based on:
   ```
   shop
   ├── components
-  │   └── register.component.spec.ts
+  │   └── register.component.ts
   └── index.ts
   ```
   For instance, in case the `register` component is exported with the `index.ts` facade, on the example below, we can import it using:
@@ -280,7 +280,7 @@ The guidelines described below are based on:
   ```
   Instead of:
   ```ts
-  import {RegisterComponent} from './shop/components/register.component.spec';
+  import {RegisterComponent} from './shop/components/register.component';
   ```
 
 * In case given bounded context contains two or more child contexts, divide them into separate directories:
