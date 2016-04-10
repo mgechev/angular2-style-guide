@@ -148,7 +148,7 @@ The guidelines described below are based on:
   ```
   Instead of:
   ```ts
-  import {RegisterComponent} from './shop/components/register.component.spec';
+  import {RegisterComponent} from './shop/components/register.component';
   ```
 
   *Why?*: Can be applied with TypeScript's compiler option: `moduleResolution: node`, which will reduce the import to:
