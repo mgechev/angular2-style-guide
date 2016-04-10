@@ -158,7 +158,8 @@ The guidelines described below are based on:
   ```
 
 * The second level division of the directory structure, which is associated with given bounded context and excludes the nested bounded context, should be by either code unit type (as illustrated on the examples above) or by feature like shown below:
-
+ 
+  ```
   shop
   ├── edit-profile
   │   ├── edit-profile.component.ts
@@ -178,7 +179,8 @@ The guidelines described below are based on:
   │   ├── user.model.ts
   │   └── index.ts
   └── index.ts
-
+  ```
+  
 * In case given bounded context contains two or more child contexts, divide them into separate directories:
 
   ```
