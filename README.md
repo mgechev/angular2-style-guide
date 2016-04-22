@@ -1008,18 +1008,18 @@ Waiting for announcement of official module format by [angular-cli](https://gith
 
 ### TypeScript code style
 
-* Use the [style-guide](https://github.com/Microsoft/TypeScript/wiki/Coding-guidelines) provided by Microsoft for writing your TypeScript code.
+* Use `_` in private variable and property names.
 
-  *Why?*: It is a standardized guide that corresponds very well with the included paradigms and patterns.
+  *Why?*: It is more obvious when debigging without source maps which property is public and which is private.
 
-* (From [Classes.md#Accessors](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Classes.md#accessors)) Do not use `_` in variable names unless it's a field for a property.
+  *Why?*: It is considered bad practice to access private members in your templates. When such members are named with `_` it is more obvious that they should not be explosed to the template.
 
 ```ts
 class MyClass {
-  private myPrivateString:string = 'foobar';
   public myPublicString:string = 'foobar, but public';
+  private _myPrivateString:string = 'foobar';
 
-  //exception: property field
+  // exception: property field
   private _answerToEverything:number = 42;
 
   public get answerToEverything():number {
