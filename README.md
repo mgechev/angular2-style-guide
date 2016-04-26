@@ -1,4 +1,4 @@
-## Angular 2 Style Guide
+# Angular 2 Style Guide
 
 Together with the Angular core team and John Papa, we're working on an official style guide which incorporates all the best practices from:
 
@@ -7,3 +7,4 @@ Together with the Angular core team and John Papa, we're working on an official 
 - John Papa's AngularJS 1.x and Angular 2 [style guides](https://github.com/johnpapa/angular-styleguide).
 
 The previous version of the style guide can be found [here](./old/README.md).
+
