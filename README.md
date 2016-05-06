@@ -1,4 +1,6 @@
-# Angular 2 Style Guide
+# Deprecated
+
+## Angular 2 Style Guide
 
 [**Official style guide**](https://angular.io/styleguide)
 
