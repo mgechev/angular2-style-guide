@@ -2,7 +2,7 @@
 
 ## Angular 2 Style Guide
 
-[**Official style guide**](https://angular.io/styleguide)
+[**Official style guide**](https://angular.io/guide/styleguide)
 
 Together with the Angular core team and John Papa, we're working on an official style guide which incorporates all the best practices from:
 
@@ -12,5 +12,5 @@ Together with the Angular core team and John Papa, we're working on an official 
 
 The previous version of the style guide can be found [here](./old/README.md).
 
-The official style guide can be found [here](https://angular.io/styleguide).
+The official style guide can be found [here](https://angular.io/guide/styleguide).
 
